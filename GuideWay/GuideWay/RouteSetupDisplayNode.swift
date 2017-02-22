@@ -79,14 +79,14 @@ class RouteSetupDisplayNode: ASDisplayNode {
     let originIconNode: ASImageNode = {
         let node = ASImageNode()
 
-        node.image = #imageLiteral(resourceName: "ic_mark_border")
+        node.image = #imageLiteral(resourceName: "ic_mark_a")
         return node
     }()
 
     let destinationIconNode: ASImageNode = {
         let node = ASImageNode()
 
-        node.image = #imageLiteral(resourceName: "ic_mark_border")
+        node.image = #imageLiteral(resourceName: "ic_mark_b")
         return node
     }()
 
