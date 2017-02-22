@@ -52,6 +52,7 @@ class RouteSetupDisplayNode: ASDisplayNode {
         )
         textField.returnKeyType = .done
         textField.delegate = self
+        textField.autocorrectionType = .no
         return textField
     }
 
@@ -116,18 +117,24 @@ class RouteSetupDisplayNode: ASDisplayNode {
         return node
     }()
 
+    var onCreateRouteButtonTap: (() -> ())?
+
     override init() {
         super.init()
         automaticallyManagesSubnodes = true
     }
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        let isNarrow = constrainedSize.max.height <= 510
+
         let routeImageAndTitleStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 17,
             justifyContent: .center,
             alignItems: .center,
-            children: [routeImageNode, createNewRouteTitleNode]
+            children: isNarrow
+                ? [createNewRouteTitleNode]
+                : [routeImageNode, createNewRouteTitleNode]
         )
 
         originTextFieldNode.style.flexShrink = 1
@@ -182,35 +189,31 @@ class RouteSetupDisplayNode: ASDisplayNode {
         )
         let addTextFieldsStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 50,
-            justifyContent: .start,
+            spacing: isNarrow ? 20 : 50,
+            justifyContent: .center,
             alignItems: .stretch,
             children: [routeImageAndTitleStack, textFieldsInsets]
         )
-        let addTextFieldsStackInsets = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 70, left: 0, bottom: 0, right: 0),
-            child: addTextFieldsStack
-        )
 
         createRouteButtonNode.style.preferredSize.height = 55
+        addTextFieldsStack.style.flexBasis = ASDimensionMake(constrainedSize.max.height - 55)
 
-        let createRouteButtonInsets = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: CGFloat.infinity, left: 0, bottom: 0, right: 0), 
-            child: createRouteButtonNode
-        )
-        let createRouteButtonOverlay = ASOverlayLayoutSpec(
-            child: addTextFieldsStackInsets,
-            overlay: createRouteButtonInsets
+        let addCreateRouteButton = ASStackLayoutSpec(
+            direction: .vertical, 
+            spacing: 0, 
+            justifyContent: .start, 
+            alignItems: .stretch, 
+            children: [addTextFieldsStack, createRouteButtonNode]
         )
         let backgroundImage = ASOverlayLayoutSpec(
             child: backgroundImageNode,
-            overlay: createRouteButtonOverlay
+            overlay: addCreateRouteButton
         )
         return backgroundImage
     }
 
     func createRouteButtonTapped() {
-
+        onCreateRouteButtonTap?()
     }
 }
 

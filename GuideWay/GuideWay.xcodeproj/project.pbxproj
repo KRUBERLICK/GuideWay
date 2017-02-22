@@ -18,6 +18,7 @@
 		5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */; };
 		5BB0424A1E5DDBD800A31443 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BB0424C1E5DDBD800A31443 /* Localizable.strings */; };
 		5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */; };
+		5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042501E5DEC5A00A31443 /* KeyboardController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteSetupDisplayNode.swift; sourceTree = "<group>"; };
 		5BB0424B1E5DDBD800A31443 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationUtils.swift; sourceTree = "<group>"; };
+		5BB042501E5DEC5A00A31443 /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */,
+				5BB042501E5DEC5A00A31443 /* KeyboardController.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
 				5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */,
