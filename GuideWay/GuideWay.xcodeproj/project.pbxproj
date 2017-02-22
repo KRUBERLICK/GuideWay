@@ -52,13 +52,29 @@
 		5B307BAF1E5DAFBC004F8017 /* GuideWay */ = {
 			isa = PBXGroup;
 			children = (
+				5B307BC31E5DB0C4004F8017 /* Resources */,
+				5B307BC21E5DB0BF004F8017 /* Source */,
+			);
+			path = GuideWay;
+			sourceTree = "<group>";
+		};
+		5B307BC21E5DB0BF004F8017 /* Source */ = {
+			isa = PBXGroup;
+			children = (
 				5B307BB01E5DAFBC004F8017 /* AppDelegate.swift */,
 				5B307BB21E5DAFBC004F8017 /* ViewController.swift */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		5B307BC31E5DB0C4004F8017 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				5B307BB71E5DAFBC004F8017 /* Assets.xcassets */,
 				5B307BB91E5DAFBC004F8017 /* LaunchScreen.storyboard */,
 				5B307BBC1E5DAFBC004F8017 /* Info.plist */,
 			);
-			path = GuideWay;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
