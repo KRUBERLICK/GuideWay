@@ -9,16 +9,23 @@ PODS:
   - IGListKit/Default (2.1.0):
     - IGListKit/Diffing
   - IGListKit/Diffing (2.1.0)
+  - RxCocoa (3.2.0):
+    - RxSwift (~> 3.1)
+  - RxSwift (3.2.0)
 
 DEPENDENCIES:
   - AsyncDisplayKit/IGListKit
   - DITranquillity
+  - RxCocoa
+  - RxSwift
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
   DITranquillity: 38b933863d800dbf7b5b8e70fb8c8329df6ab1b4
   IGListKit: b826c68ef7a4ae1626c09d4d3e1ea7a169e6c36e
+  RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
+  RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
 
-PODFILE CHECKSUM: 00db1bfba82af1e5fa22887dc3dc35a6ff6d8732
+PODFILE CHECKSUM: 0a860b364ff9930ab0e27e81d1ede040f76ae2f7
 
 COCOAPODS: 1.2.0

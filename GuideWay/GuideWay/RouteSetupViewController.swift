@@ -7,16 +7,29 @@
 //
 
 import AsyncDisplayKit
+import RxSwift
+import RxCocoa
 
 class RouteSetupViewController: ASViewController<ASDisplayNode> {
     let routeSetupDisplayNode: RouteSetupDisplayNode
     let keyboardController: KeyboardController
+    let disposeBag = DisposeBag()
+
+    lazy var autocompleteController: AutocompleteController = {
+        let controller = AutocompleteController(parentNode: self.routeSetupDisplayNode)
+
+        return controller
+    }()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
     override var prefersStatusBarHidden: Bool {
+        return false
+    }
+
+    override var shouldAutorotate: Bool {
         return false
     }
 
@@ -42,13 +55,42 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         )
         routeSetupDisplayNode.onCreateRouteButtonTap = { [unowned self] in
             self.keyboardController.hideKeyboard(completion: { 
-
+                // do something...
             })
+        }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(textFieldDidChange(notification:)),
+            name: NSNotification.Name.UITextFieldTextDidChange,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(textFieldDidEndEditing(notification:)),
+            name: NSNotification.Name.UITextFieldTextDidEndEditing,
+            object: nil
+        )
+    }
+
+    func textFieldDidChange(notification: Notification) {
+        guard let textField = notification.object as? UITextField,
+            !textField.text!.isEmpty else {
+                autocompleteController.hideAutocomplete()
+                return
+        }
+
+        switch textField {
+        case (routeSetupDisplayNode.originTextFieldNode.view as! UITextField):
+            autocompleteController.showAutocomplete(for: routeSetupDisplayNode.originTextFieldNode)
+        case (routeSetupDisplayNode.destinationTextFieldNode.view as! UITextField):
+            autocompleteController.showAutocomplete(for: routeSetupDisplayNode.destinationTextFieldNode)
+        default:
+            break
         }
     }
 
-    override var shouldAutorotate: Bool {
-        return false
+    func textFieldDidEndEditing(notification: Notification) {
+        autocompleteController.hideAutocomplete()
     }
 
     func hideKeyboard() {

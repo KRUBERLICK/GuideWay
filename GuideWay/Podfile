@@ -5,4 +5,6 @@ target 'GuideWay' do
 
   pod 'AsyncDisplayKit/IGListKit'
   pod 'DITranquillity'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end
