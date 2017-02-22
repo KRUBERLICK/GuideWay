@@ -16,7 +16,13 @@ class PresentationManager {
         self.scope = scope
     }
 
-    func getInitialViewController() -> ViewController {
-        return *!scope
+    // ViewControllers
+
+    func getInitialViewController() -> UIViewController {
+        let routeSetupVC: RouteSetupViewController = *!scope
+
+        return routeSetupVC
     }
+
+    // Nodes
 }

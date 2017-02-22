@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  GuideWay
+
+  Created by Daniel Ilchishyn on 2/22/17.
+  Copyright © 2017 Sasha&Daniel. All rights reserved.
+*/
+
+"route_setup.create_new_route" = "Create new route";
+"route_setup.origin" = "Origin";
+"route_setup.destination" = "Destination";

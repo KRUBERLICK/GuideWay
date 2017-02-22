@@ -13,7 +13,10 @@ class PresentationLayerModule: DIModule {
         builder.register { PresentationManager(scope: $0) }
             .lifetime(.perDependency)
         // ViewControllers
-        builder.register { ViewController() }
+        builder.register { RouteSetupViewController(routeSetupDisplayNode: *!$0) }
+            .lifetime(.perDependency)
+        // Nodes
+        builder.register { RouteSetupDisplayNode() }
             .lifetime(.perDependency)
     }
 }
