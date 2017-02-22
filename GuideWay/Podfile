@@ -4,4 +4,5 @@ target 'GuideWay' do
   use_frameworks!
 
   pod 'AsyncDisplayKit/IGListKit'
+  pod 'DITranquillity'
 end

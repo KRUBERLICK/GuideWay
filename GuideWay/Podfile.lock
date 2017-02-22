@@ -3,6 +3,7 @@ PODS:
   - AsyncDisplayKit/IGListKit (2.1):
     - AsyncDisplayKit/Core
     - IGListKit (= 2.1.0)
+  - DITranquillity (1.3.1)
   - IGListKit (2.1.0):
     - IGListKit/Default (= 2.1.0)
   - IGListKit/Default (2.1.0):
@@ -11,11 +12,13 @@ PODS:
 
 DEPENDENCIES:
   - AsyncDisplayKit/IGListKit
+  - DITranquillity
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
+  DITranquillity: 38b933863d800dbf7b5b8e70fb8c8329df6ab1b4
   IGListKit: b826c68ef7a4ae1626c09d4d3e1ea7a169e6c36e
 
-PODFILE CHECKSUM: 6ce07c53f607627549c6e3ec1f4cbbaaa724c192
+PODFILE CHECKSUM: 00db1bfba82af1e5fa22887dc3dc35a6ff6d8732
 
 COCOAPODS: 1.2.0

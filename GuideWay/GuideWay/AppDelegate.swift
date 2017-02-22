@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DITranquillity
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
-        window?.rootViewController = ViewController()
+
+        let builder = DIContainerBuilder()
+
+        builder.register(assembly: AppAssembly())
+
+        let scope = try! builder.build()
+        let presentationManager: PresentationManager = *!scope
+
+        window?.rootViewController = presentationManager.getInitialViewController()
         window?.makeKeyAndVisible()
         return true
     }
