@@ -1,0 +1,7 @@
+platform :ios, '9.0'
+
+target 'GuideWay' do
+  use_frameworks!
+
+  pod 'AsyncDisplayKit/IGListKit'
+end
