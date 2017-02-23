@@ -13,6 +13,7 @@
 		5B307BB81E5DAFBC004F8017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB71E5DAFBC004F8017 /* Assets.xcassets */; };
 		5B307BBB1E5DAFBC004F8017 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB91E5DAFBC004F8017 /* LaunchScreen.storyboard */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
+		5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE1E4F1E5F2FE3007CCFB5 /* DataLayerModule.swift */; };
 		5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0423F1E5DB45F00A31443 /* PresentationLayerModule.swift */; };
 		5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042411E5DB4A400A31443 /* PresentationManager.swift */; };
 		5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042431E5DB56800A31443 /* AppAssembly.swift */; };
@@ -21,7 +22,7 @@
 		5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */; };
 		5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042501E5DEC5A00A31443 /* KeyboardController.swift */; };
 		5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042541E5E180E00A31443 /* AutocompleteController.swift */; };
-		5BB6B4131E5EE19900F270B4 /* AutosuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4121E5EE19900F270B4 /* AutosuggestResponse.swift */; };
+		5BB6B4131E5EE19900F270B4 /* PlaceSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */; };
 		5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4141E5EE35800F270B4 /* WebService.swift */; };
 		5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */; };
 		5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */; };
@@ -38,6 +39,7 @@
 		5B307BBA1E5DAFBC004F8017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B307BBC1E5DAFBC004F8017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5BAE1E4F1E5F2FE3007CCFB5 /* DataLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLayerModule.swift; sourceTree = "<group>"; };
 		5BB0423F1E5DB45F00A31443 /* PresentationLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationLayerModule.swift; sourceTree = "<group>"; };
 		5BB042411E5DB4A400A31443 /* PresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationManager.swift; sourceTree = "<group>"; };
 		5BB042431E5DB56800A31443 /* AppAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
@@ -46,7 +48,7 @@
 		5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationUtils.swift; sourceTree = "<group>"; };
 		5BB042501E5DEC5A00A31443 /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		5BB042541E5E180E00A31443 /* AutocompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteController.swift; sourceTree = "<group>"; };
-		5BB6B4121E5EE19900F270B4 /* AutosuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutosuggestResponse.swift; sourceTree = "<group>"; };
+		5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceSearchResponse.swift; sourceTree = "<group>"; };
 		5BB6B4141E5EE35800F270B4 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainLayerModule.swift; sourceTree = "<group>"; };
 		5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleServicesAPI.swift; sourceTree = "<group>"; };
@@ -124,10 +126,36 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5BAE1E4C1E5F2FA2007CCFB5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5BAE1E4D1E5F2FAB007CCFB5 /* Responses */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5BAE1E4D1E5F2FAB007CCFB5 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */,
+			);
+			name = Responses;
+			sourceTree = "<group>";
+		};
+		5BAE1E4E1E5F2FC1007CCFB5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5BB6B4141E5EE35800F270B4 /* WebService.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		5BB0423A1E5DB41100A31443 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				5BB6B4121E5EE19900F270B4 /* AutosuggestResponse.swift */,
+				5BAE1E4F1E5F2FE3007CCFB5 /* DataLayerModule.swift */,
+				5BAE1E4E1E5F2FC1007CCFB5 /* Networking */,
+				5BAE1E4C1E5F2FA2007CCFB5 /* Models */,
 			);
 			name = DataLayer;
 			sourceTree = "<group>";
@@ -136,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */,
-				5BB6B4181E5EE80D00F270B4 /* Network */,
+				5BB6B4181E5EE80D00F270B4 /* NetworkAPIs */,
 			);
 			name = DomainLayer;
 			sourceTree = "<group>";
@@ -179,13 +207,12 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		5BB6B4181E5EE80D00F270B4 /* Network */ = {
+		5BB6B4181E5EE80D00F270B4 /* NetworkAPIs */ = {
 			isa = PBXGroup;
 			children = (
-				5BB6B4141E5EE35800F270B4 /* WebService.swift */,
 				5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */,
 			);
-			name = Network;
+			name = NetworkAPIs;
 			sourceTree = "<group>";
 		};
 		7D389E010BEB9E634F4FCE53 /* Frameworks */ = {
@@ -322,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */,
+				5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */,
 				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
 				5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
@@ -331,7 +359,7 @@
 				5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */,
 				5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */,
 				5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */,
-				5BB6B4131E5EE19900F270B4 /* AutosuggestResponse.swift in Sources */,
+				5BB6B4131E5EE19900F270B4 /* PlaceSearchResponse.swift in Sources */,
 				5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */,
 				5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */,
 			);

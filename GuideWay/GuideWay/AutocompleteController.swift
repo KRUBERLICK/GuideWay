@@ -73,7 +73,7 @@ class AutocompleteController: NSObject {
         isShowing = true
         tableNode.frame = CGRect(
             x: node.frame.origin.x,
-            y: node.frame.origin.y + node.frame.height + 1,
+            y: node.frame.origin.y + node.frame.height,
             width: node.frame.width,
             height: 0
         )

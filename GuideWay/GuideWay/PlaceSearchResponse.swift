@@ -8,7 +8,7 @@
 
 import ObjectMapper
 
-struct AutosuggestItem: ImmutableMappable {
+struct PlaceSearchResponseItem: ImmutableMappable {
     let name: String
     let formattedAddress: String
     let latitude: Double
@@ -29,8 +29,8 @@ struct AutosuggestItem: ImmutableMappable {
     }
 }
 
-struct AutosuggestResponse: ImmutableMappable {
-    let results: [AutosuggestItem]
+struct PlaceSearchResponse: ImmutableMappable {
+    let results: [PlaceSearchResponseItem]
 
     init(map: Map) throws {
         results = try map.value("results")

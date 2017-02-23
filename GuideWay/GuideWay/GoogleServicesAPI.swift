@@ -11,16 +11,16 @@ import RxSwift
 
 class GoogleServicesAPI {
     let apiKey = "AIzaSyCcovS3o38O9B888ic5iRs9nhx4k83oVMc"
-    static let placeTextSearchURL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+    static let placeSearchURL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
     let webService: WebService
 
     init(webService: WebService) {
         self.webService = webService
     }
 
-    func requestPlaceAutosuggestions(for query: String) -> Observable<AutosuggestResponse> {
+    func requestPlaceSearch(for query: String) -> Observable<PlaceSearchResponse> {
         return Observable.create { observer in
-            self.webService.resource(absoluteURL: GoogleServicesAPI.placeTextSearchURL)
+            self.webService.resource(absoluteURL: GoogleServicesAPI.placeSearchURL)
                 .withParam("key", self.apiKey)
                 .withParam("query", query)
                 .withParam("lang", Locale.current.languageCode ?? "en")

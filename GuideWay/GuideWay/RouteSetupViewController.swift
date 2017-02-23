@@ -69,7 +69,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             self.autocompleteController.hideAutocomplete()
         }
         routeSetupDisplayNode.originTextField.rx.text
-            .throttle(2, scheduler: MainScheduler.instance)
+            .debounce(2, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] text in
                 self.fetchAutosuggestions(
                     for: self.routeSetupDisplayNode.originTextField
@@ -77,7 +77,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             })
             .addDisposableTo(disposeBag)
         routeSetupDisplayNode.destinationTextField.rx.text
-            .throttle(2, scheduler: MainScheduler.instance)
+            .debounce(2, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] text in
                 self.fetchAutosuggestions(
                     for: self.routeSetupDisplayNode.destinationTextField
@@ -108,24 +108,24 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         }
 
         autocompleteDisposeBag = DisposeBag()
-        googleServicesAPI.requestPlaceAutosuggestions(for: text)
+        googleServicesAPI.requestPlaceSearch(for: text)
             .subscribe(onNext: { response in
                 self.autocompleteController.autocompleteQueries
                     = response.results.map { $0.name }
                 switch textField {
                 case self.routeSetupDisplayNode.originTextField:
                     self.autocompleteController.showAutocomplete(
-                        for: self.routeSetupDisplayNode.originTextFieldNode
+                        for: self.routeSetupDisplayNode.originTextFieldUnderscoreNode
                     )
                 case self.routeSetupDisplayNode.destinationTextField:
                     self.autocompleteController.showAutocomplete(
-                        for: self.routeSetupDisplayNode.destinationTextFieldNode
+                        for: self.routeSetupDisplayNode.destinationTextFieldUnderscoreNode
                     )
                 default:
                     break
                 }
             }, onError: { error in
-                print(error)
+                // show error popup
             })
             .addDisposableTo(autocompleteDisposeBag)
     }

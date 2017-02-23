@@ -1,5 +1,5 @@
 //
-//  DomainLayerModule.swift
+//  DataLayerModule.swift
 //  GuideWay
 //
 //  Created by Daniel Ilchishyn on 2/23/17.
@@ -8,9 +8,9 @@
 
 import DITranquillity
 
-class DomainLayerModule: DIModule {
+class DataLayerModule: DIModule {
     func load(builder: DIContainerBuilder) {
-        builder.register { GoogleServicesAPI(webService: *!$0) }
+        builder.register { WebService() }
             .lifetime(.lazySingle)
     }
 }

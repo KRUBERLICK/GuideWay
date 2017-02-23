@@ -16,10 +16,10 @@ class WebService: Service {
     }
 
     func setupTransformers() {
-        configureTransformer(GoogleServicesAPI.placeTextSearchURL)
+        configureTransformer(GoogleServicesAPI.placeSearchURL)
         {
-            (data: Entity<[String: Any]>) throws -> AutosuggestResponse in
-            try Mapper<AutosuggestResponse>().map(JSON: data.content)
+            (data: Entity<[String: Any]>) throws -> PlaceSearchResponse in
+            try Mapper<PlaceSearchResponse>().map(JSON: data.content)
         }
     }
 }
