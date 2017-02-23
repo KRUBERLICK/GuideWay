@@ -21,6 +21,10 @@
 		5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */; };
 		5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042501E5DEC5A00A31443 /* KeyboardController.swift */; };
 		5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042541E5E180E00A31443 /* AutocompleteController.swift */; };
+		5BB6B4131E5EE19900F270B4 /* AutosuggestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4121E5EE19900F270B4 /* AutosuggestResponse.swift */; };
+		5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4141E5EE35800F270B4 /* WebService.swift */; };
+		5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */; };
+		5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationUtils.swift; sourceTree = "<group>"; };
 		5BB042501E5DEC5A00A31443 /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		5BB042541E5E180E00A31443 /* AutocompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteController.swift; sourceTree = "<group>"; };
+		5BB6B4121E5EE19900F270B4 /* AutosuggestResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutosuggestResponse.swift; sourceTree = "<group>"; };
+		5BB6B4141E5EE35800F270B4 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainLayerModule.swift; sourceTree = "<group>"; };
+		5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleServicesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +127,7 @@
 		5BB0423A1E5DB41100A31443 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
+				5BB6B4121E5EE19900F270B4 /* AutosuggestResponse.swift */,
 			);
 			name = DataLayer;
 			sourceTree = "<group>";
@@ -126,6 +135,8 @@
 		5BB0423B1E5DB41B00A31443 /* DomainLayer */ = {
 			isa = PBXGroup;
 			children = (
+				5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */,
+				5BB6B4181E5EE80D00F270B4 /* Network */,
 			);
 			name = DomainLayer;
 			sourceTree = "<group>";
@@ -166,6 +177,15 @@
 				5BB042541E5E180E00A31443 /* AutocompleteController.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		5BB6B4181E5EE80D00F270B4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5BB6B4141E5EE35800F270B4 /* WebService.swift */,
+				5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		7D389E010BEB9E634F4FCE53 /* Frameworks */ = {
@@ -301,6 +321,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */,
+				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
 				5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
@@ -309,7 +331,9 @@
 				5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */,
 				5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */,
 				5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */,
+				5BB6B4131E5EE19900F270B4 /* AutosuggestResponse.swift in Sources */,
 				5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */,
+				5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

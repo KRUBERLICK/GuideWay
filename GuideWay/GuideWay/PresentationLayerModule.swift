@@ -16,7 +16,8 @@ class PresentationLayerModule: DIModule {
         builder.register {
             RouteSetupViewController(routeSetupDisplayNode: *!$0,
                                      keyboardController: *!$0,
-                                     autocompleteController: *!$0)
+                                     autocompleteController: *!$0,
+                                     googleServicesAPI: *!$0)
             }
             .dependency { $1.autocompleteController.parentNode = $1.node }
             .lifetime(.perDependency)

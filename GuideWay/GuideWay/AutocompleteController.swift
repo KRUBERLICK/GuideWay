@@ -36,9 +36,7 @@ class AutocompleteCellNode: ASCellNode {
 }
 
 class AutocompleteController: NSObject {
-    var autocompleteQueries = ["проспект Победы",
-                               "проспект Мира",
-                               "проспект Степана Бандеры"]
+    var autocompleteQueries = [String]()
     var parentNode: ASDisplayNode!
 
     lazy var tableNode: ASTableNode = {
@@ -59,6 +57,14 @@ class AutocompleteController: NSObject {
         tableNode.reloadData()
 
         guard !isShowing else {
+            UIView.animate(
+                withDuration: 0.25,
+                delay: 0,
+                options: .curveEaseOut,
+                animations: {
+                    let height = CGFloat(self.autocompleteQueries.count) * 30
+                    self.tableNode.frame.size.height = height <= 150 ? height : 150
+            }, completion: nil)
             return
         }
         

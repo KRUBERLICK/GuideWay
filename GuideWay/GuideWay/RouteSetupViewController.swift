@@ -9,12 +9,15 @@
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
+import Siesta
 
 class RouteSetupViewController: ASViewController<ASDisplayNode> {
     let routeSetupDisplayNode: RouteSetupDisplayNode
     let keyboardController: KeyboardController
     let disposeBag = DisposeBag()
+    var autocompleteDisposeBag = DisposeBag()
     let autocompleteController: AutocompleteController
+    let googleServicesAPI: GoogleServicesAPI
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -30,10 +33,12 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
 
     init(routeSetupDisplayNode: RouteSetupDisplayNode,
          keyboardController: KeyboardController,
-         autocompleteController: AutocompleteController) {
+         autocompleteController: AutocompleteController,
+         googleServicesAPI: GoogleServicesAPI) {
         self.routeSetupDisplayNode = routeSetupDisplayNode
         self.keyboardController = keyboardController
         self.autocompleteController = autocompleteController
+        self.googleServicesAPI = googleServicesAPI
         super.init(node: routeSetupDisplayNode)
     }
     
@@ -63,12 +68,22 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             }
             self.autocompleteController.hideAutocomplete()
         }
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(textFieldDidChange(notification:)),
-            name: NSNotification.Name.UITextFieldTextDidChange,
-            object: nil
-        )
+        routeSetupDisplayNode.originTextField.rx.text
+            .throttle(2, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] text in
+                self.fetchAutosuggestions(
+                    for: self.routeSetupDisplayNode.originTextField
+                )
+            })
+            .addDisposableTo(disposeBag)
+        routeSetupDisplayNode.destinationTextField.rx.text
+            .throttle(2, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] text in
+                self.fetchAutosuggestions(
+                    for: self.routeSetupDisplayNode.destinationTextField
+                )
+            })
+            .addDisposableTo(disposeBag)
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(textFieldDidEndEditing(notification:)),
@@ -84,14 +99,35 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
                 return
         }
 
-        switch textField {
-        case routeSetupDisplayNode.originTextField:
-            autocompleteController.showAutocomplete(for: routeSetupDisplayNode.originTextFieldNode)
-        case routeSetupDisplayNode.destinationTextField:
-            autocompleteController.showAutocomplete(for: routeSetupDisplayNode.destinationTextFieldNode)
-        default:
-            break
+        fetchAutosuggestions(for: textField)
+    }
+
+    func fetchAutosuggestions(for textField: UITextField) {
+        guard let text = textField.text, !text.isEmpty else {
+            return
         }
+
+        autocompleteDisposeBag = DisposeBag()
+        googleServicesAPI.requestPlaceAutosuggestions(for: text)
+            .subscribe(onNext: { response in
+                self.autocompleteController.autocompleteQueries
+                    = response.results.map { $0.name }
+                switch textField {
+                case self.routeSetupDisplayNode.originTextField:
+                    self.autocompleteController.showAutocomplete(
+                        for: self.routeSetupDisplayNode.originTextFieldNode
+                    )
+                case self.routeSetupDisplayNode.destinationTextField:
+                    self.autocompleteController.showAutocomplete(
+                        for: self.routeSetupDisplayNode.destinationTextFieldNode
+                    )
+                default:
+                    break
+                }
+            }, onError: { error in
+                print(error)
+            })
+            .addDisposableTo(autocompleteDisposeBag)
     }
 
     func textFieldDidEndEditing(notification: Notification) {
