@@ -16,6 +16,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
     let keyboardController: KeyboardController
     let disposeBag = DisposeBag()
     var autocompleteDisposeBag = DisposeBag()
+    var textFieldsDisposeBag = DisposeBag()
     let autocompleteController: AutocompleteController
     let googleServicesAPI: GoogleServicesAPI
 
@@ -56,7 +57,13 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         )
         routeSetupDisplayNode.onCreateRouteButtonTap = { [unowned self] in
             self.keyboardController.hideKeyboard(completion: { 
-                
+                guard !self.routeSetupDisplayNode.originTextField.text!.isEmpty,
+                    !self.routeSetupDisplayNode.destinationTextField.text!.isEmpty else {
+                        // display alert
+                        return
+                }
+
+                // process route creation
             })
         }
         autocompleteController.onSelect = { [unowned self] suggestion in
@@ -66,40 +73,35 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             if self.routeSetupDisplayNode.destinationTextFieldNode.isFirstResponder() {
                 self.routeSetupDisplayNode.destinationTextField.text = suggestion
             }
+            self.autocompleteDisposeBag = DisposeBag()
             self.autocompleteController.hideAutocomplete()
         }
-        routeSetupDisplayNode.originTextField.rx.text
-            .debounce(2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] text in
-                self.fetchAutosuggestions(
-                    for: self.routeSetupDisplayNode.originTextField
-                )
-            })
-            .addDisposableTo(disposeBag)
-        routeSetupDisplayNode.destinationTextField.rx.text
-            .debounce(2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] text in
-                self.fetchAutosuggestions(
-                    for: self.routeSetupDisplayNode.destinationTextField
-                )
-            })
-            .addDisposableTo(disposeBag)
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(textFieldDidEndEditing(notification:)),
+            selector: #selector(RouteSetupViewController.textFieldDidBeginEditing(notification:)),
+            name: NSNotification.Name.UITextFieldTextDidBeginEditing,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(RouteSetupViewController.textFieldDidEndEditing(notification:)),
             name: NSNotification.Name.UITextFieldTextDidEndEditing,
             object: nil
         )
     }
 
-    func textFieldDidChange(notification: Notification) {
-        guard let textField = notification.object as? UITextField,
-            !textField.text!.isEmpty else {
-                autocompleteController.hideAutocomplete()
-                return
+    func textFieldDidBeginEditing(notification: Notification) {
+        guard let textField = notification.object as? UITextField else {
+            return
         }
 
-        fetchAutosuggestions(for: textField)
+        textFieldsDisposeBag = DisposeBag()
+        textField.rx.text
+            .debounce(0.2, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] text in
+                self.fetchAutosuggestions(for: textField)
+            })
+            .addDisposableTo(textFieldsDisposeBag)
     }
 
     func fetchAutosuggestions(for textField: UITextField) {
@@ -131,6 +133,8 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
     }
 
     func textFieldDidEndEditing(notification: Notification) {
+        autocompleteDisposeBag = DisposeBag()
+        textFieldsDisposeBag = DisposeBag()
         autocompleteController.hideAutocomplete()
     }
 
