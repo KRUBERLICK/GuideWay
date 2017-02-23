@@ -8,4 +8,6 @@ target 'GuideWay' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'Firebase/Core'
+  pod 'Siesta'
+  pod 'ObjectMapper'
 end
