@@ -7,4 +7,5 @@ target 'GuideWay' do
   pod 'DITranquillity'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Firebase/Core'
 end

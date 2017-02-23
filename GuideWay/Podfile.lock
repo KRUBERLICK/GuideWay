@@ -4,6 +4,19 @@ PODS:
     - AsyncDisplayKit/Core
     - IGListKit (= 2.1.0)
   - DITranquillity (1.3.1)
+  - Firebase/Core (3.13.0):
+    - FirebaseAnalytics (= 3.7.0)
+    - FirebaseCore (= 3.5.0)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - IGListKit (2.1.0):
     - IGListKit/Default (= 2.1.0)
   - IGListKit/Default (2.1.0):
@@ -16,16 +29,22 @@ PODS:
 DEPENDENCIES:
   - AsyncDisplayKit/IGListKit
   - DITranquillity
+  - Firebase/Core
   - RxCocoa
   - RxSwift
 
 SPEC CHECKSUMS:
   AsyncDisplayKit: 28de788f9d6ec573be7662f0fe8931e656357e93
   DITranquillity: 38b933863d800dbf7b5b8e70fb8c8329df6ab1b4
+  Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   IGListKit: b826c68ef7a4ae1626c09d4d3e1ea7a169e6c36e
   RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
 
-PODFILE CHECKSUM: 0a860b364ff9930ab0e27e81d1ede040f76ae2f7
+PODFILE CHECKSUM: 11f82fab39ff282402dee76d1c27aea65ebee212
 
 COCOAPODS: 1.2.0
