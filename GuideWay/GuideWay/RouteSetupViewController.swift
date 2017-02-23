@@ -14,12 +14,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
     let routeSetupDisplayNode: RouteSetupDisplayNode
     let keyboardController: KeyboardController
     let disposeBag = DisposeBag()
-
-    lazy var autocompleteController: AutocompleteController = {
-        let controller = AutocompleteController(parentNode: self.routeSetupDisplayNode)
-
-        return controller
-    }()
+    let autocompleteController: AutocompleteController
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -34,9 +29,11 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
     }
 
     init(routeSetupDisplayNode: RouteSetupDisplayNode,
-         keyboardController: KeyboardController) {
+         keyboardController: KeyboardController,
+         autocompleteController: AutocompleteController) {
         self.routeSetupDisplayNode = routeSetupDisplayNode
         self.keyboardController = keyboardController
+        self.autocompleteController = autocompleteController
         super.init(node: routeSetupDisplayNode)
     }
     

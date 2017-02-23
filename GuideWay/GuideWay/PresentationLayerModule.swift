@@ -15,14 +15,18 @@ class PresentationLayerModule: DIModule {
         // ViewControllers
         builder.register {
             RouteSetupViewController(routeSetupDisplayNode: *!$0,
-                                     keyboardController: *!$0)
+                                     keyboardController: *!$0,
+                                     autocompleteController: *!$0)
             }
+            .dependency { $1.autocompleteController.parentNode = $1.node }
             .lifetime(.perDependency)
         // Nodes
         builder.register { RouteSetupDisplayNode() }
             .lifetime(.perDependency)
         // Utils
         builder.register { KeyboardController() }
+            .lifetime(.perDependency)
+        builder.register { AutocompleteController() }
             .lifetime(.perDependency)
     }
 }

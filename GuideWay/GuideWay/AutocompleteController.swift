@@ -39,7 +39,7 @@ class AutocompleteController: NSObject {
     var autocompleteQueries = ["проспект Победы",
                                "проспект Мира",
                                "проспект Степана Бандеры"]
-    let parentNode: ASDisplayNode
+    var parentNode: ASDisplayNode!
 
     lazy var tableNode: ASTableNode = {
         let node = ASTableNode(style: .plain)
@@ -54,11 +54,6 @@ class AutocompleteController: NSObject {
 
     var isShowing = false
     var onSelect: ((String) -> ())?
-
-    init(parentNode: ASDisplayNode) {
-        self.parentNode = parentNode
-        super.init()
-    }
 
     func showAutocomplete(for node: ASDisplayNode) {
         tableNode.reloadData()
