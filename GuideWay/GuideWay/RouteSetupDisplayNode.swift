@@ -119,6 +119,14 @@ class RouteSetupDisplayNode: ASDisplayNode {
 
     var onCreateRouteButtonTap: (() -> ())?
 
+    var originTextField: UITextField {
+        return originTextFieldNode.view as! UITextField
+    }
+
+    var destinationTextField: UITextField {
+        return destinationTextFieldNode.view as! UITextField
+    }
+
     override init() {
         super.init()
         automaticallyManagesSubnodes = true

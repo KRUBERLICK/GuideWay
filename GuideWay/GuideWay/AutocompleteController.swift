@@ -53,6 +53,7 @@ class AutocompleteController: NSObject {
     }()
 
     var isShowing = false
+    var onSelect: ((String) -> ())?
 
     init(parentNode: ASDisplayNode) {
         self.parentNode = parentNode
@@ -120,5 +121,11 @@ extension AutocompleteController: ASTableDataSource, ASTableDelegate {
                 height: 30
             )
         )
+    }
+
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        let selectedText = autocompleteQueries[indexPath.row]
+
+        onSelect?(selectedText)
     }
 }

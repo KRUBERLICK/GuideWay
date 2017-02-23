@@ -47,16 +47,24 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         super.viewDidLoad()
         keyboardController.parentView = view
-        routeSetupDisplayNode.view.addGestureRecognizer(
-            UITapGestureRecognizer(
-                target: self, 
-                action: #selector(RouteSetupViewController.hideKeyboard)
-            )
+        routeSetupDisplayNode.backgroundImageNode.addTarget(
+            self,
+            action: #selector(RouteSetupViewController.hideKeyboard),
+            forControlEvents: .touchUpInside
         )
         routeSetupDisplayNode.onCreateRouteButtonTap = { [unowned self] in
             self.keyboardController.hideKeyboard(completion: { 
-                // do something...
+                
             })
+        }
+        autocompleteController.onSelect = { [unowned self] suggestion in
+            if self.routeSetupDisplayNode.originTextFieldNode.isFirstResponder() {
+                self.routeSetupDisplayNode.originTextField.text = suggestion
+            }
+            if self.routeSetupDisplayNode.destinationTextFieldNode.isFirstResponder() {
+                self.routeSetupDisplayNode.destinationTextField.text = suggestion
+            }
+            self.autocompleteController.hideAutocomplete()
         }
         NotificationCenter.default.addObserver(
             self,
@@ -80,9 +88,9 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         }
 
         switch textField {
-        case (routeSetupDisplayNode.originTextFieldNode.view as! UITextField):
+        case routeSetupDisplayNode.originTextField:
             autocompleteController.showAutocomplete(for: routeSetupDisplayNode.originTextFieldNode)
-        case (routeSetupDisplayNode.destinationTextFieldNode.view as! UITextField):
+        case routeSetupDisplayNode.destinationTextField:
             autocompleteController.showAutocomplete(for: routeSetupDisplayNode.destinationTextFieldNode)
         default:
             break
