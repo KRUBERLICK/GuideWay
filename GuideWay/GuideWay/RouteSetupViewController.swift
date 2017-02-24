@@ -19,6 +19,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
     var textFieldsDisposeBag = DisposeBag()
     let autocompleteController: AutocompleteController
     let googleServicesAPI: GoogleServicesAPI
+    let presentationManager: PresentationManager
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -35,11 +36,13 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
     init(routeSetupDisplayNode: RouteSetupDisplayNode,
          keyboardController: KeyboardController,
          autocompleteController: AutocompleteController,
-         googleServicesAPI: GoogleServicesAPI) {
+         googleServicesAPI: GoogleServicesAPI,
+         presentationManager: PresentationManager) {
         self.routeSetupDisplayNode = routeSetupDisplayNode
         self.keyboardController = keyboardController
         self.autocompleteController = autocompleteController
         self.googleServicesAPI = googleServicesAPI
+        self.presentationManager = presentationManager
         super.init(node: routeSetupDisplayNode)
     }
     
@@ -56,17 +59,30 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             forControlEvents: .touchUpInside
         )
         routeSetupDisplayNode.onCreateRouteButtonTap = { [unowned self] in
-            self.keyboardController.hideKeyboard(completion: { 
-                guard !self.routeSetupDisplayNode.originTextField.text!.isEmpty,
-                    !self.routeSetupDisplayNode.destinationTextField.text!.isEmpty else {
+            self.keyboardController.hideKeyboard(completion: {
+                guard let origin = self.routeSetupDisplayNode.originTextField.text,
+                    let destination = self.routeSetupDisplayNode.destinationTextField.text,
+                    !origin.isEmpty,
+                    !destination.isEmpty else {
                         AlertWithBackgroundNode.showAlert(
-                            for: self.node, 
+                            for: self.node,
                             with: NSLocalizedString("alert.error.input_all_fields", comment: "")
                         )
                         return
                 }
 
-                // process route creation
+                let route = Route(
+                    origin: origin,
+                    destination: destination
+                )
+
+                let routeDetailsVC =
+                    self.presentationManager.getRouteDetailsViewController(for: route)
+
+                self.navigationController?.pushViewController(
+                    routeDetailsVC,
+                    animated: true
+                )
             })
         }
         autocompleteController.onSelect = { [unowned self] suggestion in
@@ -91,6 +107,11 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             name: NSNotification.Name.UITextFieldTextDidEndEditing,
             object: nil
         )
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     func textFieldDidBeginEditing(notification: Notification) {

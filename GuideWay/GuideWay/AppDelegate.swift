@@ -6,7 +6,7 @@
 //  Copyright © 2017 Sasha&Daniel. All rights reserved.
 //
 
-import UIKit
+import AsyncDisplayKit
 import DITranquillity
 import Firebase
 
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let scope = try! builder.build()
         let presentationManager: PresentationManager = *!scope
 
-        window?.rootViewController = presentationManager.getInitialViewController()
+        window?.rootViewController = ASNavigationController(rootViewController: presentationManager.getInitialViewController())
         window?.makeKeyAndVisible()
         return true
     }

@@ -24,5 +24,9 @@ class PresentationManager {
         return routeSetupVC
     }
 
+    func getRouteDetailsViewController(for route: Route) -> RouteDetailsViewController {
+        return try! scope.resolve(arg: route)
+    }
+
     // Nodes
 }
