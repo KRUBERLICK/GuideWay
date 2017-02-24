@@ -109,6 +109,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
 
     func fetchAutosuggestions(for textField: UITextField) {
         guard let text = textField.text, !text.isEmpty else {
+            autocompleteController.hideAutocomplete()
             return
         }
 
