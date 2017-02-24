@@ -59,7 +59,10 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             self.keyboardController.hideKeyboard(completion: { 
                 guard !self.routeSetupDisplayNode.originTextField.text!.isEmpty,
                     !self.routeSetupDisplayNode.destinationTextField.text!.isEmpty else {
-                        // display alert
+                        AlertWithBackgroundNode.showAlert(
+                            for: self.node, 
+                            with: NSLocalizedString("alert.error.input_all_fields", comment: "")
+                        )
                         return
                 }
 

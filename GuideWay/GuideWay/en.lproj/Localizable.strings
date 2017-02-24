@@ -9,3 +9,6 @@
 "route_setup.create_new_route" = "Create new route";
 "route_setup.origin" = "Origin";
 "route_setup.destination" = "Destination";
+"alert.ok" = "OK";
+"alert.title.error" = "Error";
+"alert.error.input_all_fields" = "Input all fields";
