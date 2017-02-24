@@ -21,7 +21,7 @@ class PresentationManager {
     func getInitialViewController() -> UIViewController {
         let routeSetupVC: RouteSetupViewController = *!scope
 
-        return routeSetupVC
+        return BaseNavigationController(rootViewController: routeSetupVC)
     }
 
     func getRouteDetailsViewController(for route: Route) -> RouteDetailsViewController {

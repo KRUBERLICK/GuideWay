@@ -12,3 +12,4 @@
 "alert.ok" = "OK";
 "alert.title.error" = "Error";
 "alert.error.input_all_fields" = "Input all fields";
+"route_details.title" = "Route details";

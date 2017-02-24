@@ -17,6 +17,7 @@
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
 		5BA977C61E6076C800421A60 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C51E6076C800421A60 /* Route.swift */; };
 		5BA977C81E6078AC00421A60 /* RouteDetailsDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */; };
+		5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C91E608BF100421A60 /* BaseNavigationController.swift */; };
 		5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE1E4F1E5F2FE3007CCFB5 /* DataLayerModule.swift */; };
 		5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0423F1E5DB45F00A31443 /* PresentationLayerModule.swift */; };
 		5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042411E5DB4A400A31443 /* PresentationManager.swift */; };
@@ -47,6 +48,7 @@
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5BA977C51E6076C800421A60 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsDisplayNode.swift; sourceTree = "<group>"; };
+		5BA977C91E608BF100421A60 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		5BAE1E4F1E5F2FE3007CCFB5 /* DataLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLayerModule.swift; sourceTree = "<group>"; };
 		5BB0423F1E5DB45F00A31443 /* PresentationLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationLayerModule.swift; sourceTree = "<group>"; };
 		5BB042411E5DB4A400A31443 /* PresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationManager.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			children = (
 				5B307BB21E5DAFBC004F8017 /* RouteSetupViewController.swift */,
 				5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */,
+				5BA977C91E608BF100421A60 /* BaseNavigationController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
+				5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */,
 				5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */,
 				5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */,
 				5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */,

@@ -114,6 +114,14 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // Temporary
+        let routeDetailsVC = self.presentationManager.getRouteDetailsViewController(for: Route(origin: "Origin", destination: "Destination"))
+        self.navigationController?.pushViewController(routeDetailsVC, animated: true)
+    }
+
     func textFieldDidBeginEditing(notification: Notification) {
         guard let textField = notification.object as? UITextField else {
             return

@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let scope = try! builder.build()
         let presentationManager: PresentationManager = *!scope
 
-        window?.rootViewController = ASNavigationController(rootViewController: presentationManager.getInitialViewController())
+        window?.rootViewController = presentationManager.getInitialViewController()
         window?.makeKeyAndVisible()
         return true
     }
