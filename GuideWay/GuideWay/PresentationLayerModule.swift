@@ -14,23 +14,48 @@ class PresentationLayerModule: DIModule {
             .lifetime(.perDependency)
         // ViewControllers
         builder.register {
-            RouteSetupViewController(routeSetupDisplayNode: *!$0,
-                                     keyboardController: *!$0,
-                                     autocompleteController: *!$0,
-                                     googleServicesAPI: *!$0,
-                                     presentationManager: *!$0)
+            RouteSetupViewController(
+                routeSetupDisplayNode: *!$0,
+                keyboardController: *!$0,
+                autocompleteController: *!$0,
+                googleServicesAPI: *!$0,
+                presentationManager: *!$0
+            )
             }
-            .dependency { $1.autocompleteController.parentNode = $1.node }
+            .dependency {
+                $1.autocompleteController.parentNode = $1.node
+            }
             .lifetime(.perDependency)
         builder.register {
-            RouteDetailsViewController(routeDetailsDisplayNode: *!$0,
-                                       route: $1)
+            RouteDetailsViewController(
+                presentationManager: *!$0,
+                route: $1,
+                googleServicesAPI: *!$0
+            )
             }
             .lifetime(.perDependency)
         // Nodes
         builder.register { RouteSetupDisplayNode() }
             .lifetime(.perDependency)
-        builder.register { RouteDetailsDisplayNode() }
+        builder.register {
+            RouteDetailsDisplayNode(
+                presentationManager: *!$0,
+                state: $1
+            )
+            }
+            .lifetime(.perDependency)
+        builder.register(RouteDetailsTitleCellNode.self)
+            .initializer {
+                RouteDetailsTitleCellNode(isEditing: $1)
+            }
+            .initializer {
+                RouteDetailsTitleCellNode(
+                    title: $1,
+                    isEditing: $2
+                )
+            }
+            .lifetime(.perDependency)
+        builder.register { RouteDetailsMapCellNode(route: $1) }
             .lifetime(.perDependency)
         // Utils
         builder.register { KeyboardController() }

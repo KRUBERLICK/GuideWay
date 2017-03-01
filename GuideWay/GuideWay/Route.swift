@@ -9,31 +9,33 @@
 import ObjectMapper
 
 struct Route: ImmutableMappable {
-    let id: String
+    var id: String?
+    var title: String?
     var origin: String
     var destination: String
-    var length: Double?
-    var duration: Double?
+    var directions: DirectionsResponseRoute?
 
-    init(origin: String, destination: String) {
+    init(origin: String,
+         destination: String) {
+        id = nil
         self.origin = origin
         self.destination = destination
-        id = ""
+        self.directions = nil
     }
 
     init(map: Map) throws {
-        id = try map.value("id")
+        id = try? map.value("id")
+        title = try? map.value("title")
         origin = try map.value("origin")
         destination = try map.value("destination")
-        length = try? map.value("length")
-        duration = try? map.value("duration")
+        directions = try? map.value("directions")
     }
 
     mutating func mapping(map: Map) {
-        id >>> map["id"]
+        id <- map["id"]
+        title <- map["title"]
         origin <- map["origin"]
         destination <- map["destination"]
-        length <- map["length"]
-        duration <- map["duration"]
+        directions <- map["directions"]
     }
 }

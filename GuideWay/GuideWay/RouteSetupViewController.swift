@@ -13,10 +13,10 @@ import Siesta
 
 class RouteSetupViewController: ASViewController<ASDisplayNode> {
     let routeSetupDisplayNode: RouteSetupDisplayNode
-    let keyboardController: KeyboardController
     let disposeBag = DisposeBag()
     var autocompleteDisposeBag = DisposeBag()
     var textFieldsDisposeBag = DisposeBag()
+    let keyboardController: KeyboardController
     let autocompleteController: AutocompleteController
     let googleServicesAPI: GoogleServicesAPI
     let presentationManager: PresentationManager
@@ -54,19 +54,25 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         super.viewDidLoad()
         keyboardController.parentView = view
         routeSetupDisplayNode.backgroundImageNode.addTarget(
-            self,
-            action: #selector(RouteSetupViewController.hideKeyboard),
+            self, 
+            action: #selector(RouteSetupViewController.hideKeyboard), 
             forControlEvents: .touchUpInside
         )
+        automaticallyAdjustsScrollViewInsets = false
         routeSetupDisplayNode.onCreateRouteButtonTap = { [unowned self] in
-            self.keyboardController.hideKeyboard(completion: {
-                guard let origin = self.routeSetupDisplayNode.originTextField.text,
-                    let destination = self.routeSetupDisplayNode.destinationTextField.text,
+            self.keyboardController.hideKeyboard(completion: { 
+                guard let origin = self.routeSetupDisplayNode
+                    .originTextField.text,
+                    let destination = self.routeSetupDisplayNode
+                        .destinationTextField.text,
                     !origin.isEmpty,
                     !destination.isEmpty else {
                         AlertWithBackgroundNode.showAlert(
                             for: self.node,
-                            with: NSLocalizedString("alert.error.input_all_fields", comment: "")
+                            with: NSLocalizedString(
+                                "alert.error.input_all_fields",
+                                comment: ""
+                            )
                         )
                         return
                 }
@@ -77,7 +83,8 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
                 )
 
                 let routeDetailsVC =
-                    self.presentationManager.getRouteDetailsViewController(for: route)
+                    self.presentationManager
+                        .getRouteDetailsViewController(for: route)
 
                 self.navigationController?.pushViewController(
                     routeDetailsVC,
@@ -86,45 +93,68 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             })
         }
         autocompleteController.onSelect = { [unowned self] suggestion in
-            if self.routeSetupDisplayNode.originTextFieldNode.isFirstResponder() {
-                self.routeSetupDisplayNode.originTextField.text = suggestion
+            if self.routeSetupDisplayNode
+                .originTextFieldNode.isFirstResponder() {
+                self.routeSetupDisplayNode
+                    .originTextField.text = suggestion
             }
-            if self.routeSetupDisplayNode.destinationTextFieldNode.isFirstResponder() {
-                self.routeSetupDisplayNode.destinationTextField.text = suggestion
+            if self.routeSetupDisplayNode
+                .destinationTextFieldNode.isFirstResponder() {
+                self.routeSetupDisplayNode
+                    .destinationTextField.text = suggestion
             }
             self.autocompleteDisposeBag = DisposeBag()
             self.autocompleteController.hideAutocomplete()
         }
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(RouteSetupViewController.textFieldDidBeginEditing(notification:)),
-            name: NSNotification.Name.UITextFieldTextDidBeginEditing,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(RouteSetupViewController.textFieldDidEndEditing(notification:)),
-            name: NSNotification.Name.UITextFieldTextDidEndEditing,
-            object: nil
-        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(RouteSetupViewController
+                .textFieldDidBeginEditing(notification:)),
+            name: NSNotification.Name.UITextFieldTextDidBeginEditing,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(RouteSetupViewController
+                .textFieldDidEndEditing(notification:)),
+            name: NSNotification.Name.UITextFieldTextDidEndEditing,
+            object: nil
+        )
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         // Temporary
-        let routeDetailsVC = self.presentationManager.getRouteDetailsViewController(for: Route(origin: "Origin", destination: "Destination"))
-        self.navigationController?.pushViewController(routeDetailsVC, animated: true)
+        let routeDetailsVC = self.presentationManager
+            .getRouteDetailsViewController(
+                for: Route(
+                    origin: "проспект Победы 37К5",
+                    destination: "улица Двинская 19"
+                )
+        )
+
+        self.navigationController?.pushViewController(
+            routeDetailsVC,
+            animated: true
+        )
     }
 
     func textFieldDidBeginEditing(notification: Notification) {
-        guard let textField = notification.object as? UITextField else {
-            return
+        guard let textField = notification.object as? UITextField,
+            (textField == routeSetupDisplayNode.originTextField
+                || textField == routeSetupDisplayNode.destinationTextField) else {
+                    return
         }
 
         textFieldsDisposeBag = DisposeBag()
@@ -143,36 +173,43 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         }
 
         autocompleteDisposeBag = DisposeBag()
-        googleServicesAPI.requestPlaceSearch(for: text)
+        googleServicesAPI.requestPlaceAutocomplete(for: text)
             .subscribe(onNext: { response in
                 self.autocompleteController.autocompleteQueries
-                    = response.results.map { $0.name }
+                    = response.predictions.map {
+                        let string = $0.terms.prefix(2).reduce("", { $0 + " \($1.value)," })
+
+                        return string.substring(to: string.index(before: string.endIndex))
+                }
                 switch textField {
                 case self.routeSetupDisplayNode.originTextField:
                     self.autocompleteController.showAutocomplete(
-                        for: self.routeSetupDisplayNode.originTextFieldUnderscoreNode
+                        for: self.routeSetupDisplayNode
+                            .originTextFieldUnderscoreNode
                     )
                 case self.routeSetupDisplayNode.destinationTextField:
                     self.autocompleteController.showAutocomplete(
-                        for: self.routeSetupDisplayNode.destinationTextFieldUnderscoreNode
+                        for: self.routeSetupDisplayNode
+                            .destinationTextFieldUnderscoreNode
                     )
                 default:
                     break
                 }
             }, onError: { error in
-                // show error popup
+                // show error informer
             })
             .addDisposableTo(autocompleteDisposeBag)
     }
 
-    func textFieldDidEndEditing(notification: Notification) {
-        autocompleteDisposeBag = DisposeBag()
-        textFieldsDisposeBag = DisposeBag()
-        autocompleteController.hideAutocomplete()
-    }
-
     func hideKeyboard() {
         keyboardController.hideKeyboard()
+    }
+
+    func textFieldDidEndEditing(notification: Notification) {
+        autocompleteDisposeBag = DisposeBag()
+        hideKeyboard()
+        textFieldsDisposeBag = DisposeBag()
+        autocompleteController.hideAutocomplete()
     }
 }
 

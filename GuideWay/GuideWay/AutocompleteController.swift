@@ -19,6 +19,7 @@ class AutocompleteCellNode: ASCellNode {
             attributes: [NSForegroundColorAttributeName: UIColor.white,
                          NSFontAttributeName: UIFont.systemFont(ofSize: 15)]
         )
+        titleNode.truncationMode = .byTruncatingTail
     }
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -62,8 +63,10 @@ class AutocompleteController: NSObject {
                 delay: 0,
                 options: .curveEaseOut,
                 animations: {
-                    let height = CGFloat(self.autocompleteQueries.count) * 30
-                    self.tableNode.frame.size.height = height <= 150 ? height : 150
+                    let height =
+                        CGFloat(self.autocompleteQueries.count) * 30
+                    self.tableNode.frame.size.height =
+                        height <= 150 ? height : 150
             }, completion: nil)
             return
         }
@@ -82,8 +85,10 @@ class AutocompleteController: NSObject {
             delay: 0,
             options: .curveEaseOut,
             animations: {
-                let height = CGFloat(self.autocompleteQueries.count) * 30
-                self.tableNode.frame.size.height = height <= 150 ? height : 150
+                let height =
+                    CGFloat(self.autocompleteQueries.count) * 30
+                self.tableNode.frame.size.height =
+                    height <= 150 ? height : 150
         }, completion: nil)
     }
 
@@ -110,7 +115,9 @@ extension AutocompleteController: ASTableDataSource, ASTableDelegate {
     func tableNode(_ tableNode: ASTableNode,
                    nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         return {
-            return AutocompleteCellNode(title: self.autocompleteQueries[indexPath.row])
+            return AutocompleteCellNode(
+                title: self.autocompleteQueries[indexPath.row]
+            )
         }
     }
 

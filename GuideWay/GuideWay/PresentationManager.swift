@@ -29,4 +29,24 @@ class PresentationManager {
     }
 
     // Nodes
+
+    func getRouteDetailsDisplayNode(with state: RouteDetailsDisplayNode.State) -> RouteDetailsDisplayNode {
+        return try! scope.resolve(arg: state)
+    }
+
+    func getRouteDetailsTitleCellNode(with title: String? = nil,
+                                      editingMode: Bool) -> RouteDetailsTitleCellNode {
+        if let title = title {
+            return try! scope.resolve(
+                arg: title,
+                editingMode
+            )
+        } else {
+            return try! scope.resolve(arg: editingMode)
+        }
+    }
+
+    func getRouteDetailsMapCellNode(for route: Route) -> RouteDetailsMapCellNode {
+        return try! scope.resolve(arg: route)
+    }
 }

@@ -26,6 +26,10 @@ class KeyboardController {
         )
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     func hideKeyboard(completion: (() -> ())? = nil) {
         guard keyboardIsShowing else {
             completion?()

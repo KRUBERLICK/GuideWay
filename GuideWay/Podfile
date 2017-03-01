@@ -10,4 +10,5 @@ target 'GuideWay' do
   pod 'Firebase/Core'
   pod 'Siesta'
   pod 'ObjectMapper'
+  pod 'GoogleMaps'
 end

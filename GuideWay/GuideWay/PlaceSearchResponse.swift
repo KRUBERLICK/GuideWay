@@ -8,35 +8,47 @@
 
 import ObjectMapper
 
-struct PlaceSearchResponseItem: ImmutableMappable {
-    let name: String
-    let formattedAddress: String
-    let latitude: Double
-    let longitude: Double
+struct PlaceAutocompleteResponseItemTerm: ImmutableMappable {
+    let offset: Int
+    let value: String
 
     init(map: Map) throws {
-        name = try map.value("name")
-        formattedAddress = try map.value("formatted_address")
-        latitude = try map.value("geometry.location.lat")
-        longitude = try map.value("geometry.location.lng")
+        offset = try map.value("offset")
+        value = try map.value("value")
     }
 
     mutating func mapping(map: Map) {
-        name >>> map["name"]
-        formattedAddress >>> map["formatted_address"]
-        latitude >>> map["geometry.location.lat"]
-        longitude >>> map["geometry.location.lng"]
+        offset >>> map["offset"]
+        value >>> map["value"]
     }
 }
 
-struct PlaceSearchResponse: ImmutableMappable {
-    let results: [PlaceSearchResponseItem]
+struct PlaceAutocompleteResponseItem: ImmutableMappable {
+    let id: String
+    let description: String
+    let terms: [PlaceAutocompleteResponseItemTerm]
 
     init(map: Map) throws {
-        results = try map.value("results")
+        id = try map.value("id")
+        description = try map.value("description")
+        terms = try map.value("terms")
     }
 
     mutating func mapping(map: Map) {
-        results >>> map["results"]
+        id >>> map["id"]
+        description >>> map["description"]
+        terms >>> map["terms"]
+    }
+}
+
+struct PlaceAutocompleteResponse: ImmutableMappable {
+    let predictions: [PlaceAutocompleteResponseItem]
+
+    init(map: Map) throws {
+        predictions = try map.value("predictions")
+    }
+
+    mutating func mapping(map: Map) {
+        predictions >>> map["predictions"]
     }
 }

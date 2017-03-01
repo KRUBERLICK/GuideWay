@@ -18,8 +18,17 @@ extension String {
     }
 
     subscript(r: Range<Int>) -> String {
-        return substring(with: characters.index(startIndex, offsetBy: r.lowerBound)
-            ..< characters.index(startIndex, offsetBy: r.upperBound))
+        return substring(
+            with: characters.index(
+                startIndex,
+                offsetBy: r.lowerBound
+                )
+                ..<
+                characters.index(
+                    startIndex,
+                    offsetBy: r.upperBound
+            )
+        )
     }
 }
 
@@ -29,10 +38,23 @@ extension UIColor {
 
         strtoul(hexString, nil, 16)
 
-        let r = CGFloat(strtoul(hexString[length - 6 ..< length - 4], nil, 16)) / 255
-        let g = CGFloat(strtoul(hexString[length - 4 ..< length - 2], nil, 16)) / 255
-        let b = CGFloat(strtoul(hexString[length - 2 ..< length], nil, 16)) / 255
+        let r = CGFloat(
+            strtoul(hexString[length - 6 ..< length - 4],
+                    nil,
+                    16)) / 255
+        let g = CGFloat(
+            strtoul(
+                hexString[length - 4 ..< length - 2],
+                nil,
+                16)) / 255
+        let b = CGFloat(
+            strtoul(hexString[length - 2 ..< length],
+                    nil,
+                    16)) / 255
 
-        self.init(red: r, green: g, blue: b, alpha: alpha)
+        self.init(red: r,
+                  green: g,
+                  blue: b,
+                  alpha: alpha)
     }
 }

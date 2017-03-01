@@ -141,58 +141,58 @@ class RouteSetupDisplayNode: ASDisplayNode {
             justifyContent: .center,
             alignItems: .center,
             children: isNarrow
-                ? [createNewRouteTitleNode]
-                : [routeImageNode, createNewRouteTitleNode]
+                ? [self.createNewRouteTitleNode]
+                : [self.routeImageNode, self.createNewRouteTitleNode]
         )
 
-        originTextFieldNode.style.flexShrink = 1
-        originTextFieldNode.style.flexGrow = 1
-        destinationTextFieldNode.style.flexGrow = 1
-        destinationTextFieldNode.style.flexShrink = 1
+        self.originTextFieldNode.style.flexShrink = 1
+        self.originTextFieldNode.style.flexGrow = 1
+        self.destinationTextFieldNode.style.flexGrow = 1
+        self.destinationTextFieldNode.style.flexShrink = 1
 
         let originTextFieldAndIconStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: 12,
             justifyContent: .start,
             alignItems: .center,
-            children: [originIconNode, originTextFieldNode]
+            children: [self.originIconNode, self.originTextFieldNode]
         )
         let destinationTextFieldAndIconStack = ASStackLayoutSpec(
             direction: .horizontal,
-            spacing: 12, 
-            justifyContent: .start, 
-            alignItems: .center, 
-            children: [destinationIconNode, destinationTextFieldNode]
+            spacing: 12,
+            justifyContent: .start,
+            alignItems: .center,
+            children: [self.destinationIconNode, self.destinationTextFieldNode]
         )
 
         originTextFieldAndIconStack.style.flexBasis = ASDimensionMake(50)
         destinationTextFieldAndIconStack.style.flexBasis = ASDimensionMake(50)
-        originTextFieldUnderscoreNode.style.flexBasis = ASDimensionMake(1)
-        destinationTextFieldUnderscoreNode.style.flexBasis = ASDimensionMake(1)
+        self.originTextFieldUnderscoreNode.style.flexBasis = ASDimensionMake(1)
+        self.destinationTextFieldUnderscoreNode.style.flexBasis = ASDimensionMake(1)
 
         let originTextFieldUnderscore = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 0,
             justifyContent: .start,
             alignItems: .stretch,
-            children: [originTextFieldAndIconStack, originTextFieldUnderscoreNode]
+            children: [originTextFieldAndIconStack, self.originTextFieldUnderscoreNode]
         )
         let destinationTextFieldUnderscore = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 0,
             justifyContent: .start,
             alignItems: .stretch,
-            children: [destinationTextFieldAndIconStack, destinationTextFieldUnderscoreNode]
+            children: [destinationTextFieldAndIconStack, self.destinationTextFieldUnderscoreNode]
         )
         let textFieldsStack = ASStackLayoutSpec(
-            direction: .vertical, 
-            spacing: 0, 
-            justifyContent: .start, 
-            alignItems: .stretch, 
+            direction: .vertical,
+            spacing: 0,
+            justifyContent: .start,
+            alignItems: .stretch,
             children: [originTextFieldUnderscore, destinationTextFieldUnderscore]
         )
         let textFieldsInsets = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 0, left: 31, bottom: 0, right: 31), 
+            insets: UIEdgeInsets(top: 0, left: 31, bottom: 0, right: 31),
             child: textFieldsStack
         )
         let addTextFieldsStack = ASStackLayoutSpec(
@@ -203,18 +203,18 @@ class RouteSetupDisplayNode: ASDisplayNode {
             children: [routeImageAndTitleStack, textFieldsInsets]
         )
 
-        createRouteButtonNode.style.preferredSize.height = 55
+        self.createRouteButtonNode.style.preferredSize.height = 55
         addTextFieldsStack.style.flexBasis = ASDimensionMake(constrainedSize.max.height - 55)
 
         let addCreateRouteButton = ASStackLayoutSpec(
-            direction: .vertical, 
-            spacing: 0, 
-            justifyContent: .start, 
-            alignItems: .stretch, 
-            children: [addTextFieldsStack, createRouteButtonNode]
+            direction: .vertical,
+            spacing: 0,
+            justifyContent: .start,
+            alignItems: .stretch,
+            children: [addTextFieldsStack, self.createRouteButtonNode]
         )
         let backgroundImage = ASOverlayLayoutSpec(
-            child: backgroundImageNode,
+            child: self.backgroundImageNode,
             overlay: addCreateRouteButton
         )
         return backgroundImage

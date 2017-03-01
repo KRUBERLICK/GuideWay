@@ -13,3 +13,9 @@
 "alert.title.error" = "Error";
 "alert.error.input_all_fields" = "Input all fields";
 "route_details.title" = "Route details";
+"route_details.practice" = "Practice";
+"route_details.test" = "Test";
+"route_details.route_title" = "Route Title";
+"route_details.loading_route" = "Calculating directions...";
+"route_details.loading_failed" = "Loading failed";
+"route_details.no_directions" = "No directions found";

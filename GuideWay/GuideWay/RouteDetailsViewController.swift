@@ -7,10 +7,14 @@
 //
 
 import AsyncDisplayKit
+import RxSwift
 
 class RouteDetailsViewController: ASViewController<ASDisplayNode> {
+    let presentationManager: PresentationManager
     let routeDetailsDisplayNode: RouteDetailsDisplayNode
     var route: Route
+    var disposeBag = DisposeBag()
+    let googleServicesAPI: GoogleServicesAPI
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -24,10 +28,41 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
         return false
     }
 
-    init(routeDetailsDisplayNode: RouteDetailsDisplayNode,
-         route: Route) {
-        self.routeDetailsDisplayNode = routeDetailsDisplayNode
+    lazy var editBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+            image: #imageLiteral(resourceName: "ic_bar_edit"), 
+            style: .plain, 
+            target: self, 
+            action: #selector(RouteDetailsViewController.editButtonTapped)
+        )
+    }()
+
+    lazy var editCancelBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+            image: #imageLiteral(resourceName: "ic_close"), 
+            style: .plain, 
+            target: self, 
+            action: #selector(RouteDetailsViewController.editCancelButtonTapped)
+        )
+    }()
+
+    lazy var editConfirmBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+            image: #imageLiteral(resourceName: "ic_checkmark"),
+            style: .plain,
+            target: self,
+            action: #selector(RouteDetailsViewController.editConfirmButtonTapped)
+        )
+    }()
+
+    init(presentationManager: PresentationManager,
+         route: Route,
+         googleServicesAPI: GoogleServicesAPI) {
+        self.presentationManager = presentationManager
+        self.routeDetailsDisplayNode =
+            presentationManager.getRouteDetailsDisplayNode(with: .loading)
         self.route = route
+        self.googleServicesAPI = googleServicesAPI
         super.init(node: routeDetailsDisplayNode)
     }
     
@@ -47,6 +82,15 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
             "route_details.title",
             comment: ""
         )
+        navigationItem.rightBarButtonItems = []
+        edgesForExtendedLayout = []
+        routeDetailsDisplayNode.collectionNode.view.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self, 
+                action: #selector(RouteDetailsViewController.hideKeyboard)
+            )
+        )
+        requestRouteDirections()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +101,67 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
         )
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideKeyboard()
+    }
+
+    func requestRouteDirections() {
+        disposeBag = DisposeBag()
+        googleServicesAPI.requestDirections(
+            from: route.origin, 
+            to: route.destination
+        )
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [unowned self] response in
+                self.route.directions = response.routes.first
+
+                guard let _ = self.route.directions else {
+                    self.navigationItem.setRightBarButtonItems([], animated: true)
+                    self.routeDetailsDisplayNode.state = .noDirections
+                    return
+                }
+
+                self.navigationItem.setRightBarButtonItems(
+                    [self.editBarButton], 
+                    animated: true
+                )
+                self.routeDetailsDisplayNode.state = .loaded(self.route)
+            }, onError: { error in
+                self.navigationItem.setRightBarButtonItems([], animated: true)
+                self.routeDetailsDisplayNode.state = .loadingFailed
+            })
+            .addDisposableTo(disposeBag)
+    }
+
+    func editButtonTapped() {
+        navigationItem.setRightBarButtonItems(
+            [editConfirmBarButton, editCancelBarButton], 
+            animated: true
+        )
+        routeDetailsDisplayNode.isEditing = true
+    }
+
+    func editCancelButtonTapped() {
+        routeDetailsDisplayNode.isEditing = false
+        navigationItem.setRightBarButtonItems(
+            [editBarButton], 
+            animated: true
+        )
+    }
+
+    func editConfirmButtonTapped() {
+        route.title = routeDetailsDisplayNode.currentRouteTitle
+        routeDetailsDisplayNode.state = .loaded(route)
+        // Send route update request
+        routeDetailsDisplayNode.isEditing = false
+        navigationItem.setRightBarButtonItems(
+            [editBarButton], 
+            animated: true
+        )
+    }
+
+    func hideKeyboard() {
+        view.endEditing(false)
     }
 }

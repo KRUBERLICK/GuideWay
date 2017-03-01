@@ -8,13 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		19551076698326328C213092 /* Pods_GuideWay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BAA290F6F4F9C4CE1CB494 /* Pods_GuideWay.framework */; };
+		5B2CFE421E66DA7500D57D53 /* DirectionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CFE411E66DA7500D57D53 /* DirectionsResponse.swift */; };
+		5B2CFE441E670FE300D57D53 /* RouteDetailsMapCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CFE431E670FE300D57D53 /* RouteDetailsMapCellNode.swift */; };
 		5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B307BB01E5DAFBC004F8017 /* AppDelegate.swift */; };
 		5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B307BB21E5DAFBC004F8017 /* RouteSetupViewController.swift */; };
 		5B307BB81E5DAFBC004F8017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB71E5DAFBC004F8017 /* Assets.xcassets */; };
 		5B307BBB1E5DAFBC004F8017 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB91E5DAFBC004F8017 /* LaunchScreen.storyboard */; };
+		5B36E1A51E64385F0091BB7D /* RouteDetailsTitleCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */; };
 		5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */; };
 		5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51CBEC1E6023B6002C06AE /* AlertNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
+		5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B976AE71E65DA4000CB03DE /* KeyboardController.swift */; };
 		5BA977C61E6076C800421A60 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C51E6076C800421A60 /* Route.swift */; };
 		5BA977C81E6078AC00421A60 /* RouteDetailsDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */; };
 		5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C91E608BF100421A60 /* BaseNavigationController.swift */; };
@@ -25,7 +29,6 @@
 		5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */; };
 		5BB0424A1E5DDBD800A31443 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BB0424C1E5DDBD800A31443 /* Localizable.strings */; };
 		5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */; };
-		5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042501E5DEC5A00A31443 /* KeyboardController.swift */; };
 		5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042541E5E180E00A31443 /* AutocompleteController.swift */; };
 		5BB6B4131E5EE19900F270B4 /* PlaceSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */; };
 		5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4141E5EE35800F270B4 /* WebService.swift */; };
@@ -37,15 +40,19 @@
 		00BAA290F6F4F9C4CE1CB494 /* Pods_GuideWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuideWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9602DC1AABEF46D3ED777E /* Pods-GuideWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-GuideWay/Pods-GuideWay.release.xcconfig"; sourceTree = "<group>"; };
 		5174A1AEF54E5E00744D335D /* Pods-GuideWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideWay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideWay/Pods-GuideWay.debug.xcconfig"; sourceTree = "<group>"; };
+		5B2CFE411E66DA7500D57D53 /* DirectionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsResponse.swift; sourceTree = "<group>"; };
+		5B2CFE431E670FE300D57D53 /* RouteDetailsMapCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsMapCellNode.swift; sourceTree = "<group>"; };
 		5B307BAD1E5DAFBC004F8017 /* GuideWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B307BB01E5DAFBC004F8017 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B307BB21E5DAFBC004F8017 /* RouteSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSetupViewController.swift; sourceTree = "<group>"; };
 		5B307BB71E5DAFBC004F8017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B307BBA1E5DAFBC004F8017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B307BBC1E5DAFBC004F8017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsTitleCellNode.swift; sourceTree = "<group>"; };
 		5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsViewController.swift; sourceTree = "<group>"; };
 		5B51CBEC1E6023B6002C06AE /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5B976AE71E65DA4000CB03DE /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		5BA977C51E6076C800421A60 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsDisplayNode.swift; sourceTree = "<group>"; };
 		5BA977C91E608BF100421A60 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
@@ -56,7 +63,6 @@
 		5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteSetupDisplayNode.swift; sourceTree = "<group>"; };
 		5BB0424B1E5DDBD800A31443 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationUtils.swift; sourceTree = "<group>"; };
-		5BB042501E5DEC5A00A31443 /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		5BB042541E5E180E00A31443 /* AutocompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteController.swift; sourceTree = "<group>"; };
 		5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceSearchResponse.swift; sourceTree = "<group>"; };
 		5BB6B4141E5EE35800F270B4 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -136,6 +142,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5B36E1A31E64384F0091BB7D /* RouteDetails */ = {
+			isa = PBXGroup;
+			children = (
+				5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */,
+				5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */,
+				5B2CFE431E670FE300D57D53 /* RouteDetailsMapCellNode.swift */,
+			);
+			name = RouteDetails;
+			sourceTree = "<group>";
+		};
 		5BAE1E4C1E5F2FA2007CCFB5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */,
+				5B2CFE411E66DA7500D57D53 /* DirectionsResponse.swift */,
 			);
 			name = Responses;
 			sourceTree = "<group>";
@@ -205,9 +222,9 @@
 		5BB042451E5DD7CC00A31443 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				5B36E1A31E64384F0091BB7D /* RouteDetails */,
 				5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */,
 				5B51CBEC1E6023B6002C06AE /* AlertNode.swift */,
-				5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -215,8 +232,8 @@
 		5BB0424D1E5DE65200A31443 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5B976AE71E65DA4000CB03DE /* KeyboardController.swift */,
 				5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */,
-				5BB042501E5DEC5A00A31443 /* KeyboardController.swift */,
 				5BB042541E5E180E00A31443 /* AutocompleteController.swift */,
 			);
 			name = Utils;
@@ -366,7 +383,6 @@
 				5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */,
 				5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */,
 				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
-				5BB042511E5DEC5A00A31443 /* KeyboardController.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
 				5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */,
@@ -376,8 +392,12 @@
 				5BA977C61E6076C800421A60 /* Route.swift in Sources */,
 				5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */,
 				5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */,
+				5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */,
+				5B2CFE441E670FE300D57D53 /* RouteDetailsMapCellNode.swift in Sources */,
+				5B2CFE421E66DA7500D57D53 /* DirectionsResponse.swift in Sources */,
 				5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */,
 				5BA977C81E6078AC00421A60 /* RouteDetailsDisplayNode.swift in Sources */,
+				5B36E1A51E64385F0091BB7D /* RouteDetailsTitleCellNode.swift in Sources */,
 				5BB6B4131E5EE19900F270B4 /* PlaceSearchResponse.swift in Sources */,
 				5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */,
 				5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */,
