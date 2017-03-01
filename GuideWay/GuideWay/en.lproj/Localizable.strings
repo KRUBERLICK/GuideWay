@@ -19,3 +19,5 @@
 "route_details.loading_route" = "Calculating directions...";
 "route_details.loading_failed" = "Loading failed";
 "route_details.no_directions" = "No directions found";
+"route_details.from_label" = "From";
+"route_details.to_label" = "To";

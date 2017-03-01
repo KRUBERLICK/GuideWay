@@ -57,6 +57,8 @@ class PresentationLayerModule: DIModule {
             .lifetime(.perDependency)
         builder.register { RouteDetailsMapCellNode(route: $1) }
             .lifetime(.perDependency)
+        builder.register { RouteDetailsOriginDestinationRouteCellNode(route: $1) }
+            .lifetime(.perDependency)
         // Utils
         builder.register { KeyboardController() }
             .lifetime(.perDependency)

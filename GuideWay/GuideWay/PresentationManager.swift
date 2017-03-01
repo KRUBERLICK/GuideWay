@@ -49,4 +49,8 @@ class PresentationManager {
     func getRouteDetailsMapCellNode(for route: Route) -> RouteDetailsMapCellNode {
         return try! scope.resolve(arg: route)
     }
+
+    func getRouteDetailsOriginDestinationCellNode(for route: Route) -> RouteDetailsOriginDestinationRouteCellNode {
+        return try! scope.resolve(arg: route)
+    }
 }

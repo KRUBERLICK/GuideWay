@@ -38,7 +38,12 @@ class RouteDetailsDisplayNode: ASDisplayNode {
     }()
 
     lazy var collectionNode: ASCollectionNode = {
-        let node = ASCollectionNode(collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+
+        let node = ASCollectionNode(collectionViewLayout: layout)
 
         node.backgroundColor = .clear
         node.dataSource = self
@@ -281,7 +286,7 @@ extension RouteDetailsDisplayNode: ASCollectionDataSource, ASCollectionDelegateF
 
     func collectionNode(_ collectionNode: ASCollectionNode,
                         numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
 
     func collectionNode(_ collectionNode: ASCollectionNode, 
@@ -293,6 +298,8 @@ extension RouteDetailsDisplayNode: ASCollectionDataSource, ASCollectionDelegateF
                 return constructRouteDetailsTitleCellNode()
             case 1:
                 return constructRouteDetailsMapCellNode()
+            case 2:
+                return constructRouteDetailsOriginDestinationCellNode()
             default:
                 return { ASCellNode() }
             }
@@ -338,6 +345,17 @@ extension RouteDetailsDisplayNode: ASCollectionDataSource, ASCollectionDelegateF
         return {
             return self.presentationManager
                 .getRouteDetailsMapCellNode(for: route)
+        }
+    }
+
+    func constructRouteDetailsOriginDestinationCellNode() -> ASCellNodeBlock {
+        guard case let .loaded(route) = state else {
+            return { ASCellNode() }
+        }
+
+        return {
+            return self.presentationManager
+                .getRouteDetailsOriginDestinationCellNode(for: route)
         }
     }
 }
