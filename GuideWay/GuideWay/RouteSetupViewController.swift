@@ -136,18 +136,18 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         super.viewDidAppear(animated)
 
         // Temporary
-        let routeDetailsVC = self.presentationManager
-            .getRouteDetailsViewController(
-                for: Route(
-                    origin: "проспект Победы 37К5",
-                    destination: "улица Двинская 19"
-                )
-        )
-
-        self.navigationController?.pushViewController(
-            routeDetailsVC,
-            animated: true
-        )
+//        let routeDetailsVC = self.presentationManager
+//            .getRouteDetailsViewController(
+//                for: Route(
+//                    origin: "проспект Победы 37К5",
+//                    destination: "улица Двинская 19"
+//                )
+//        )
+//
+//        self.navigationController?.pushViewController(
+//            routeDetailsVC,
+//            animated: true
+//        )
     }
 
     func textFieldDidBeginEditing(notification: Notification) {
@@ -174,7 +174,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
 
         autocompleteDisposeBag = DisposeBag()
         googleServicesAPI.requestPlaceAutocomplete(for: text)
-            .subscribe(onNext: { response in
+            .subscribe(onNext: { [unowned self] response in
                 self.autocompleteController.autocompleteQueries
                     = response.predictions.map {
                         let string = $0.terms.prefix(2).reduce("", { $0 + " \($1.value)," })
@@ -195,8 +195,11 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
                 default:
                     break
                 }
-            }, onError: { error in
-                // show error informer
+            }, onError: { [unowned self] error in
+                InformerNode.showInformer(
+                    for: self.node, 
+                    with: NSLocalizedString("informer.network_error", comment: "")
+                )
             })
             .addDisposableTo(autocompleteDisposeBag)
     }

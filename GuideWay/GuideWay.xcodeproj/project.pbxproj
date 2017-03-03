@@ -24,6 +24,7 @@
 		5BA977C81E6078AC00421A60 /* RouteDetailsDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */; };
 		5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C91E608BF100421A60 /* BaseNavigationController.swift */; };
 		5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE1E4F1E5F2FE3007CCFB5 /* DataLayerModule.swift */; };
+		5BAEFF1C1E696EAF004A3D6F /* InformerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEFF1B1E696EAF004A3D6F /* InformerNode.swift */; };
 		5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0423F1E5DB45F00A31443 /* PresentationLayerModule.swift */; };
 		5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042411E5DB4A400A31443 /* PresentationManager.swift */; };
 		5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042431E5DB56800A31443 /* AppAssembly.swift */; };
@@ -59,6 +60,7 @@
 		5BA977C71E6078AC00421A60 /* RouteDetailsDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsDisplayNode.swift; sourceTree = "<group>"; };
 		5BA977C91E608BF100421A60 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		5BAE1E4F1E5F2FE3007CCFB5 /* DataLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLayerModule.swift; sourceTree = "<group>"; };
+		5BAEFF1B1E696EAF004A3D6F /* InformerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformerNode.swift; sourceTree = "<group>"; };
 		5BB0423F1E5DB45F00A31443 /* PresentationLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationLayerModule.swift; sourceTree = "<group>"; };
 		5BB042411E5DB4A400A31443 /* PresentationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationManager.swift; sourceTree = "<group>"; };
 		5BB042431E5DB56800A31443 /* AppAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				5B36E1A31E64384F0091BB7D /* RouteDetails */,
 				5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */,
 				5B51CBEC1E6023B6002C06AE /* AlertNode.swift */,
+				5BAEFF1B1E696EAF004A3D6F /* InformerNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				5B36E1A51E64385F0091BB7D /* RouteDetailsTitleCellNode.swift in Sources */,
 				5BB6B4131E5EE19900F270B4 /* PlaceSearchResponse.swift in Sources */,
 				5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */,
+				5BAEFF1C1E696EAF004A3D6F /* InformerNode.swift in Sources */,
 				5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */,
 				5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */,
 			);

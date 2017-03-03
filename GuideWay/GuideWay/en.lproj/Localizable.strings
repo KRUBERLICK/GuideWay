@@ -21,3 +21,4 @@
 "route_details.no_directions" = "No directions found";
 "route_details.from_label" = "From";
 "route_details.to_label" = "To";
+"informer.network_error" = "Network error";
