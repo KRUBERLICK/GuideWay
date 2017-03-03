@@ -151,6 +151,7 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
     }
 
     func editConfirmButtonTapped() {
+        InformerNode.showInformer(for: node, with: "Error")
         route.title = routeDetailsDisplayNode.currentRouteTitle
         routeDetailsDisplayNode.state = .loaded(route)
         // Send route update request

@@ -11,4 +11,5 @@ target 'GuideWay' do
   pod 'Siesta'
   pod 'ObjectMapper'
   pod 'GoogleMaps'
+  pod 'NVActivityIndicatorView'
 end

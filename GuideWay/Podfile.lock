@@ -27,6 +27,7 @@ PODS:
   - IGListKit/Default (2.1.0):
     - IGListKit/Diffing
   - IGListKit/Diffing (2.1.0)
+  - NVActivityIndicatorView (3.5)
   - ObjectMapper (2.2.3)
   - RxCocoa (3.2.0):
     - RxSwift (~> 3.1)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - DITranquillity
   - Firebase/Core
   - GoogleMaps
+  - NVActivityIndicatorView
   - ObjectMapper
   - RxCocoa
   - RxSwift
@@ -55,11 +57,12 @@ SPEC CHECKSUMS:
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   IGListKit: b826c68ef7a4ae1626c09d4d3e1ea7a169e6c36e
+  NVActivityIndicatorView: e5252b082f93885f0bfc24c318719b4eaabcd37b
   ObjectMapper: d3b3de11267f5d971f390eb8d63dd509116a4329
   RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
   RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
   Siesta: ada9f35255e4eb16fad45cc3080927f6c6cba9cc
 
-PODFILE CHECKSUM: 0b676d4ed9892a770d90a4032060468b7ab6e5d9
+PODFILE CHECKSUM: bfea412d21ff479618ea3ca603bc04ee1fcb1dfe
 
 COCOAPODS: 1.2.0

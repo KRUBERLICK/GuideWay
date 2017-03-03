@@ -7,6 +7,7 @@
 //
 
 import AsyncDisplayKit
+import NVActivityIndicatorView
 
 class RouteDetailsDisplayNode: ASDisplayNode {
     enum State {
@@ -102,18 +103,49 @@ class RouteDetailsDisplayNode: ASDisplayNode {
         return node
     }()
 
-    let loadingTextNode: ASTextNode = {
-        let node = ASTextNode()
+    let loadingStateNode: ASDisplayNode = {
+        let loadingIndicatorView = NVActivityIndicatorView(
+            frame: .zero, 
+            type: .lineScalePulseOut, 
+            color: .white, 
+            padding: nil
+        )
+
+        loadingIndicatorView.frame.size = CGSize(width: 50,
+                                                 height: 50)
+        loadingIndicatorView.startAnimating()
+
+        let loadingIndicatorNode = ASDisplayNode(viewBlock: { loadingIndicatorView })
+
+        loadingIndicatorNode.backgroundColor = .clear
+
+        let loadingTextNode = ASTextNode()
         let textAttribs = [
-            NSForegroundColorAttributeName: UIColor.white, 
+            NSForegroundColorAttributeName: UIColor.white,
             NSFontAttributeName: UIFont.systemFont(ofSize: 20)
         ]
 
-        node.attributedText = NSAttributedString(
-            string: NSLocalizedString("route_details.loading_route", comment: ""), 
+        loadingTextNode.attributedText = NSAttributedString(
+            string: NSLocalizedString("route_details.loading_route", comment: ""),
             attributes: textAttribs
         )
-        return node
+
+        let finalNode = ASDisplayNode()
+
+        finalNode.automaticallyManagesSubnodes = true
+        finalNode.layoutSpecBlock = { node, constrainedSize in
+            loadingIndicatorNode.style.preferredSize = CGSize(width: 50,
+                                                              height: 50)
+            return ASStackLayoutSpec(
+                direction: .vertical,
+                spacing: 10,
+                justifyContent: .center,
+                alignItems: .center,
+                children: [loadingIndicatorNode,
+                           loadingTextNode]
+            )
+        }
+        return finalNode
     }()
 
     let errorTextNode: ASTextNode = {
@@ -169,6 +201,10 @@ class RouteDetailsDisplayNode: ASDisplayNode {
         self.state = state
         super.init()
         automaticallyManagesSubnodes = true
+    }
+
+    override func didLoad() {
+        super.didLoad()
     }
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -239,7 +275,7 @@ class RouteDetailsDisplayNode: ASDisplayNode {
             overlay: ASCenterLayoutSpec(
                 centeringOptions: .XY, 
                 sizingOptions: .minimumXY, 
-                child: loadingTextNode
+                child: loadingStateNode
             )
         )
     }
