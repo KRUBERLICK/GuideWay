@@ -92,10 +92,10 @@ class RouteDetailsMapCellNode: ASCellNode {
                 longitude: routeDestinationCoordinates.1
             )
         )
-        originMarker.icon = #imageLiteral(resourceName: "ic_map_origin")
+        originMarker.icon = #imageLiteral(resourceName: "ic_map_origin_no_shadow")
         originMarker.title = route.directions?.legs.first?.startLocationTitle
         originMarker.map = mapView
-        destinationMarker.icon = #imageLiteral(resourceName: "ic_map_destination")
+        destinationMarker.icon = #imageLiteral(resourceName: "ic_map_destination_no_shadow")
         destinationMarker.title = route.directions?.legs.first?.endLocationTitle
         destinationMarker.map = mapView
         routePolyline = GMSPolyline(path: GMSPath(fromEncodedPath: overviewPolylineString))
@@ -155,7 +155,10 @@ class RouteDetailsMapCellNode: ASCellNode {
 
     override func didEnterDisplayState() {
         super.didEnterDisplayState()
-        zoomMapToFit([originMarker.position, destinationMarker.position])
+
+        if let path = routePolyline.path {
+            zoomMapToFit(path: path)
+        }
     }
 
     func zoomMapToFit(_ coords: [CLLocationCoordinate2D]) {
@@ -166,6 +169,18 @@ class RouteDetailsMapCellNode: ASCellNode {
             with: GMSCameraUpdate.fit(
                 bounds,
                 with: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+            )
+        )
+    }
+
+    func zoomMapToFit(path: GMSPath) {
+        var bounds = GMSCoordinateBounds()
+
+        bounds = bounds.includingPath(path)
+        mapView.animate(
+            with: GMSCameraUpdate.fit(
+                bounds,
+                with: UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)
             )
         )
     }
