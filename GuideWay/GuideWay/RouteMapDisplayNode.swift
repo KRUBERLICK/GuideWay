@@ -17,6 +17,15 @@ class RouteMapDisplayNode: ASDisplayNode {
         return ASDisplayNode(viewBlock: { [unowned self] in self.mapView })
     }()
 
+    lazy var menuNode: RouteMapMenuNode = {
+        let node = RouteMapMenuNode()
+
+        node.onExitButtonTap = { [unowned self] in self.onExitButtonTap?() }
+        node.onInfoButtonTap = { [unowned self] in self.onInfoButtonTap?() }
+        node.onNextButtonTap = { [unowned self] in self.onNextButtonTap?() }
+        return node
+    }()
+
     var panoramaView: GMSPanoramaView {
         if let routeOriginCoordinates = route.directions?.legs
             .first?.startLocationCoordinates {
@@ -35,6 +44,10 @@ class RouteMapDisplayNode: ASDisplayNode {
         return ASDisplayNode(viewBlock: { [unowned self] in self.panoramaView })
     }()
 
+    var onNextButtonTap: (() -> ())?
+    var onInfoButtonTap: (() -> ())?
+    var onExitButtonTap: (() -> ())?
+
     init(route: Route) {
         self.route = route
         super.init()
@@ -45,8 +58,23 @@ class RouteMapDisplayNode: ASDisplayNode {
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let isLandscape = constrainedSize.max.width > constrainedSize.max.height
 
-        mapNode.style.flexBasis = ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.4)
-        panoramaNode.style.flexBasis = ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.6)
-        return ASStackLayoutSpec(direction: isLandscape ? .horizontal : .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [panoramaNode, mapNode])
+        mapNode.style.flexBasis =
+            ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.4)
+        panoramaNode.style.flexBasis =
+            ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.6)
+
+        let mapAndPanoramaStack = ASStackLayoutSpec(
+            direction: isLandscape ? .horizontal : .vertical, 
+            spacing: 0, 
+            justifyContent: .start, 
+            alignItems: .stretch, 
+            children: [panoramaNode, mapNode]
+        )
+        let menuOverlay = ASOverlayLayoutSpec(
+            child: mapAndPanoramaStack, 
+            overlay: menuNode
+        )
+
+        return menuOverlay
     }
 }
