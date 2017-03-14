@@ -17,6 +17,10 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
         return .lightContent
     }
 
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+
     init(presentationManager: PresentationManager,
          route: Route) {
         self.presentationManager = presentationManager

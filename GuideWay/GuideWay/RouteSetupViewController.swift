@@ -139,7 +139,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         let routeDetailsVC = self.presentationManager
             .getRouteDetailsViewController(
                 for: Route(
-                    origin: "проспект Победы 37К5",
+                    origin: "проспект Победы",
                     destination: "улица Двинская 19"
                 )
         )
