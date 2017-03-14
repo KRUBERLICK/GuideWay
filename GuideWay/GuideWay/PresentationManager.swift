@@ -28,6 +28,10 @@ class PresentationManager {
         return try! scope.resolve(arg: route)
     }
 
+    func getMapViewController() -> MapViewController {
+        return *!scope
+    }
+
     // Nodes
 
     func getRouteDetailsDisplayNode(with state: RouteDetailsDisplayNode.State) -> RouteDetailsDisplayNode {

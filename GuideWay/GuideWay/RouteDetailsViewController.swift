@@ -72,6 +72,16 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        routeDetailsDisplayNode.onPracticeTap = {
+            self.present(self.presentationManager.getMapViewController(),
+                         animated: true,
+                         completion: nil)
+        }
+        routeDetailsDisplayNode.onTestTap = {
+            self.present(self.presentationManager.getMapViewController(),
+                         animated: true,
+                         completion: nil)
+        }
         navigationController?.navigationBar
             .barTintColor = UIColor(hexString: "626466")
         navigationController?.navigationBar

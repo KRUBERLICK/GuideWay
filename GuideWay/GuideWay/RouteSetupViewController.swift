@@ -136,18 +136,18 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         super.viewDidAppear(animated)
 
         // Temporary
-//        let routeDetailsVC = self.presentationManager
-//            .getRouteDetailsViewController(
-//                for: Route(
-//                    origin: "проспект Победы 37К5",
-//                    destination: "улица Двинская 19"
-//                )
-//        )
-//
-//        self.navigationController?.pushViewController(
-//            routeDetailsVC,
-//            animated: true
-//        )
+        let routeDetailsVC = self.presentationManager
+            .getRouteDetailsViewController(
+                for: Route(
+                    origin: "проспект Победы 37К5",
+                    destination: "улица Двинская 19"
+                )
+        )
+
+        self.navigationController?.pushViewController(
+            routeDetailsVC,
+            animated: true
+        )
     }
 
     func textFieldDidBeginEditing(notification: Notification) {

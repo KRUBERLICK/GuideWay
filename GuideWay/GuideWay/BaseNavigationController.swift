@@ -20,4 +20,13 @@ class BaseNavigationController: ASNavigationController {
     override var shouldAutorotate: Bool {
         return topViewController?.shouldAutorotate ?? false
     }
+
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        super.pushViewController(viewController, animated: animated)
+        topViewController?.navigationItem.backBarButtonItem =
+            UIBarButtonItem(title: "",
+                            style: .plain,
+                            target: nil,
+                            action: nil)
+    }
 }
