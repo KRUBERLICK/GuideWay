@@ -53,4 +53,20 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    let menuNode = RouteMapMenuNode()
+
+    override func viewDidLoad() {
+        routeMapDisplayNode.addSubnode(menuNode)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        menuNode.frame = routeMapDisplayNode.bounds
+    }
+
+    override func viewWillTransition(to size: CGSize,
+                                     with coordinator: UIViewControllerTransitionCoordinator) {
+        menuNode.frame.size = size
+    }
 }

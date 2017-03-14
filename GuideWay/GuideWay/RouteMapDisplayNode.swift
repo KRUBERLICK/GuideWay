@@ -47,8 +47,6 @@ class RouteMapDisplayNode: ASDisplayNode {
 
         mapNode.style.flexBasis = ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.4)
         panoramaNode.style.flexBasis = ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.6)
-//        panoramaNode.style.flexGrow = 1
-//        mapNode.style.flexGrow = 1
         return ASStackLayoutSpec(direction: isLandscape ? .horizontal : .vertical, spacing: 0, justifyContent: .start, alignItems: .stretch, children: [panoramaNode, mapNode])
     }
 }

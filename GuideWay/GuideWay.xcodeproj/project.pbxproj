@@ -18,6 +18,7 @@
 		5B36E1A51E64385F0091BB7D /* RouteDetailsTitleCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */; };
 		5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */; };
 		5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */; };
+		5B3B74D91E77FEA400F46FD6 /* RouteMapMenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D81E77FEA400F46FD6 /* RouteMapMenuNode.swift */; };
 		5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */; };
 		5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51CBEC1E6023B6002C06AE /* AlertNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
@@ -56,6 +57,7 @@
 		5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsTitleCellNode.swift; sourceTree = "<group>"; };
 		5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
 		5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapDisplayNode.swift; sourceTree = "<group>"; };
+		5B3B74D81E77FEA400F46FD6 /* RouteMapMenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapMenuNode.swift; sourceTree = "<group>"; };
 		5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsViewController.swift; sourceTree = "<group>"; };
 		5B51CBEC1E6023B6002C06AE /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */,
+				5B3B74D81E77FEA400F46FD6 /* RouteMapMenuNode.swift */,
 			);
 			name = RouteMap;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
 				5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
+				5B3B74D91E77FEA400F46FD6 /* RouteMapMenuNode.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
 				5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */,
 				5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */,
