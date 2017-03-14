@@ -28,8 +28,8 @@ class PresentationManager {
         return try! scope.resolve(arg: route)
     }
 
-    func getRouteMapViewController() -> RouteMapViewController {
-        return *!scope
+    func getRouteMapViewController(with route: Route) -> RouteMapViewController {
+        return try! scope.resolve(arg: route)
     }
 
     // Nodes
@@ -58,7 +58,7 @@ class PresentationManager {
         return try! scope.resolve(arg: route)
     }
 
-    func getRouteMapDisplayNode() -> RouteMapDisplayNode {
-        return *!scope
+    func getRouteMapDisplayNode(with route: Route) -> RouteMapDisplayNode {
+        return try! scope.resolve(arg: route)
     }
 }

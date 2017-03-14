@@ -34,7 +34,10 @@ class PresentationLayerModule: DIModule {
             )
             }
             .lifetime(.perDependency)
-        builder.register { RouteMapViewController(presentationManager: *!$0) }
+        builder.register {
+            RouteMapViewController(presentationManager: *!$0,
+                                   route: $1)
+            }
             .lifetime(.perDependency)
         // Nodes
         builder.register { RouteSetupDisplayNode() }
@@ -61,7 +64,7 @@ class PresentationLayerModule: DIModule {
             .lifetime(.perDependency)
         builder.register { RouteDetailsOriginDestinationRouteCellNode(route: $1) }
             .lifetime(.perDependency)
-        builder.register { RouteMapDisplayNode() }
+        builder.register { RouteMapDisplayNode(route: $1) }
             .lifetime(.perDependency)
         // Utils
         builder.register { KeyboardController() }

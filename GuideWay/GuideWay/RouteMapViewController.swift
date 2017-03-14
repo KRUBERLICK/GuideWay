@@ -11,14 +11,18 @@ import AsyncDisplayKit
 class RouteMapViewController: ASViewController<ASDisplayNode> {
     let presentationManager: PresentationManager
     let routeMapDisplayNode: RouteMapDisplayNode
+    let route: Route
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
-    init(presentationManager: PresentationManager) {
+    init(presentationManager: PresentationManager,
+         route: Route) {
         self.presentationManager = presentationManager
-        routeMapDisplayNode = self.presentationManager.getRouteMapDisplayNode()
+        self.route = route
+        routeMapDisplayNode = self.presentationManager
+            .getRouteMapDisplayNode(with: self.route)
 
         let firstNode = ASDisplayNode()
 

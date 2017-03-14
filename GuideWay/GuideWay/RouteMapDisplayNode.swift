@@ -7,9 +7,13 @@
 //
 
 import AsyncDisplayKit
+import GoogleMaps
 
 class RouteMapDisplayNode: ASDisplayNode {
-    override init() {
+    let route: Route
+
+    init(route: Route) {
+        self.route = route
         super.init()
         backgroundColor = .green
     }
