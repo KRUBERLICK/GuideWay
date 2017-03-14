@@ -16,7 +16,8 @@
 		5B307BB81E5DAFBC004F8017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB71E5DAFBC004F8017 /* Assets.xcassets */; };
 		5B307BBB1E5DAFBC004F8017 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB91E5DAFBC004F8017 /* LaunchScreen.storyboard */; };
 		5B36E1A51E64385F0091BB7D /* RouteDetailsTitleCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */; };
-		5B3B74D31E77EDCC00F46FD6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D21E77EDCC00F46FD6 /* MapViewController.swift */; };
+		5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */; };
+		5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */; };
 		5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */; };
 		5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51CBEC1E6023B6002C06AE /* AlertNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
@@ -53,7 +54,8 @@
 		5B307BBA1E5DAFBC004F8017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B307BBC1E5DAFBC004F8017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsTitleCellNode.swift; sourceTree = "<group>"; };
-		5B3B74D21E77EDCC00F46FD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
+		5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapDisplayNode.swift; sourceTree = "<group>"; };
 		5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsViewController.swift; sourceTree = "<group>"; };
 		5B51CBEC1E6023B6002C06AE /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -159,6 +161,14 @@
 			name = RouteDetails;
 			sourceTree = "<group>";
 		};
+		5B3B74D51E77F2C600F46FD6 /* RouteMap */ = {
+			isa = PBXGroup;
+			children = (
+				5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */,
+			);
+			name = RouteMap;
+			sourceTree = "<group>";
+		};
 		5BAE1E4C1E5F2FA2007CCFB5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +232,7 @@
 				5B307BB21E5DAFBC004F8017 /* RouteSetupViewController.swift */,
 				5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */,
 				5BA977C91E608BF100421A60 /* BaseNavigationController.swift */,
-				5B3B74D21E77EDCC00F46FD6 /* MapViewController.swift */,
+				5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -230,6 +240,7 @@
 		5BB042451E5DD7CC00A31443 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				5B3B74D51E77F2C600F46FD6 /* RouteMap */,
 				5B36E1A31E64384F0091BB7D /* RouteDetails */,
 				5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */,
 				5B51CBEC1E6023B6002C06AE /* AlertNode.swift */,
@@ -392,12 +403,13 @@
 				5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */,
 				5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */,
 				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
+				5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
 				5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */,
 				5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */,
 				5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */,
-				5B3B74D31E77EDCC00F46FD6 /* MapViewController.swift in Sources */,
+				5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */,
 				5B2CFE461E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift in Sources */,
 				5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */,
 				5BA977C61E6076C800421A60 /* Route.swift in Sources */,

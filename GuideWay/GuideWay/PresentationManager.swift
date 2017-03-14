@@ -28,7 +28,7 @@ class PresentationManager {
         return try! scope.resolve(arg: route)
     }
 
-    func getMapViewController() -> MapViewController {
+    func getRouteMapViewController() -> RouteMapViewController {
         return *!scope
     }
 
@@ -56,5 +56,9 @@ class PresentationManager {
 
     func getRouteDetailsOriginDestinationCellNode(for route: Route) -> RouteDetailsOriginDestinationRouteCellNode {
         return try! scope.resolve(arg: route)
+    }
+
+    func getRouteMapDisplayNode() -> RouteMapDisplayNode {
+        return *!scope
     }
 }

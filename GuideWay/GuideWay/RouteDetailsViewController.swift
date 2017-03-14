@@ -73,12 +73,12 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         super.viewDidLoad()
         routeDetailsDisplayNode.onPracticeTap = {
-            self.present(self.presentationManager.getMapViewController(),
+            self.present(self.presentationManager.getRouteMapViewController(),
                          animated: true,
                          completion: nil)
         }
         routeDetailsDisplayNode.onTestTap = {
-            self.present(self.presentationManager.getMapViewController(),
+            self.present(self.presentationManager.getRouteMapViewController(),
                          animated: true,
                          completion: nil)
         }
