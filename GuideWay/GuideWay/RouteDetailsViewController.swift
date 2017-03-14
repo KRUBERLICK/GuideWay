@@ -152,9 +152,9 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
 
     func editConfirmButtonTapped() {
         InformerNode.showInformer(for: node, with: "Error")
+        // Send route update request, if not in demo mode
         route.title = routeDetailsDisplayNode.currentRouteTitle
         routeDetailsDisplayNode.state = .loaded(route)
-        // Send route update request
         routeDetailsDisplayNode.isEditing = false
         navigationItem.setRightBarButtonItems(
             [editBarButton], 

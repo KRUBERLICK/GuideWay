@@ -180,7 +180,7 @@ class RouteDetailsMapCellNode: ASCellNode {
         mapView.animate(
             with: GMSCameraUpdate.fit(
                 bounds,
-                with: UIEdgeInsets(top: 30, left: 10, bottom: 10, right: 10)
+                with: UIEdgeInsets(top: 30 + 5, left: 12 + 5, bottom: 5, right: 12 + 5)
             )
         )
     }
