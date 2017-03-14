@@ -89,6 +89,7 @@ class RouteMapMenuNode: ASDisplayNode {
         }
     }
 
+    var onViewModeButtonTap: (() -> ())?
     var onNextButtonTap: (() -> ())?
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
@@ -131,19 +132,19 @@ class RouteMapMenuNode: ASDisplayNode {
     }
 
     func viewModeButtonTapped() {
-        // change view mode
+        onViewModeButtonTap?()
     }
 
     func nextButtonTapped() {
-        // move to next route segment
+        onNextButtonTap?()
     }
 
     func infoButtonTapped() {
-        // show route info
+        onInfoButtonTap?()
     }
 
     func exitButtonTapped() {
-        // exit route map
+        onExitButtonTap?()
     }
 
     override func point(inside point: CGPoint,

@@ -10,8 +10,22 @@ import AsyncDisplayKit
 import GoogleMaps
 
 class RouteMapDisplayNode: ASDisplayNode {
+    enum State {
+        case split
+        case mapOnly
+        case panoramaOnly
+    }
+
     let route: Route
     let mapView = GMSMapView()
+
+    var state: State = .split {
+        didSet {
+            transitionLayout(withAnimation: true,
+                             shouldMeasureAsync: true,
+                             measurementCompletion: nil)
+        }
+    }
 
     lazy var mapNode: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [unowned self] in self.mapView })
@@ -20,6 +34,9 @@ class RouteMapDisplayNode: ASDisplayNode {
     lazy var menuNode: RouteMapMenuNode = {
         let node = RouteMapMenuNode()
 
+        node.onViewModeButtonTap = { [unowned self] in
+            self.changeViewMode()
+        }
         node.onExitButtonTap = { [unowned self] in self.onExitButtonTap?() }
         node.onInfoButtonTap = { [unowned self] in self.onInfoButtonTap?() }
         node.onNextButtonTap = { [unowned self] in self.onNextButtonTap?() }
@@ -58,17 +75,33 @@ class RouteMapDisplayNode: ASDisplayNode {
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let isLandscape = constrainedSize.max.width > constrainedSize.max.height
 
-        mapNode.style.flexBasis =
-            ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.4)
-        panoramaNode.style.flexBasis =
-            ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.6)
+        if state == .split {
+            mapNode.style.flexBasis =
+                ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.4)
+            panoramaNode.style.flexBasis =
+                ASDimensionMakeWithFraction(isLandscape ? 0.5 : 0.6)
+        } else {
+            mapNode.style.flexBasis = ASDimensionMakeWithFraction(1)
+            panoramaNode.style.flexBasis = ASDimensionMakeWithFraction(1)
+        }
+
+        var children: [ASDisplayNode]
+
+        switch state {
+        case .split:
+            children = [panoramaNode, mapNode]
+        case .mapOnly:
+            children = [mapNode]
+        case .panoramaOnly:
+            children = [panoramaNode]
+        }
 
         let mapAndPanoramaStack = ASStackLayoutSpec(
             direction: isLandscape ? .horizontal : .vertical, 
             spacing: 0, 
             justifyContent: .start, 
             alignItems: .stretch, 
-            children: [panoramaNode, mapNode]
+            children: children
         )
         let menuOverlay = ASOverlayLayoutSpec(
             child: mapAndPanoramaStack, 
@@ -76,5 +109,16 @@ class RouteMapDisplayNode: ASDisplayNode {
         )
 
         return menuOverlay
+    }
+
+    func changeViewMode() {
+        switch state {
+        case .split:
+            state = .panoramaOnly
+        case .mapOnly:
+            state = .split
+        case .panoramaOnly:
+            state = .mapOnly
+        }
     }
 }
