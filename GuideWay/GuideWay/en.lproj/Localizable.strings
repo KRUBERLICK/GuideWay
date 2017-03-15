@@ -11,7 +11,11 @@
 "route_setup.destination" = "Destination";
 "alert.ok" = "OK";
 "alert.title.error" = "Error";
+"alert.title.warning" = "Warning";
 "alert.error.input_all_fields" = "Input all fields";
+"alert.warning.testing_exit" = "You're leaving an uncompleted test. All progress will be lost. Are you sure?";
+"alert.warning.yes" = "Yes";
+"alert.warning.no" = "No";
 "route_details.title" = "Route details";
 "route_details.practice" = "Practice";
 "route_details.test" = "Test";

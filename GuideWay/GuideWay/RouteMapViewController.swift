@@ -9,9 +9,15 @@
 import AsyncDisplayKit
 
 class RouteMapViewController: ASViewController<ASDisplayNode> {
+    enum Mode {
+        case practice
+        case testing
+    }
+
     let presentationManager: PresentationManager
     let routeMapDisplayNode: RouteMapDisplayNode
     let route: Route
+    let mode: Mode
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -22,9 +28,11 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
     }
 
     init(presentationManager: PresentationManager,
-         route: Route) {
+         route: Route,
+         mode: Mode) {
         self.presentationManager = presentationManager
         self.route = route
+        self.mode = mode
         routeMapDisplayNode = self.presentationManager
             .getRouteMapDisplayNode(with: self.route)
 
@@ -57,7 +65,30 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         super.viewDidLoad()
         routeMapDisplayNode.onExitButtonTap = { [unowned self] in
-            self.dismiss(animated: true, completion: nil)
+            if self.mode == .testing {
+                let alertController = UIAlertController(
+                    title: NSLocalizedString("alert.title.warning", comment: ""), 
+                    message: NSLocalizedString("alert.warning.testing_exit", comment: ""), 
+                    preferredStyle: .alert
+                )
+                let okButtonAction = UIAlertAction(
+                    title: NSLocalizedString("alert.warning.yes", comment: ""), 
+                    style: .destructive, 
+                    handler: { [unowned self] _ in
+                        self.dismiss(animated: true, completion: nil)
+                })
+                let cancelButtonAction = UIAlertAction(
+                    title: NSLocalizedString("alert.warning.no", comment: ""), 
+                    style: .cancel, 
+                    handler: nil
+                )
+
+                alertController.addAction(cancelButtonAction)
+                alertController.addAction(okButtonAction)
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }

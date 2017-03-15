@@ -36,7 +36,8 @@ class PresentationLayerModule: DIModule {
             .lifetime(.perDependency)
         builder.register {
             RouteMapViewController(presentationManager: *!$0,
-                                   route: $1)
+                                   route: $1,
+                                   mode: $2)
             }
             .lifetime(.perDependency)
         // Nodes
