@@ -94,6 +94,8 @@ class RouteMapMenuNode: ASDisplayNode {
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
 
+    var isNextButtonEnabled = true
+
     override init() {
         super.init()
         automaticallyManagesSubnodes = true
@@ -102,11 +104,16 @@ class RouteMapMenuNode: ASDisplayNode {
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let children = isOpen
-            ? [closeMenuButtonNode,
-               viewModeButtonNode,
-               nextButtonNode,
-               infoButtonNode,
-               exitButtonNode]
+            ? (isNextButtonEnabled
+                ? [closeMenuButtonNode,
+                   viewModeButtonNode,
+                   nextButtonNode,
+                   infoButtonNode,
+                   exitButtonNode]
+                : [closeMenuButtonNode,
+                   viewModeButtonNode,
+                   infoButtonNode,
+                   exitButtonNode])
             : [openMenuButtonNode]
         let buttonsStack =  ASStackLayoutSpec(
             direction: .vertical, 

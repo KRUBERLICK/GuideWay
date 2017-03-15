@@ -48,6 +48,17 @@ class RouteMapDisplayNode: ASDisplayNode {
         return node
     }()
 
+    lazy var finishButtonNode: ASButtonNode = {
+        let node = ASButtonNode()
+
+        node.setImage(#imageLiteral(resourceName: "ic_map_finish"), for: [])
+        node.addTarget(self, 
+                       action: #selector(RouteMapDisplayNode.finishButtonTapped), 
+                       forControlEvents: .touchUpInside
+        )
+        return node
+    }()
+
     var panoramaView: GMSPanoramaView {
         if let routeOriginCoordinates = route.directions?.legs
             .first?.startLocationCoordinates {
@@ -64,6 +75,17 @@ class RouteMapDisplayNode: ASDisplayNode {
 
     var originMarker: GMSMarker!
     var destinationMarker: GMSMarker!
+
+    var isRouteCompleted: Bool = false {
+        didSet {
+            menuNode.isNextButtonEnabled = !isRouteCompleted
+            menuNode.transitionLayout(
+                withAnimation: true, 
+                shouldMeasureAsync: true, 
+                measurementCompletion: nil
+            )
+        }
+    }
     
     lazy var panoramaNode: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [unowned self] in self.panoramaView })
@@ -72,6 +94,7 @@ class RouteMapDisplayNode: ASDisplayNode {
     var onNextButtonTap: (() -> ())?
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
+    var onFinishButtonTap: (() -> ())?
 
     init(route: Route, 
          mode: RouteMapViewController.Mode) {
@@ -185,7 +208,7 @@ class RouteMapDisplayNode: ASDisplayNode {
 
                 polyline.strokeColor =
                     routePolylineSegmentsColors[index % routePolylineSegmentsColors.count]
-                polyline.strokeWidth = 3
+                polyline.strokeWidth = 4
                 polyline.map = mapView
             }
         case .testing:
@@ -211,5 +234,65 @@ class RouteMapDisplayNode: ASDisplayNode {
         let update = GMSCameraUpdate.fit(bounds)
 
         mapView.animate(with: update)
+    }
+
+    func zoomToSegment(at index: Int) {
+        guard let steps = route.directions?.legs.first?.steps,
+            index < steps.count else {
+                return
+        }
+
+        let polylinePath = GMSPath(fromEncodedPath: steps[index].polyline)!
+        var bounds = GMSCoordinateBounds()
+
+        bounds = bounds.includingPath(polylinePath)
+
+        let update = GMSCameraUpdate.fit(bounds)
+
+        mapView.animate(with: update)
+    }
+
+    func showFinishButton() {
+        let calculatedLayout = finishButtonNode.calculateLayoutThatFits(
+            ASSizeRangeMake(
+                .zero, 
+                CGSize(width: CGFloat.infinity,
+                       height: CGFloat.infinity)
+            )
+        )
+        let origin = CGPoint(
+            x: frame.midX - calculatedLayout.size.width / 2, 
+            y: frame.maxY
+        )
+
+        finishButtonNode.frame = CGRect(origin: origin,
+                                        size: calculatedLayout.size)
+        addSubnode(finishButtonNode)
+        UIView.animate(withDuration: 0.25,
+                       delay: 0, 
+                       options: .curveEaseOut, 
+                       animations: {
+                        self.finishButtonNode.frame.origin.y -=
+                            self.finishButtonNode.bounds.height + 45
+        }, completion: nil)
+    }
+
+    func hideFinishButton(completion: (() -> ())?) {
+        UIView.animate(withDuration: 0.25,
+                       delay: 0, 
+                       options: .curveEaseIn, 
+                       animations: {
+                        self.finishButtonNode.frame.origin.y += 
+                            self.finishButtonNode.bounds.height + 45
+        }, completion: { _ in
+            self.finishButtonNode.removeFromSupernode()
+            completion?()
+        })
+    }
+
+    func finishButtonTapped() {
+        hideFinishButton { 
+            self.onFinishButtonTap?()
+        }
     }
 }

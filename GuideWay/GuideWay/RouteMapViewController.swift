@@ -18,6 +18,12 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
     let routeMapDisplayNode: RouteMapDisplayNode
     let route: Route
     let mode: Mode
+    var currentSegment = 0
+    var wrongAnswersIndexes = [Int]()
+
+    var totalSegmentsCount: Int {
+        return route.directions?.legs.first?.steps.count ?? 0
+    }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -88,6 +94,31 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
                 self.present(alertController, animated: true, completion: nil)
             } else {
                 self.dismiss(animated: true, completion: nil)
+            }
+        }
+        routeMapDisplayNode.onNextButtonTap = { [unowned self] in
+            switch self.mode {
+            case .practice:
+                guard self.currentSegment < self.totalSegmentsCount else {
+                    self.routeMapDisplayNode.isRouteCompleted = true
+                    self.routeMapDisplayNode.zoomToInitial()
+                    self.routeMapDisplayNode.showFinishButton()
+                    return
+                }
+
+                self.routeMapDisplayNode.zoomToSegment(at: self.currentSegment)
+                self.currentSegment += 1
+            case .testing:
+                print()
+            }
+        }
+        routeMapDisplayNode.onFinishButtonTap = { [unowned self] in
+            switch self.mode {
+            case .practice:
+                self.dismiss(animated: true, completion: nil)
+            case .testing:
+                // save completed route statictics
+                print()
             }
         }
     }
