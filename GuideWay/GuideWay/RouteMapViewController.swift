@@ -34,7 +34,7 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
         self.route = route
         self.mode = mode
         routeMapDisplayNode = self.presentationManager
-            .getRouteMapDisplayNode(with: self.route)
+            .getRouteMapDisplayNode(with: self.route, mode: self.mode)
 
         let firstNode = ASDisplayNode()
 

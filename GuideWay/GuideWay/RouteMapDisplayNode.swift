@@ -17,7 +17,12 @@ class RouteMapDisplayNode: ASDisplayNode {
     }
 
     let route: Route
-    let mapView = GMSMapView()
+    let mode: RouteMapViewController.Mode
+    var mapView: GMSMapView!
+    let routePolylineSegmentsColors = [UIColor(hexString: "4A90E2"), 
+                                       UIColor(hexString: "21C064"),
+                                       UIColor(hexString: "50E3C2"),
+                                       UIColor(hexString: "F8832B")]
 
     var state: State = .split {
         didSet {
@@ -56,6 +61,9 @@ class RouteMapDisplayNode: ASDisplayNode {
         }
         return GMSPanoramaView()
     }
+
+    var originMarker: GMSMarker!
+    var destinationMarker: GMSMarker!
     
     lazy var panoramaNode: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [unowned self] in self.panoramaView })
@@ -65,11 +73,25 @@ class RouteMapDisplayNode: ASDisplayNode {
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
 
-    init(route: Route) {
+    init(route: Route, 
+         mode: RouteMapViewController.Mode) {
         self.route = route
+        self.mode = mode
         super.init()
         automaticallyManagesSubnodes = true
         backgroundColor = .white
+    }
+
+    override func didLoad() {
+        super.didLoad()
+        mapView = GMSMapView()
+        initMarkers()
+        paintInitialRoutePolyline()
+    }
+
+    override func didEnterDisplayState() {
+        super.didEnterDisplayState()
+        zoomToInitial()
     }
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -120,5 +142,74 @@ class RouteMapDisplayNode: ASDisplayNode {
         case .panoramaOnly:
             state = .mapOnly
         }
+    }
+
+    func initMarkers() {
+        guard let routeOriginCoordinates = route.directions?
+            .legs.first?.startLocationCoordinates,
+            let routeDestinationCoordinates = route.directions?
+                .legs.first?.endLocationCoordinates else {
+                return
+        }
+
+        originMarker = GMSMarker(
+            position: CLLocationCoordinate2D(
+                latitude: routeOriginCoordinates.0,
+                longitude: routeOriginCoordinates.1
+            )
+        )
+        destinationMarker = GMSMarker(
+            position: CLLocationCoordinate2D(
+                latitude: routeDestinationCoordinates.0,
+                longitude: routeDestinationCoordinates.1
+            )
+        )
+        originMarker.icon = #imageLiteral(resourceName: "ic_map_origin_no_shadow")
+        originMarker.title = route.directions?.legs.first?.startLocationTitle
+        originMarker.map = mapView
+        destinationMarker.icon = #imageLiteral(resourceName: "ic_map_destination_no_shadow")
+        destinationMarker.title = route.directions?.legs.first?.endLocationTitle
+        destinationMarker.map = mapView
+    }
+
+    func paintInitialRoutePolyline() {
+        switch mode {
+        case .practice:
+            guard let steps = route.directions?.legs.first?.steps else {
+                return
+            }
+
+            for (index, step) in steps.enumerated() {
+                let polylinePath = GMSPath(fromEncodedPath: step.polyline)
+                let polyline = GMSPolyline(path: polylinePath)
+
+                polyline.strokeColor =
+                    routePolylineSegmentsColors[index % routePolylineSegmentsColors.count]
+                polyline.strokeWidth = 3
+                polyline.map = mapView
+            }
+        case .testing:
+            guard let firstStep = route.directions?.legs.first?.steps.first else {
+                return
+            }
+
+            let polylinePath = GMSPath(fromEncodedPath: firstStep.polyline)
+            let polyline = GMSPolyline(path: polylinePath)
+
+            polyline.strokeColor = routePolylineSegmentsColors[0]
+            polyline.strokeWidth = 3
+            polyline.map = mapView
+        }
+    }
+
+    func zoomToInitial() {
+        var bounds = GMSCoordinateBounds()
+
+        bounds = bounds.includingCoordinate(originMarker.position)
+        bounds = bounds.includingCoordinate(destinationMarker.position)
+
+        let update = GMSCameraUpdate.fit(bounds)
+
+        mapView.animate(with: update)
     }
 }

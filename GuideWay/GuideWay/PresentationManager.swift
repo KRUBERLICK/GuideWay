@@ -59,7 +59,8 @@ class PresentationManager {
         return try! scope.resolve(arg: route)
     }
 
-    func getRouteMapDisplayNode(with route: Route) -> RouteMapDisplayNode {
-        return try! scope.resolve(arg: route)
+    func getRouteMapDisplayNode(with route: Route, 
+                                mode: RouteMapViewController.Mode) -> RouteMapDisplayNode {
+        return try! scope.resolve(arg: route, mode)
     }
 }
