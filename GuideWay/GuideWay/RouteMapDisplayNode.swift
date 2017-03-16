@@ -59,8 +59,8 @@ class RouteMapDisplayNode: ASDisplayNode {
         return node
     }()
 
-    var panoramaView: GMSPanoramaView {
-        if let routeOriginCoordinates = route.directions?.legs
+    lazy var panoramaView: GMSPanoramaView = {
+        if let routeOriginCoordinates = self.route.directions?.legs
             .first?.startLocationCoordinates {
             return GMSPanoramaView.panorama(
                 withFrame: .zero,
@@ -71,7 +71,7 @@ class RouteMapDisplayNode: ASDisplayNode {
             )
         }
         return GMSPanoramaView()
-    }
+    }()
 
     var originMarker: GMSMarker!
     var destinationMarker: GMSMarker!
@@ -95,6 +95,7 @@ class RouteMapDisplayNode: ASDisplayNode {
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
     var onFinishButtonTap: (() -> ())?
+    var zoomToLocationTimer: Timer?
 
     init(route: Route, 
          mode: RouteMapViewController.Mode) {
@@ -249,7 +250,34 @@ class RouteMapDisplayNode: ASDisplayNode {
 
         let update = GMSCameraUpdate.fit(bounds)
 
+        CATransaction.begin()
+        CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
         mapView.animate(with: update)
+        CATransaction.commit()
+
+        let segmentEndLocation = CLLocationCoordinate2D(
+            latitude: steps[index].endLocationLatitude,
+            longitude: steps[index].endLocationLongitude
+        )
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            CATransaction.begin()
+            CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
+            self.mapView.animate(
+                to: GMSCameraPosition(
+                    target: segmentEndLocation, 
+                    zoom: 18, 
+                    bearing: 0, 
+                    viewingAngle: 0
+                )
+            )
+            CATransaction.commit()
+            self.panoramaView.moveNearCoordinate(segmentEndLocation)
+        }
+    }
+
+    func zoomToCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        mapView.animate(toLocation: coordinate)
     }
 
     func showFinishButton() {
