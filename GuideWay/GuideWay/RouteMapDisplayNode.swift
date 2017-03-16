@@ -62,19 +62,27 @@ class RouteMapDisplayNode: ASDisplayNode {
     lazy var panoramaView: GMSPanoramaView = {
         if let routeOriginCoordinates = self.route.directions?.legs
             .first?.startLocationCoordinates {
-            return GMSPanoramaView.panorama(
+            let panorama = GMSPanoramaView.panorama(
                 withFrame: .zero,
                 nearCoordinate: CLLocationCoordinate2D(
                     latitude: routeOriginCoordinates.0,
                     longitude: routeOriginCoordinates.1
                 )
             )
+
+            panorama.delegate = self
+            return panorama
         }
-        return GMSPanoramaView()
+
+        let panorama = GMSPanoramaView()
+
+        panorama.delegate = self
+        return panorama
     }()
 
     var originMarker: GMSMarker!
     var destinationMarker: GMSMarker!
+    var carMarker: GMSMarker!
 
     var isRouteCompleted: Bool = false {
         didSet {
@@ -95,7 +103,6 @@ class RouteMapDisplayNode: ASDisplayNode {
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
     var onFinishButtonTap: (() -> ())?
-    var zoomToLocationTimer: Timer?
 
     init(route: Route, 
          mode: RouteMapViewController.Mode) {
@@ -176,6 +183,16 @@ class RouteMapDisplayNode: ASDisplayNode {
                 return
         }
 
+        carMarker = GMSMarker(
+            position: CLLocationCoordinate2D(
+                latitude: routeOriginCoordinates.0,
+                longitude: routeOriginCoordinates.1
+            )
+        )
+        carMarker.icon = #imageLiteral(resourceName: "ic_car_marker")
+        carMarker.title = NSLocalizedString("map.car_marker_title", comment: "")
+        carMarker.map = mapView
+        carMarker.zIndex = 5
         originMarker = GMSMarker(
             position: CLLocationCoordinate2D(
                 latitude: routeOriginCoordinates.0,
@@ -271,6 +288,7 @@ class RouteMapDisplayNode: ASDisplayNode {
                     viewingAngle: 0
                 )
             )
+            self.carMarker.position = segmentEndLocation
             CATransaction.commit()
             self.panoramaView.moveNearCoordinate(segmentEndLocation)
         }
@@ -322,5 +340,19 @@ class RouteMapDisplayNode: ASDisplayNode {
         hideFinishButton { 
             self.onFinishButtonTap?()
         }
+    }
+}
+
+extension RouteMapDisplayNode: GMSPanoramaViewDelegate {
+    func panoramaView(_ view: GMSPanoramaView,
+                      didMoveTo panorama: GMSPanorama?) {
+        guard let panorama = panorama else {
+            return
+        }
+
+        CATransaction.begin()
+        CATransaction.setValue(1, forKey: kCATransactionAnimationDuration)
+        carMarker.position = panorama.coordinate
+        CATransaction.commit()
     }
 }
