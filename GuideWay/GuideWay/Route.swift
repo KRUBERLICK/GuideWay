@@ -14,6 +14,7 @@ struct Route: ImmutableMappable {
     var origin: String
     var destination: String
     var directions: DirectionsResponseRoute?
+    var statistics: [[Int]]
 
     init(origin: String,
          destination: String) {
@@ -21,6 +22,7 @@ struct Route: ImmutableMappable {
         self.origin = origin
         self.destination = destination
         self.directions = nil
+        self.statistics = []
     }
 
     init(map: Map) throws {
@@ -29,6 +31,7 @@ struct Route: ImmutableMappable {
         origin = try map.value("origin")
         destination = try map.value("destination")
         directions = try? map.value("directions")
+        statistics = (try? map.value("statistics")) ?? []
     }
 
     mutating func mapping(map: Map) {
@@ -37,5 +40,6 @@ struct Route: ImmutableMappable {
         origin <- map["origin"]
         destination <- map["destination"]
         directions <- map["directions"]
+        statistics <- map["statistics"]
     }
 }

@@ -35,7 +35,7 @@
 		5BB0424A1E5DDBD800A31443 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5BB0424C1E5DDBD800A31443 /* Localizable.strings */; };
 		5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */; };
 		5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042541E5E180E00A31443 /* AutocompleteController.swift */; };
-		5BB6B4131E5EE19900F270B4 /* PlaceSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */; };
+		5BB6B4131E5EE19900F270B4 /* PlaceAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4121E5EE19900F270B4 /* PlaceAutocompleteResponse.swift */; };
 		5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4141E5EE35800F270B4 /* WebService.swift */; };
 		5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */; };
 		5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */; };
@@ -74,7 +74,7 @@
 		5BB0424B1E5DDBD800A31443 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5BB0424E1E5DE66600A31443 /* PresentationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationUtils.swift; sourceTree = "<group>"; };
 		5BB042541E5E180E00A31443 /* AutocompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteController.swift; sourceTree = "<group>"; };
-		5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceSearchResponse.swift; sourceTree = "<group>"; };
+		5BB6B4121E5EE19900F270B4 /* PlaceAutocompleteResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAutocompleteResponse.swift; sourceTree = "<group>"; };
 		5BB6B4141E5EE35800F270B4 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainLayerModule.swift; sourceTree = "<group>"; };
 		5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleServicesAPI.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		5BAE1E4D1E5F2FAB007CCFB5 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				5BB6B4121E5EE19900F270B4 /* PlaceSearchResponse.swift */,
+				5BB6B4121E5EE19900F270B4 /* PlaceAutocompleteResponse.swift */,
 				5B2CFE411E66DA7500D57D53 /* DirectionsResponse.swift */,
 			);
 			name = Responses;
@@ -425,7 +425,7 @@
 				5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */,
 				5BA977C81E6078AC00421A60 /* RouteDetailsDisplayNode.swift in Sources */,
 				5B36E1A51E64385F0091BB7D /* RouteDetailsTitleCellNode.swift in Sources */,
-				5BB6B4131E5EE19900F270B4 /* PlaceSearchResponse.swift in Sources */,
+				5BB6B4131E5EE19900F270B4 /* PlaceAutocompleteResponse.swift in Sources */,
 				5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */,
 				5BAEFF1C1E696EAF004A3D6F /* InformerNode.swift in Sources */,
 				5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */,

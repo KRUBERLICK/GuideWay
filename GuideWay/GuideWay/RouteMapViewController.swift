@@ -109,7 +109,15 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
                 self.routeMapDisplayNode.zoomToSegment(at: self.currentSegment)
                 self.currentSegment += 1
             case .testing:
-                print()
+                guard self.currentSegment < self.totalSegmentsCount else {
+                    self.routeMapDisplayNode.isRouteCompleted = true
+                    self.routeMapDisplayNode.zoomToInitial()
+                    self.routeMapDisplayNode.showFinishButton()
+                    return
+                }
+
+                self.routeMapDisplayNode.showNextSegmentAndZoom(segmentIndex: self.currentSegment)
+                self.currentSegment += 1
             }
         }
         routeMapDisplayNode.onFinishButtonTap = { [unowned self] in

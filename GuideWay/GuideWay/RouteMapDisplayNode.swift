@@ -103,6 +103,7 @@ class RouteMapDisplayNode: ASDisplayNode {
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
     var onFinishButtonTap: (() -> ())?
+    var syncCarMarkerToPanoramaPosition = true
 
     init(route: Route, 
          mode: RouteMapViewController.Mode) {
@@ -278,8 +279,12 @@ class RouteMapDisplayNode: ASDisplayNode {
         )
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            self.panoramaView.delegate = nil
             CATransaction.begin()
             CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
+            CATransaction.setCompletionBlock({ 
+                self.panoramaView.delegate = self
+            })
             self.mapView.animate(
                 to: GMSCameraPosition(
                     target: segmentEndLocation, 
@@ -289,9 +294,25 @@ class RouteMapDisplayNode: ASDisplayNode {
                 )
             )
             self.carMarker.position = segmentEndLocation
-            CATransaction.commit()
             self.panoramaView.moveNearCoordinate(segmentEndLocation)
+            CATransaction.commit()
         }
+    }
+
+    func showNextSegmentAndZoom(segmentIndex: Int) {
+        guard let steps = route.directions?.legs.first?.steps,
+            segmentIndex < steps.count else {
+                return
+        }
+
+        let polylinePath = GMSPath(fromEncodedPath: steps[segmentIndex].polyline)
+        let polyline = GMSPolyline(path: polylinePath)
+
+        polyline.strokeColor = 
+            routePolylineSegmentsColors[segmentIndex % routePolylineSegmentsColors.count]
+        polyline.strokeWidth = 3
+        polyline.map = mapView
+        zoomToSegment(at: segmentIndex)
     }
 
     func zoomToCoordinate(_ coordinate: CLLocationCoordinate2D) {
@@ -346,8 +367,9 @@ class RouteMapDisplayNode: ASDisplayNode {
 extension RouteMapDisplayNode: GMSPanoramaViewDelegate {
     func panoramaView(_ view: GMSPanoramaView,
                       didMoveTo panorama: GMSPanorama?) {
-        guard let panorama = panorama else {
-            return
+        guard let panorama = panorama, 
+            syncCarMarkerToPanoramaPosition else {
+                return
         }
 
         CATransaction.begin()
