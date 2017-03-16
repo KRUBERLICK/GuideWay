@@ -18,7 +18,11 @@ class BaseNavigationController: ASNavigationController {
     }
 
     override var shouldAutorotate: Bool {
-        return topViewController?.shouldAutorotate ?? false
+        return topViewController?.shouldAutorotate ?? super.shouldAutorotate
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {

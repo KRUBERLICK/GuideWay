@@ -24,8 +24,8 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
         return false
     }
 
-    override var shouldAutorotate: Bool {
-        return false
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
 
     lazy var editBarButton: UIBarButtonItem = {
