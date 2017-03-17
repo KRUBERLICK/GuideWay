@@ -278,7 +278,14 @@ class RouteMapDisplayNode: ASDisplayNode {
 
         let update = GMSCameraUpdate.fit(bounds)
 
+        panoramaView.delegate = nil
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { 
+            self.panoramaView.delegate = self
+        }
+        CATransaction.setValue(0.25, forKey: kCATransactionAnimationDuration)
         mapView.animate(with: update)
+        CATransaction.commit()
     }
 
     func zoomToSegment(at index: Int, completion: (() -> ())? = nil) {
@@ -483,6 +490,7 @@ extension RouteMapDisplayNode: GMSPanoramaViewDelegate {
         CATransaction.begin()
         CATransaction.setValue(1, forKey: kCATransactionAnimationDuration)
         carMarker.position = panorama.coordinate
+        mapView.animate(toLocation: panorama.coordinate)
         CATransaction.commit()
     }
 }
