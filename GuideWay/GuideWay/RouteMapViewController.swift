@@ -20,6 +20,7 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
     let mode: Mode
     var currentSegment = 0
     var wrongAnswersIndexes = [Int]()
+    var onTestingFinished: ((Route) -> ())?
 
     var totalSegmentsCount: Int {
         return route.directions?.legs.first?.steps.count ?? 0
@@ -141,6 +142,8 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
                 let routePass = RoutePass(mistakeIndexes: self.wrongAnswersIndexes)
 
                 self.route.passes.append(routePass)
+                // send route update request
+                self.onTestingFinished?(self.route)
                 self.dismiss(animated: true, completion: nil)
             }
         }

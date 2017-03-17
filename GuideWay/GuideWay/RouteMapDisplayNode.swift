@@ -432,14 +432,14 @@ class RouteMapDisplayNode: ASDisplayNode {
                        options: .curveEaseOut, 
                        animations: {
                         self.answerRightButtonNode.frame.origin.y -=
-                            answerRightButtonCalculatedSize.height + 20
+                            answerRightButtonCalculatedSize.height + 30
         }, completion: nil)
         UIView.animate(withDuration: 0.25,
                        delay: 0.1,
                        options: .curveEaseOut,
                        animations: {
                         self.answerWrongButtonNode.frame.origin.y -=
-                            answerWrongButtonCalculatedSize.height + 20
+                            answerWrongButtonCalculatedSize.height + 30
         }, completion: nil)
     }
 

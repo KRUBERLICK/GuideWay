@@ -13,6 +13,7 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
     let presentationManager: PresentationManager
     let routeDetailsDisplayNode: RouteDetailsDisplayNode
     var route: Route
+
     var disposeBag = DisposeBag()
     let googleServicesAPI: GoogleServicesAPI
 
@@ -84,12 +85,18 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
             )
         }
         routeDetailsDisplayNode.onTestTap = { [unowned self] in
+            let routeMapViewController = self.presentationManager
+                .getRouteMapViewController(
+                    with: self.route,
+                    mode: .testing
+            )
+
+            routeMapViewController.onTestingFinished = { [unowned self] route in
+                print(route)
+                //update route info ui
+            }
             self.present(
-                self.presentationManager
-                    .getRouteMapViewController(
-                        with: self.route,
-                        mode: .testing
-                ),
+                routeMapViewController,
                 animated: true,
                 completion: nil
             )
