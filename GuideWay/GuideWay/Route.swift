@@ -8,13 +8,33 @@
 
 import ObjectMapper
 
+struct RoutePass: ImmutableMappable {
+    let timestamp: Double
+    let mistakeIndexes: [Int]
+
+    init(mistakeIndexes: [Int] = []) {
+        timestamp = Date().timeIntervalSince1970
+        self.mistakeIndexes = mistakeIndexes
+    }
+
+    init(map: Map) throws {
+        timestamp = try map.value("timestamp")
+        mistakeIndexes = try map.value("mistake_indexes")
+    }
+
+    mutating func mapping(map: Map) {
+        timestamp >>> map["timestamp"]
+        mistakeIndexes >>> map["mistake_indexes"]
+    }
+}
+
 struct Route: ImmutableMappable {
     var id: String?
     var title: String?
     var origin: String
     var destination: String
     var directions: DirectionsResponseRoute?
-    var statistics: [[Int]]
+    var passes: [RoutePass] = []
 
     init(origin: String,
          destination: String) {
@@ -22,7 +42,7 @@ struct Route: ImmutableMappable {
         self.origin = origin
         self.destination = destination
         self.directions = nil
-        self.statistics = []
+        self.passes = []
     }
 
     init(map: Map) throws {
@@ -31,7 +51,7 @@ struct Route: ImmutableMappable {
         origin = try map.value("origin")
         destination = try map.value("destination")
         directions = try? map.value("directions")
-        statistics = (try? map.value("statistics")) ?? []
+        passes = (try? map.value("passes")) ?? []
     }
 
     mutating func mapping(map: Map) {
@@ -40,6 +60,6 @@ struct Route: ImmutableMappable {
         origin <- map["origin"]
         destination <- map["destination"]
         directions <- map["directions"]
-        statistics <- map["statistics"]
+        passes <- map["passes"]
     }
 }

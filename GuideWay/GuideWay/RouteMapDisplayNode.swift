@@ -59,6 +59,30 @@ class RouteMapDisplayNode: ASDisplayNode {
         return node
     }()
 
+    lazy var answerRightButtonNode: ASButtonNode = {
+        let node = ASButtonNode()
+
+        node.setImage(#imageLiteral(resourceName: "ic_map_thumbs_up"), for: [])
+        node.addTarget(
+            self, 
+            action: #selector(RouteMapDisplayNode.answerButtonTapped(sender:)), 
+            forControlEvents: .touchUpInside
+        )
+        return node
+    }()
+
+    lazy var answerWrongButtonNode: ASButtonNode = {
+        let node = ASButtonNode()
+
+        node.setImage(#imageLiteral(resourceName: "ic_map_thumbs_down"), for: [])
+        node.addTarget(
+            self, 
+            action: #selector(RouteMapDisplayNode.answerButtonTapped(sender:)), 
+            forControlEvents: .touchUpInside
+        )
+        return node
+    }()
+
     lazy var panoramaView: GMSPanoramaView = {
         if let routeOriginCoordinates = self.route.directions?.legs
             .first?.startLocationCoordinates {
@@ -84,9 +108,9 @@ class RouteMapDisplayNode: ASDisplayNode {
     var destinationMarker: GMSMarker!
     var carMarker: GMSMarker!
 
-    var isRouteCompleted: Bool = false {
+    var isNextButtonDisabled: Bool = false {
         didSet {
-            menuNode.isNextButtonEnabled = !isRouteCompleted
+            menuNode.isNextButtonEnabled = !isNextButtonDisabled
             menuNode.transitionLayout(
                 withAnimation: true, 
                 shouldMeasureAsync: true, 
@@ -103,6 +127,8 @@ class RouteMapDisplayNode: ASDisplayNode {
     var onInfoButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
     var onFinishButtonTap: (() -> ())?
+    var onAnswerRightButtonTap: (() -> ())?
+    var onAnswerWrongButtonTap: (() -> ())?
     var syncCarMarkerToPanoramaPosition = true
 
     init(route: Route, 
@@ -255,7 +281,7 @@ class RouteMapDisplayNode: ASDisplayNode {
         mapView.animate(with: update)
     }
 
-    func zoomToSegment(at index: Int) {
+    func zoomToSegment(at index: Int, completion: (() -> ())? = nil) {
         guard let steps = route.directions?.legs.first?.steps,
             index < steps.count else {
                 return
@@ -284,6 +310,7 @@ class RouteMapDisplayNode: ASDisplayNode {
             CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
             CATransaction.setCompletionBlock({ 
                 self.panoramaView.delegate = self
+                completion?()
             })
             self.mapView.animate(
                 to: GMSCameraPosition(
@@ -312,7 +339,14 @@ class RouteMapDisplayNode: ASDisplayNode {
             routePolylineSegmentsColors[segmentIndex % routePolylineSegmentsColors.count]
         polyline.strokeWidth = 3
         polyline.map = mapView
-        zoomToSegment(at: segmentIndex)
+        switch mode {
+        case .testing:
+            zoomToSegment(at: segmentIndex, completion: { 
+                self.showAnswerButtons()
+            })
+        case .practice:
+            zoomToSegment(at: segmentIndex)
+        }
     }
 
     func zoomToCoordinate(_ coordinate: CLLocationCoordinate2D) {
@@ -360,6 +394,80 @@ class RouteMapDisplayNode: ASDisplayNode {
     func finishButtonTapped() {
         hideFinishButton { 
             self.onFinishButtonTap?()
+        }
+    }
+
+    func showAnswerButtons() {
+        let sizeRange = ASSizeRange(
+            min: .zero, max: CGSize(
+                width: CGFloat.infinity, 
+                height: CGFloat.infinity
+            )
+        )
+        let answerRightButtonCalculatedSize =
+            answerRightButtonNode.calculateLayoutThatFits(sizeRange).size
+        let answerWrongButtonCalculatedSize = 
+            answerWrongButtonNode.calculateLayoutThatFits(sizeRange).size
+        let answerRightButtonOrigin = CGPoint(
+            x: frame.midX - answerRightButtonCalculatedSize.width - 5,
+            y: frame.maxY
+        )
+        let answerWrongButtonOrigin = CGPoint(
+            x: frame.midX + 5,
+            y: frame.maxY
+        )
+
+        answerRightButtonNode.frame = CGRect(
+            origin: answerRightButtonOrigin, 
+            size: answerRightButtonCalculatedSize
+        )
+        answerWrongButtonNode.frame = CGRect(
+            origin: answerWrongButtonOrigin, 
+            size: answerWrongButtonCalculatedSize
+        )
+        addSubnode(answerRightButtonNode)
+        addSubnode(answerWrongButtonNode)
+        UIView.animate(withDuration: 0.25,
+                       delay: 0, 
+                       options: .curveEaseOut, 
+                       animations: {
+                        self.answerRightButtonNode.frame.origin.y -=
+                            answerRightButtonCalculatedSize.height + 20
+        }, completion: nil)
+        UIView.animate(withDuration: 0.25,
+                       delay: 0.1,
+                       options: .curveEaseOut,
+                       animations: {
+                        self.answerWrongButtonNode.frame.origin.y -=
+                            answerWrongButtonCalculatedSize.height + 20
+        }, completion: nil)
+    }
+
+    func hideAnswerButtons(completion: (() -> ())?) {
+        UIView.animate(
+            withDuration: 0.25, 
+            delay: 0, 
+            options: .curveEaseIn, 
+            animations: {
+                self.answerRightButtonNode.frame.origin.y = self.frame.maxY
+                self.answerWrongButtonNode.frame.origin.y = self.frame.maxY
+        }, completion: { _ in
+            self.answerRightButtonNode.removeFromSupernode()
+            self.answerWrongButtonNode.removeFromSupernode()
+            completion?()
+        })
+    }
+
+    func answerButtonTapped(sender: ASButtonNode) {
+        hideAnswerButtons { 
+            switch sender {
+            case self.answerRightButtonNode:
+                self.onAnswerRightButtonTap?()
+            case self.answerWrongButtonNode:
+                self.onAnswerWrongButtonTap?()
+            default:
+                break
+            }
         }
     }
 }

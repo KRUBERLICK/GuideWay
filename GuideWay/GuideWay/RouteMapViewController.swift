@@ -16,7 +16,7 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
 
     let presentationManager: PresentationManager
     let routeMapDisplayNode: RouteMapDisplayNode
-    let route: Route
+    var route: Route
     let mode: Mode
     var currentSegment = 0
     var wrongAnswersIndexes = [Int]()
@@ -100,7 +100,7 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
             switch self.mode {
             case .practice:
                 guard self.currentSegment < self.totalSegmentsCount else {
-                    self.routeMapDisplayNode.isRouteCompleted = true
+                    self.routeMapDisplayNode.isNextButtonDisabled = true
                     self.routeMapDisplayNode.zoomToInitial()
                     self.routeMapDisplayNode.showFinishButton()
                     return
@@ -110,23 +110,38 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
                 self.currentSegment += 1
             case .testing:
                 guard self.currentSegment < self.totalSegmentsCount else {
-                    self.routeMapDisplayNode.isRouteCompleted = true
+                    self.routeMapDisplayNode.isNextButtonDisabled = true
                     self.routeMapDisplayNode.zoomToInitial()
                     self.routeMapDisplayNode.showFinishButton()
                     return
                 }
 
-                self.routeMapDisplayNode.showNextSegmentAndZoom(segmentIndex: self.currentSegment)
+                if self.currentSegment > 0 {
+                    self.routeMapDisplayNode
+                        .showNextSegmentAndZoom(segmentIndex: self.currentSegment)
+                    self.routeMapDisplayNode.isNextButtonDisabled = true
+                } else {
+                    self.routeMapDisplayNode.zoomToSegment(at: self.currentSegment)
+                }
                 self.currentSegment += 1
             }
+        }
+        routeMapDisplayNode.onAnswerRightButtonTap = { [unowned self] in
+            self.routeMapDisplayNode.isNextButtonDisabled = false
+        }
+        routeMapDisplayNode.onAnswerWrongButtonTap = { [unowned self] in
+            self.wrongAnswersIndexes.append(self.currentSegment)
+            self.routeMapDisplayNode.isNextButtonDisabled = false
         }
         routeMapDisplayNode.onFinishButtonTap = { [unowned self] in
             switch self.mode {
             case .practice:
                 self.dismiss(animated: true, completion: nil)
             case .testing:
-                // save completed route statictics
-                print()
+                let routePass = RoutePass(mistakeIndexes: self.wrongAnswersIndexes)
+
+                self.route.passes.append(routePass)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }
