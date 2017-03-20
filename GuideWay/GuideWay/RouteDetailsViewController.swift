@@ -92,7 +92,7 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
             )
 
             routeMapViewController.onTestingFinished = { [unowned self] route in
-                print(route)
+                print(route.passes)
                 //update route info ui
             }
             self.present(

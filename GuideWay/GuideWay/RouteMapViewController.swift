@@ -131,7 +131,7 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
             self.routeMapDisplayNode.isNextButtonDisabled = false
         }
         routeMapDisplayNode.onAnswerWrongButtonTap = { [unowned self] in
-            self.wrongAnswersIndexes.append(self.currentSegment)
+            self.wrongAnswersIndexes.append(self.currentSegment - 1)
             self.routeMapDisplayNode.isNextButtonDisabled = false
         }
         routeMapDisplayNode.onFinishButtonTap = { [unowned self] in

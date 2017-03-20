@@ -15,6 +15,8 @@
 		5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B307BB21E5DAFBC004F8017 /* RouteSetupViewController.swift */; };
 		5B307BB81E5DAFBC004F8017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB71E5DAFBC004F8017 /* Assets.xcassets */; };
 		5B307BBB1E5DAFBC004F8017 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B307BB91E5DAFBC004F8017 /* LaunchScreen.storyboard */; };
+		5B34A5001E7C39C7005FEF41 /* RouteMapDisplayNode+ButtonHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A4FF1E7C39C7005FEF41 /* RouteMapDisplayNode+ButtonHandling.swift */; };
+		5B34A5021E7C3A16005FEF41 /* RouteMapDisplayNode+MapHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34A5011E7C3A16005FEF41 /* RouteMapDisplayNode+MapHandling.swift */; };
 		5B36E1A51E64385F0091BB7D /* RouteDetailsTitleCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */; };
 		5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */; };
 		5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */; };
@@ -54,6 +56,8 @@
 		5B307BB71E5DAFBC004F8017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B307BBA1E5DAFBC004F8017 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B307BBC1E5DAFBC004F8017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B34A4FF1E7C39C7005FEF41 /* RouteMapDisplayNode+ButtonHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RouteMapDisplayNode+ButtonHandling.swift"; sourceTree = "<group>"; };
+		5B34A5011E7C3A16005FEF41 /* RouteMapDisplayNode+MapHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RouteMapDisplayNode+MapHandling.swift"; sourceTree = "<group>"; };
 		5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsTitleCellNode.swift; sourceTree = "<group>"; };
 		5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
 		5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapDisplayNode.swift; sourceTree = "<group>"; };
@@ -152,6 +156,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5B34A5031E7C3A61005FEF41 /* RouteMapDisplayNode */ = {
+			isa = PBXGroup;
+			children = (
+				5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */,
+				5B34A4FF1E7C39C7005FEF41 /* RouteMapDisplayNode+ButtonHandling.swift */,
+				5B34A5011E7C3A16005FEF41 /* RouteMapDisplayNode+MapHandling.swift */,
+			);
+			name = RouteMapDisplayNode;
+			sourceTree = "<group>";
+		};
 		5B36E1A31E64384F0091BB7D /* RouteDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +180,7 @@
 		5B3B74D51E77F2C600F46FD6 /* RouteMap */ = {
 			isa = PBXGroup;
 			children = (
-				5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */,
+				5B34A5031E7C3A61005FEF41 /* RouteMapDisplayNode */,
 				5B3B74D81E77FEA400F46FD6 /* RouteMapMenuNode.swift */,
 			);
 			name = RouteMap;
@@ -407,6 +421,7 @@
 				5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */,
 				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
 				5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */,
+				5B34A5001E7C39C7005FEF41 /* RouteMapDisplayNode+ButtonHandling.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
 				5B3B74D91E77FEA400F46FD6 /* RouteMapMenuNode.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
@@ -428,6 +443,7 @@
 				5BB6B4131E5EE19900F270B4 /* PlaceAutocompleteResponse.swift in Sources */,
 				5BB042421E5DB4A400A31443 /* PresentationManager.swift in Sources */,
 				5BAEFF1C1E696EAF004A3D6F /* InformerNode.swift in Sources */,
+				5B34A5021E7C3A16005FEF41 /* RouteMapDisplayNode+MapHandling.swift in Sources */,
 				5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */,
 				5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */,
 			);
