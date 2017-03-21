@@ -59,6 +59,14 @@ class PresentationManager {
         return try! scope.resolve(arg: route)
     }
 
+    func getRouteDetailsStatisticsTitleCellNode() -> RouteDetailsStatisticsTitleCellNode {
+        return *!scope
+    }
+
+    func getRouteDetailsStatisticsItemCellNode(for route: Route, passIndex: Int) -> RouteDetailsStatisticsItemCellNode {
+        return try! scope.resolve(arg: route, passIndex)
+    }
+
     func getRouteMapDisplayNode(with route: Route, 
                                 mode: RouteMapViewController.Mode) -> RouteMapDisplayNode {
         return try! scope.resolve(arg: route, mode)

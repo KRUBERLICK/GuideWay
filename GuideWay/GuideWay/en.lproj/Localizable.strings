@@ -25,5 +25,10 @@
 "route_details.no_directions" = "No directions found";
 "route_details.from_label" = "From";
 "route_details.to_label" = "To";
+"route_details.statistics_title" = "Statistics:";
+"route_details.completed_label" = "completed";
+"route_details.maneuveurs_done_right" = "maneuvers done right";
+"route_details.of_label" = "of";
+"route_details.statistics_show_details" = "Show details";
 "informer.network_error" = "Network error";
 "map.car_marker_title" = "Your current position";

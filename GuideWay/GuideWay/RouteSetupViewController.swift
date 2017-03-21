@@ -136,12 +136,18 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         super.viewDidAppear(animated)
 
         // Temporary
+        var routeMock = Route(
+            origin: "проспект Победы 12",
+            destination: "проспект Победы 25"
+        )
+
+//        routeMock.passes.append(RoutePass(mistakeIndexes: [1, 3, 7, 9]))
+//        routeMock.passes.append(RoutePass(mistakeIndexes: []))
+//        routeMock.passes.append(RoutePass(mistakeIndexes: [5, 8]))
+
         let routeDetailsVC = self.presentationManager
             .getRouteDetailsViewController(
-                for: Route(
-                    origin: "проспект Победы",
-                    destination: "улица Двинская 19"
-                )
+                for: routeMock
         )
 
         self.navigationController?.pushViewController(

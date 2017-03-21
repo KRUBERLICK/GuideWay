@@ -92,8 +92,9 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
             )
 
             routeMapViewController.onTestingFinished = { [unowned self] route in
-                print(route.passes)
-                //update route info ui
+                self.route = route
+                self.routeDetailsDisplayNode.state = .loaded(self.route)
+                self.routeDetailsDisplayNode.collectionNode.reloadData()
             }
             self.present(
                 routeMapViewController,

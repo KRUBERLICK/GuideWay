@@ -313,16 +313,29 @@ class RouteDetailsDisplayNode: ASDisplayNode {
 
 extension RouteDetailsDisplayNode: ASCollectionDataSource, ASCollectionDelegateFlowLayout {
     func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
-        guard case .loaded(_) = state else {
+        guard case let .loaded(route) = state else {
             return 0
         }
 
-        return 1
+        return route.passes.isEmpty ? 1 : 3
     }
 
     func collectionNode(_ collectionNode: ASCollectionNode,
                         numberOfItemsInSection section: Int) -> Int {
-        return 3
+        switch section {
+        case 0:
+            return 3
+        case 1:
+            return 1
+        case 2:
+            guard case let .loaded(route) = state else {
+                return 0
+            }
+
+            return route.passes.count
+        default:
+            return 0
+        }
     }
 
     func collectionNode(_ collectionNode: ASCollectionNode, 
@@ -339,6 +352,10 @@ extension RouteDetailsDisplayNode: ASCollectionDataSource, ASCollectionDelegateF
             default:
                 return { ASCellNode() }
             }
+        case 1:
+            return constructRouteDetailsStatisticsTitleCellNode()
+        case 2:
+            return constructRouteDetailsStatisticsItemCellNode(at: indexPath)
         default:
             return { ASCellNode() }
         }
@@ -392,6 +409,28 @@ extension RouteDetailsDisplayNode: ASCollectionDataSource, ASCollectionDelegateF
         return {
             return self.presentationManager
                 .getRouteDetailsOriginDestinationCellNode(for: route)
+        }
+    }
+
+    func constructRouteDetailsStatisticsTitleCellNode() -> ASCellNodeBlock {
+        guard case .loaded(_) = state else {
+            return { ASCellNode() }
+        }
+
+        return {
+            return self.presentationManager
+                .getRouteDetailsStatisticsTitleCellNode()
+        }
+    }
+
+    func constructRouteDetailsStatisticsItemCellNode(at indexPath: IndexPath) -> ASCellNodeBlock {
+        guard case let .loaded(route) = state else {
+            return { ASCellNode() }
+        }
+
+        return {
+            return self.presentationManager
+                .getRouteDetailsStatisticsItemCellNode(for: route, passIndex: indexPath.item)
         }
     }
 }

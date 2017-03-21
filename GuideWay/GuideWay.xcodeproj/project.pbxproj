@@ -21,6 +21,8 @@
 		5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */; };
 		5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */; };
 		5B3B74D91E77FEA400F46FD6 /* RouteMapMenuNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3B74D81E77FEA400F46FD6 /* RouteMapMenuNode.swift */; };
+		5B467BFA1E81339C00EB2C25 /* RouteDetailsStatisticsTitleCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B467BF91E81339C00EB2C25 /* RouteDetailsStatisticsTitleCellNode.swift */; };
+		5B467BFC1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B467BFB1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift */; };
 		5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */; };
 		5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51CBEC1E6023B6002C06AE /* AlertNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
@@ -62,6 +64,8 @@
 		5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
 		5B3B74D61E77F2D600F46FD6 /* RouteMapDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapDisplayNode.swift; sourceTree = "<group>"; };
 		5B3B74D81E77FEA400F46FD6 /* RouteMapMenuNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapMenuNode.swift; sourceTree = "<group>"; };
+		5B467BF91E81339C00EB2C25 /* RouteDetailsStatisticsTitleCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsStatisticsTitleCellNode.swift; sourceTree = "<group>"; };
+		5B467BFB1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsStatisticsItemCellNode.swift; sourceTree = "<group>"; };
 		5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsViewController.swift; sourceTree = "<group>"; };
 		5B51CBEC1E6023B6002C06AE /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				5B36E1A41E64385F0091BB7D /* RouteDetailsTitleCellNode.swift */,
 				5B2CFE431E670FE300D57D53 /* RouteDetailsMapCellNode.swift */,
 				5B2CFE451E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift */,
+				5B467BF91E81339C00EB2C25 /* RouteDetailsStatisticsTitleCellNode.swift */,
+				5B467BFB1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift */,
 			);
 			name = RouteDetails;
 			sourceTree = "<group>";
@@ -433,6 +439,7 @@
 				5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */,
 				5BA977C61E6076C800421A60 /* Route.swift in Sources */,
 				5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */,
+				5B467BFA1E81339C00EB2C25 /* RouteDetailsStatisticsTitleCellNode.swift in Sources */,
 				5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */,
 				5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */,
 				5B2CFE441E670FE300D57D53 /* RouteDetailsMapCellNode.swift in Sources */,
@@ -446,6 +453,7 @@
 				5B34A5021E7C3A16005FEF41 /* RouteMapDisplayNode+MapHandling.swift in Sources */,
 				5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */,
 				5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */,
+				5B467BFC1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

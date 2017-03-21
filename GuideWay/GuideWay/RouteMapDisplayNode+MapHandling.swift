@@ -90,10 +90,13 @@ extension RouteMapDisplayNode {
     }
 
     func zoomToInitial() {
+        guard let encodedRoutePath = route.directions?.overviewPolyline,
+            let path = GMSPath(fromEncodedPath: encodedRoutePath) else {
+                return
+        }
         var bounds = GMSCoordinateBounds()
 
-        bounds = bounds.includingCoordinate(originMarker.position)
-        bounds = bounds.includingCoordinate(destinationMarker.position)
+        bounds = bounds.includingPath(path)
 
         let update = GMSCameraUpdate.fit(bounds)
 
