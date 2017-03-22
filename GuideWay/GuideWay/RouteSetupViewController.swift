@@ -110,6 +110,7 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         navigationController?.setNavigationBarHidden(true, animated: true)
         NotificationCenter.default.addObserver(
             self,
@@ -129,11 +130,13 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        keyboardController.supress = true
         NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        keyboardController.supress = false
 
         // Temporary
         var routeMock = Route(
@@ -150,10 +153,10 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
                 for: routeMock
         )
 
-        self.navigationController?.pushViewController(
-            routeDetailsVC,
-            animated: true
-        )
+//        self.navigationController?.pushViewController(
+//            routeDetailsVC,
+//            animated: true
+//        )
     }
 
     func textFieldDidBeginEditing(notification: Notification) {

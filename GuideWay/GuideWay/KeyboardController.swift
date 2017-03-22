@@ -12,6 +12,7 @@ class KeyboardController {
     var callback: (() -> ())?
     var parentView: UIView!
     var keyboardIsShowing = false
+    var supress = false
 
     init() {
         NotificationCenter.default.addObserver(
@@ -48,7 +49,8 @@ class KeyboardController {
             let animationDuration = (keyboardInfo[UIKeyboardAnimationDurationUserInfoKey]
                 as AnyObject).doubleValue,
             let animationCurve = (keyboardInfo[UIKeyboardAnimationCurveUserInfoKey]
-                as AnyObject).integerValue
+                as AnyObject).integerValue,
+            !supress
             else {
                 return
         }
