@@ -165,11 +165,15 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
     }
 
     func editButtonTapped() {
+        routeDetailsDisplayNode.collectionNode.view
+            .setContentOffset(.zero, animated: true)
         navigationItem.setRightBarButtonItems(
             [editConfirmBarButton, editCancelBarButton], 
             animated: true
         )
-        routeDetailsDisplayNode.isEditing = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { 
+            self.routeDetailsDisplayNode.isEditing = true
+        }
     }
 
     func editCancelButtonTapped() {

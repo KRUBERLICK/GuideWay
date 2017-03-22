@@ -202,26 +202,34 @@ class RouteDetailsStatisticsItemCellNode: ASCellNode {
             height: 50
         )
 
+        let verticalSeparatorNodeCentered = ASCenterLayoutSpec(
+            centeringOptions: .XY, 
+            sizingOptions: .minimumXY, 
+            child: verticalSeparatorNode
+        )
         let finalStack = ASStackLayoutSpec(
             direction: .horizontal, 
             spacing: 0,
-            justifyContent: .spaceBetween, 
+            justifyContent: .spaceBetween,
             alignItems: .center, 
-            children: [persentsCompletedStack, 
-                       verticalSeparatorNode, 
+            children: [persentsCompletedStack,
                        addDateStack]
         )
         let finalStackInsets = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10),
+            insets: UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10),
             child: finalStack
         )
         let backgroundNodeBack = ASBackgroundLayoutSpec(
             child: finalStackInsets, 
             background: backgroundNode
         )
+        let verticalSeparatorOverlay = ASOverlayLayoutSpec(
+            child: backgroundNodeBack, 
+            overlay: verticalSeparatorNodeCentered
+        )
         let backgroundNodeBackInsets = ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: 0, left: 15, bottom: 15, right: 15),
-            child: backgroundNodeBack
+            child: verticalSeparatorOverlay
         )
 
         return backgroundNodeBackInsets
