@@ -40,6 +40,21 @@ class PresentationLayerModule: DIModule {
                                    mode: $2)
             }
             .lifetime(.perDependency)
+        builder.register(RouteManeuversListViewController.self)
+            .initializer { 
+                RouteManeuversListViewController(
+                    presentationManager: *!$0, 
+                    route: $1
+                )
+            }
+            .initializer {
+                RouteManeuversListViewController(
+                    presentationManager: *!$0, 
+                    route: $1, 
+                    passIndex: $2
+                )
+            }
+            .lifetime(.perDependency)
         // Nodes
         builder.register { RouteSetupDisplayNode() }
             .lifetime(.perDependency)
@@ -63,13 +78,45 @@ class PresentationLayerModule: DIModule {
             .lifetime(.perDependency)
         builder.register { RouteDetailsMapCellNode(route: $1) }
             .lifetime(.perDependency)
-        builder.register { RouteDetailsOriginDestinationRouteCellNode(route: $1) }
+        builder.register {
+            RouteDetailsOriginDestinationRouteCellNode(
+                route: $1
+            )
+            }
             .lifetime(.perDependency)
         builder.register { RouteMapDisplayNode(route: $1, mode: $2) }
             .lifetime(.perDependency)
         builder.register { RouteDetailsStatisticsTitleCellNode() }
             .lifetime(.perDependency)
-        builder.register { RouteDetailsStatisticsItemCellNode(route: $1, passIndex: $2) }
+        builder.register {
+            RouteDetailsStatisticsItemCellNode(
+                route: $1,
+                passIndex: $2
+            )
+            }
+            .lifetime(.perDependency)
+        builder.register(RouteManeuversListDisplayNode.self)
+            .initializer {
+                RouteManeuversListDisplayNode(
+                    presentationManager: *!$0,
+                    route: $1
+                )
+            }
+            .initializer {
+                RouteManeuversListDisplayNode(
+                    presentationManager: *!$0,
+                    route: $1, 
+                    passIndex: $2
+                )
+            }
+            .lifetime(.perDependency)
+        builder.register { 
+            RouteManeuverCellNode(
+                maneuverText: $1, 
+                maneuverType: $2,
+                isFailed: $3
+            )
+            }
             .lifetime(.perDependency)
         // Utils
         builder.register { KeyboardController() }

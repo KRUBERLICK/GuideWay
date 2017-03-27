@@ -12,7 +12,7 @@ import Foundation
 class RouteDetailsStatisticsItemCellNode: ASCellNode {
     let route: Route
     let passIndex: Int
-    var onShowDetailsTap: ((Route) -> ())?
+    var onShowDetailsTap: ((Route, Int) -> ())?
 
     lazy var persentTextNode: ASTextNode = {
         guard let routeSegmentsCount = self.route.directions?
@@ -244,7 +244,6 @@ class RouteDetailsStatisticsItemCellNode: ASCellNode {
     }
 
     func showDetailsButtonTapped() {
-        print(123)
-        onShowDetailsTap?(route)
+        onShowDetailsTap?(route, passIndex)
     }
 }

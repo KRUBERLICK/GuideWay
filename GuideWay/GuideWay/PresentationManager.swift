@@ -33,6 +33,11 @@ class PresentationManager {
         return try! scope.resolve(arg: route, mode)
     }
 
+    func getRouteManeuversListViewController(with route: Route,
+                                             passIndex: Int? = nil) -> RouteManeuversListViewController {
+        return try! scope.resolve(arg: route, passIndex)
+    }
+
     // Nodes
 
     func getRouteDetailsDisplayNode(with state: RouteDetailsDisplayNode.State) -> RouteDetailsDisplayNode {
@@ -70,5 +75,16 @@ class PresentationManager {
     func getRouteMapDisplayNode(with route: Route, 
                                 mode: RouteMapViewController.Mode) -> RouteMapDisplayNode {
         return try! scope.resolve(arg: route, mode)
+    }
+
+    func getRouteManeuversListDisplayNode(with route: Route,
+                                          passIndex: Int? = nil) -> RouteManeuversListDisplayNode {
+        return try! scope.resolve(arg: route, passIndex)
+    }
+
+    func getRouteManeuverCellNode(maneuverText: String,
+                                  maneuverType: RouteManeuver?,
+                                  isFailed: Bool) -> RouteManeuverCellNode {
+        return try! scope.resolve(arg: maneuverText, maneuverType, isFailed)
     }
 }

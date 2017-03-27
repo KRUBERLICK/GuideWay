@@ -29,6 +29,7 @@ class RouteDetailsDisplayNode: ASDisplayNode {
 
     var onPracticeTap: (() -> ())?
     var onTestTap: (() -> ())?
+    var onShowPassDetailsTap: ((Route, Int) -> ())?
 
     let backgroundNode: ASImageNode = {
         let node = ASImageNode()
@@ -428,9 +429,12 @@ extension RouteDetailsDisplayNode: ASCollectionDataSource, ASCollectionDelegateF
             return { ASCellNode() }
         }
 
-        return {
-            return self.presentationManager
+        return { [unowned self] in
+            let node = self.presentationManager
                 .getRouteDetailsStatisticsItemCellNode(for: route, passIndex: indexPath.item)
+
+            node.onShowDetailsTap = self.onShowPassDetailsTap
+            return node
         }
     }
 }

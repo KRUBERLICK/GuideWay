@@ -102,6 +102,15 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
                 completion: nil
             )
         }
+        routeDetailsDisplayNode.onShowPassDetailsTap = { [unowned self] route, passIndex in
+            let vc = self.presentationManager
+                .getRouteManeuversListViewController(
+                    with: route, 
+                    passIndex: passIndex
+            )
+
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         navigationController?.navigationBar
             .barTintColor = UIColor(hexString: "626466")
         navigationController?.navigationBar

@@ -8,6 +8,23 @@
 
 import ObjectMapper
 
+enum RouteManeuver: String {
+    case forkLeft = "fork-left"
+    case forkRight = "fork-right"
+    case merge = "merge"
+    case rampLeft = "ramp-left"
+    case rampRight = "ramp-right"
+    case roundaboutLeft = "roundabout-left"
+    case roundaboutRight = "roundabout-right"
+    case straight = "straight"
+    case turnLeft = "turn-left"
+    case turnRight = "turn-right"
+    case turnSharpLeft = "turn-sharp-left"
+    case turnSharpRight = "turn-sharp-right"
+    case turnSlightLeft = "turn-slight-left"
+    case turnSlightRight = "turn-slight-right"
+}
+
 struct DirectionsResponseRouteLegStep: ImmutableMappable {
     let distanceText: String
     let distanceValue: Int
@@ -19,7 +36,7 @@ struct DirectionsResponseRouteLegStep: ImmutableMappable {
     let startLocationLongitude: Double
     let endLocationLatitude: Double
     let endLocationLongitude: Double
-    var maneuver: String?
+    var maneuver: RouteManeuver?
 
     var startLocationCoordinates: (Double, Double) {
         return (startLocationLatitude, startLocationLongitude)
@@ -40,7 +57,7 @@ struct DirectionsResponseRouteLegStep: ImmutableMappable {
         startLocationLongitude = try map.value("start_location.lng")
         endLocationLatitude = try map.value("end_location.lat")
         endLocationLongitude = try map.value("end_location.lng")
-        maneuver = try? map.value("maneuver")
+        maneuver = try? map.value("maneuver", using: EnumTransform())
     }
 
     mutating func mapping(map: Map) {
@@ -54,7 +71,7 @@ struct DirectionsResponseRouteLegStep: ImmutableMappable {
         startLocationLongitude >>> map["start_location.lng"]
         endLocationLatitude >>> map["end_location.lat"]
         endLocationLongitude >>> map["end_location.lng"]
-        maneuver <- map["maneuver"]
+        maneuver <- (map["maneuver"], EnumTransform())
     }
 }
 

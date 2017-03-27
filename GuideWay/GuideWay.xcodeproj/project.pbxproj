@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		19551076698326328C213092 /* Pods_GuideWay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BAA290F6F4F9C4CE1CB494 /* Pods_GuideWay.framework */; };
+		5B220C171E891092002207AD /* RouteManeuversListDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B220C161E891092002207AD /* RouteManeuversListDisplayNode.swift */; };
+		5B220C191E891771002207AD /* RouteManeuversListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B220C181E891771002207AD /* RouteManeuversListViewController.swift */; };
+		5B220C1B1E894621002207AD /* RouteManeuverCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B220C1A1E894621002207AD /* RouteManeuverCellNode.swift */; };
 		5B2CFE421E66DA7500D57D53 /* DirectionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CFE411E66DA7500D57D53 /* DirectionsResponse.swift */; };
 		5B2CFE441E670FE300D57D53 /* RouteDetailsMapCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CFE431E670FE300D57D53 /* RouteDetailsMapCellNode.swift */; };
 		5B2CFE461E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2CFE451E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift */; };
@@ -49,6 +52,9 @@
 		00BAA290F6F4F9C4CE1CB494 /* Pods_GuideWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuideWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9602DC1AABEF46D3ED777E /* Pods-GuideWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-GuideWay/Pods-GuideWay.release.xcconfig"; sourceTree = "<group>"; };
 		5174A1AEF54E5E00744D335D /* Pods-GuideWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideWay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideWay/Pods-GuideWay.debug.xcconfig"; sourceTree = "<group>"; };
+		5B220C161E891092002207AD /* RouteManeuversListDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManeuversListDisplayNode.swift; sourceTree = "<group>"; };
+		5B220C181E891771002207AD /* RouteManeuversListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManeuversListViewController.swift; sourceTree = "<group>"; };
+		5B220C1A1E894621002207AD /* RouteManeuverCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManeuverCellNode.swift; sourceTree = "<group>"; };
 		5B2CFE411E66DA7500D57D53 /* DirectionsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsResponse.swift; sourceTree = "<group>"; };
 		5B2CFE431E670FE300D57D53 /* RouteDetailsMapCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsMapCellNode.swift; sourceTree = "<group>"; };
 		5B2CFE451E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsOriginDestinationCellNode.swift; sourceTree = "<group>"; };
@@ -107,6 +113,15 @@
 				0C9602DC1AABEF46D3ED777E /* Pods-GuideWay.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5B220C1C1E894722002207AD /* RouteManeuversList */ = {
+			isa = PBXGroup;
+			children = (
+				5B220C161E891092002207AD /* RouteManeuversListDisplayNode.swift */,
+				5B220C1A1E894621002207AD /* RouteManeuverCellNode.swift */,
+			);
+			name = RouteManeuversList;
 			sourceTree = "<group>";
 		};
 		5B307BA41E5DAFBC004F8017 = {
@@ -256,6 +271,7 @@
 				5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */,
 				5BA977C91E608BF100421A60 /* BaseNavigationController.swift */,
 				5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */,
+				5B220C181E891771002207AD /* RouteManeuversListViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -265,6 +281,7 @@
 			children = (
 				5B3B74D51E77F2C600F46FD6 /* RouteMap */,
 				5B36E1A31E64384F0091BB7D /* RouteDetails */,
+				5B220C1C1E894722002207AD /* RouteManeuversList */,
 				5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */,
 				5B51CBEC1E6023B6002C06AE /* AlertNode.swift */,
 				5BAEFF1B1E696EAF004A3D6F /* InformerNode.swift */,
@@ -435,13 +452,16 @@
 				5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */,
 				5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */,
 				5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */,
+				5B220C191E891771002207AD /* RouteManeuversListViewController.swift in Sources */,
 				5B2CFE461E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift in Sources */,
 				5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */,
 				5BA977C61E6076C800421A60 /* Route.swift in Sources */,
 				5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */,
 				5B467BFA1E81339C00EB2C25 /* RouteDetailsStatisticsTitleCellNode.swift in Sources */,
+				5B220C1B1E894621002207AD /* RouteManeuverCellNode.swift in Sources */,
 				5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */,
 				5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */,
+				5B220C171E891092002207AD /* RouteManeuversListDisplayNode.swift in Sources */,
 				5B2CFE441E670FE300D57D53 /* RouteDetailsMapCellNode.swift in Sources */,
 				5B2CFE421E66DA7500D57D53 /* DirectionsResponse.swift in Sources */,
 				5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */,
