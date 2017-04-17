@@ -28,6 +28,7 @@
 		5B467BFC1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B467BFB1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift */; };
 		5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */; };
 		5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51CBEC1E6023B6002C06AE /* AlertNode.swift */; };
+		5B838D511EA4A6F1000D8A72 /* RouteMapInfoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
 		5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B976AE71E65DA4000CB03DE /* KeyboardController.swift */; };
 		5BA977C61E6076C800421A60 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA977C51E6076C800421A60 /* Route.swift */; };
@@ -74,6 +75,7 @@
 		5B467BFB1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsStatisticsItemCellNode.swift; sourceTree = "<group>"; };
 		5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsViewController.swift; sourceTree = "<group>"; };
 		5B51CBEC1E6023B6002C06AE /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
+		5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapInfoNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B976AE71E65DA4000CB03DE /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
 		5BA977C51E6076C800421A60 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				5B34A5031E7C3A61005FEF41 /* RouteMapDisplayNode */,
 				5B3B74D81E77FEA400F46FD6 /* RouteMapMenuNode.swift */,
+				5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */,
 			);
 			name = RouteMap;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				5BA977CA1E608BF100421A60 /* BaseNavigationController.swift in Sources */,
 				5BB042441E5DB56800A31443 /* AppAssembly.swift in Sources */,
 				5BB0424F1E5DE66600A31443 /* PresentationUtils.swift in Sources */,
+				5B838D511EA4A6F1000D8A72 /* RouteMapInfoNode.swift in Sources */,
 				5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */,
 				5B220C191E891771002207AD /* RouteManeuversListViewController.swift in Sources */,
 				5B2CFE461E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift in Sources */,

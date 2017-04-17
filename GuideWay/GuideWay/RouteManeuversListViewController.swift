@@ -54,6 +54,18 @@ class RouteManeuversListViewController: ASViewController<ASDisplayNode> {
             "text_instructions",
             comment: ""
         )
+
+        guard navigationController?.viewControllers.count ?? 0 == 1 else {
+            return
+        }
+
+        let cancelBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self, 
+            action: #selector(RouteManeuversListViewController.cancelButtonTapped)
+        )
+
+        navigationItem.rightBarButtonItem = cancelBarButtonItem
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -62,5 +74,9 @@ class RouteManeuversListViewController: ASViewController<ASDisplayNode> {
             false,
             animated: true
         )
+    }
+
+    func cancelButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
 }

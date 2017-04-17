@@ -60,6 +60,15 @@ class RouteManeuverCellNode: ASCellNode {
         }
         super.init()
         automaticallyManagesSubnodes = true
+        clipsToBounds = false
+    }
+
+    override func layout() {
+        super.layout()
+        backgroundImageNode.layer.shadowColor = UIColor(white: 0, alpha: 0.2).cgColor
+        backgroundImageNode.layer.shadowOffset = CGSize(width: 0, height: 2)
+        backgroundImageNode.layer.shadowRadius = 4
+        backgroundImageNode.layer.shadowOpacity = 1
     }
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

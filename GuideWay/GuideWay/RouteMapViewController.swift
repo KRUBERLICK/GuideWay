@@ -134,6 +134,12 @@ class RouteMapViewController: ASViewController<ASDisplayNode> {
             self.wrongAnswersIndexes.append(self.currentSegment - 1)
             self.routeMapDisplayNode.isNextButtonDisabled = false
         }
+        routeMapDisplayNode.onTextInstructionsButtonTap = { [unowned self] in
+            let vc = self.presentationManager.getRouteManeuversListViewController(with: self.route)
+            let navVc = BaseNavigationController(rootViewController: vc)
+
+            self.present(navVc, animated: true, completion: nil)
+        }
         routeMapDisplayNode.onFinishButtonTap = { [unowned self] in
             switch self.mode {
             case .practice:

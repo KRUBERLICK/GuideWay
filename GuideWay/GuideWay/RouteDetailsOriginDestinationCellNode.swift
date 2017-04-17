@@ -9,6 +9,13 @@
 import AsyncDisplayKit
 
 class RouteDetailsOriginDestinationRouteCellNode: ASCellNode {
+    enum Style {
+        case light
+        case dark
+    }
+
+    let styleMode: Style
+
     let originIconNode: ASImageNode = {
         let node = ASImageNode()
 
@@ -23,10 +30,12 @@ class RouteDetailsOriginDestinationRouteCellNode: ASCellNode {
         return node
     }()
 
-    let originTextLabelNode: ASTextNode = {
+    lazy var originTextLabelNode: ASTextNode = {
         let node = ASTextNode()
         let textAttribs = [
-            NSForegroundColorAttributeName: UIColor.white, 
+            NSForegroundColorAttributeName: self.styleMode == .light
+                ? UIColor.white
+                : UIColor(hexString: "919191"),
             NSFontAttributeName: UIFont.systemFont(
                 ofSize: 12, 
                 weight: UIFontWeightLight
@@ -40,10 +49,12 @@ class RouteDetailsOriginDestinationRouteCellNode: ASCellNode {
         return node
     }()
 
-    let destinationTextLabelNode: ASTextNode = {
+    lazy var destinationTextLabelNode: ASTextNode = {
         let node = ASTextNode()
         let textAttribs = [
-            NSForegroundColorAttributeName: UIColor.white,
+            NSForegroundColorAttributeName: self.styleMode == .light
+                ? UIColor.white
+                : UIColor(hexString: "919191"),
             NSFontAttributeName: UIFont.systemFont(
                 ofSize: 12,
                 weight: UIFontWeightLight
@@ -61,8 +72,9 @@ class RouteDetailsOriginDestinationRouteCellNode: ASCellNode {
     let destinationTextNode = ASTextNode()
     let route: Route
 
-    init(route: Route) {
+    init(route: Route, style: Style = .light) {
         self.route = route
+        styleMode = style
         super.init()
         automaticallyManagesSubnodes = true
         bindData()
@@ -76,8 +88,12 @@ class RouteDetailsOriginDestinationRouteCellNode: ASCellNode {
                     return
         }
 
-        let textAttribs = [NSForegroundColorAttributeName: UIColor.white,
-                           NSFontAttributeName: UIFont.systemFont(ofSize: 17)]
+        let textAttribs = [
+            NSForegroundColorAttributeName: styleMode == .light
+                ? UIColor.white
+                : UIColor(hexString: "919191"),
+            NSFontAttributeName: UIFont.systemFont(ofSize: 17)
+        ]
 
         originTextNode.attributedText = NSAttributedString(
             string: originText,

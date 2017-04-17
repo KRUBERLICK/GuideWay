@@ -34,7 +34,6 @@ class RouteDetailsDisplayNode: ASDisplayNode {
     let backgroundNode: ASImageNode = {
         let node = ASImageNode()
 
-        node.image = #imageLiteral(resourceName: "img_route_details_bg")
         node.contentMode = .scaleAspectFill
         return node
     }()
@@ -202,6 +201,7 @@ class RouteDetailsDisplayNode: ASDisplayNode {
         self.state = state
         super.init()
         automaticallyManagesSubnodes = true
+        backgroundNode.image = #imageLiteral(resourceName: "img_route_details_bg")
     }
 
     override func didLoad() {

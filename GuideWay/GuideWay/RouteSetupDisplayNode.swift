@@ -12,7 +12,6 @@ class RouteSetupDisplayNode: ASDisplayNode {
     let backgroundImageNode: ASImageNode = {
         let node = ASImageNode()
 
-        node.image = #imageLiteral(resourceName: "img_route_setup_bg")
         node.contentMode = .scaleAspectFill
         return node
     }()
@@ -130,6 +129,7 @@ class RouteSetupDisplayNode: ASDisplayNode {
     override init() {
         super.init()
         automaticallyManagesSubnodes = true
+        backgroundImageNode.image = #imageLiteral(resourceName: "img_route_setup_bg")
     }
 
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

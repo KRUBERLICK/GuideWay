@@ -43,8 +43,16 @@ class RouteMapDisplayNode: ASDisplayNode {
             self.changeViewMode()
         }
         node.onExitButtonTap = { [unowned self] in self.onExitButtonTap?() }
-        node.onInfoButtonTap = { [unowned self] in self.onInfoButtonTap?() }
+        node.onInfoButtonTap = { [unowned self] in self.toggleInfoNode() }
         node.onNextButtonTap = { [unowned self] in self.onNextButtonTap?() }
+        return node
+    }()
+
+    lazy var infoNode: RouteMapInfoNode = {
+        let node = RouteMapInfoNode(route: self.route)
+
+        node.onTextInstructionsButtonTap = { [unowned self] in self.onTextInstructionsButtonTap?() }
+        node.onCloseButtonTap = { [unowned self] in self.toggleInfoNode() }
         return node
     }()
 
@@ -121,7 +129,7 @@ class RouteMapDisplayNode: ASDisplayNode {
     }()
 
     var onNextButtonTap: (() -> ())?
-    var onInfoButtonTap: (() -> ())?
+    var onTextInstructionsButtonTap: (() -> ())?
     var onExitButtonTap: (() -> ())?
     var onFinishButtonTap: (() -> ())?
     var onAnswerRightButtonTap: (() -> ())?

@@ -111,12 +111,6 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
 
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        navigationController?.navigationBar
-            .barTintColor = UIColor(hexString: "626466")
-        navigationController?.navigationBar
-            .titleTextAttributes =
-            [NSForegroundColorAttributeName: UIColor.white]
-        navigationController?.navigationBar.tintColor = .white
         navigationItem.title = NSLocalizedString(
             "route_details.title",
             comment: ""
@@ -134,6 +128,12 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar
+            .barTintColor = UIColor(hexString: "626466")
+        navigationController?.navigationBar
+            .titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.setNavigationBarHidden(
             false,
             animated: true

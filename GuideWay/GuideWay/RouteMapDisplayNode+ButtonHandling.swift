@@ -126,4 +126,43 @@ extension RouteMapDisplayNode {
             }
         }
     }
+
+    func toggleInfoNode() {
+        if infoNode.supernode != nil {
+            hideInfoNode()
+        } else {
+            showInfoNode()
+        }
+    }
+
+    func showInfoNode() {
+        let calculatedSize = infoNode.calculateLayoutThatFits(
+            ASSizeRangeMake(
+                .zero,
+                .init(width: bounds.width - 38 * 2, height: CGFloat.infinity)
+            )).size
+
+        infoNode.frame.size = calculatedSize
+        infoNode.frame.origin = CGPoint(
+            x: bounds.midX - infoNode.frame.width / 2,
+            y: bounds.maxY
+        )
+        addSubnode(infoNode)
+        UIView.animate(
+            withDuration: 0.25,
+            delay: 0,
+            options: .curveEaseOut,
+            animations: {
+                self.infoNode.frame.origin.y =
+                    self.bounds.maxY - self.infoNode.frame.height - 30
+        }, completion: nil)
+    }
+
+    func hideInfoNode() {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: { 
+            self.infoNode.frame.origin.y = self.bounds.maxY
+        }, completion: { _ in
+            self.infoNode.removeFromSupernode()
+        })
+    }
 }
