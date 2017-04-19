@@ -58,7 +58,9 @@ class PresentationLayerModule: DIModule {
         builder.register { WelcomeScreenViewController(presentationManager: *!$0) }
             .lifetime(.perDependency)
         builder.register { LoginViewController(presentationManager: *!$0,
-                                               keyboardController: *!$0) }
+                                               keyboardController: *!$0,
+                                               authManager: *!$0,
+                                               databaseManager: *!$0) }
             .lifetime(.perDependency)
         // Nodes
         builder.register { WelcomeScreenDisplayNode() }

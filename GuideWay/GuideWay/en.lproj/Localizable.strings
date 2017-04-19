@@ -41,3 +41,11 @@
 "map.car_marker_title" = "Your current position";
 "text_instructions" = "Text instructions";
 "welcome" = "Welcome!";
+"error.auth.user_disabled" = "This account was disabled";
+"error.auth.wrong_password" = "Wrong password";
+"error.auth.wrong_email" = "Wrong email";
+"error.auth.user_not_found" = "Account not found";
+"error.register.invalid_email_format" = "Invalid email format";
+"error.register.weak_password_error" = "Password too weak. Must be at least 6 digits";
+"error.register.email_already_in_use" = "Email already in use";
+"error.unknown_error" = "Unknown error";

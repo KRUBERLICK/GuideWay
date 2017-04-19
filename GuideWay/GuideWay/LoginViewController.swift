@@ -8,12 +8,15 @@
 
 import AsyncDisplayKit
 import RxSwift
+import Firebase
 
 class LoginViewController: ASViewController<ASDisplayNode> {
     let presentationManager: PresentationManager
     let loginDisplayNode: LoginDisplayNode
     let keyboardController: KeyboardController
     let disposeBag = DisposeBag()
+    let authManager: AuthManager
+    let databaseManager: DatabaseManager
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -28,10 +31,14 @@ class LoginViewController: ASViewController<ASDisplayNode> {
     }
 
     init(presentationManager: PresentationManager, 
-         keyboardController: KeyboardController) {
+         keyboardController: KeyboardController,
+         authManager: AuthManager,
+         databaseManager: DatabaseManager) {
         self.presentationManager = presentationManager
         loginDisplayNode = presentationManager.getLoginDisplayNode()
         self.keyboardController = keyboardController
+        self.authManager = authManager
+        self.databaseManager = databaseManager
         super.init(node: loginDisplayNode)
         loginDisplayNode.userInputResultPublisher
             .observeOn(MainScheduler.instance)
@@ -52,7 +59,127 @@ class LoginViewController: ASViewController<ASDisplayNode> {
                         return
                     }
                     strongSelf.loginDisplayNode.state = .loading
-                    // login/register user
+                    strongSelf.authManager.signInUser(email: email, password: password)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak strongSelf] user in
+                            guard let strongSelf = strongSelf else {
+                                return
+                            }
+
+                            strongSelf.loginDisplayNode.state = .default
+                            // transfer to my routes vc
+                            print("Login successfull: \(user)")
+                            }, onError: { [weak strongSelf] error in
+                                guard let strongSelf = strongSelf else {
+                                    return
+                                }
+                                let error = error as NSError
+                                var errorMessage: String
+
+                                switch error.code {
+                                case FIRAuthErrorCode.errorCodeUserDisabled.rawValue:
+                                    errorMessage = "error.auth.user_disabled"
+                                case FIRAuthErrorCode.errorCodeWrongPassword.rawValue:
+                                    errorMessage = "error.auth.wrong_password"
+                                case FIRAuthErrorCode.errorCodeInvalidEmail.rawValue:
+                                    errorMessage = "error.auth.wrong_email"
+                                case FIRAuthErrorCode.errorCodeUserNotFound.rawValue:
+                                    errorMessage = "error.auth.user_not_found"
+                                    strongSelf.authManager.registerUser(
+                                        email: email, 
+                                        password: password)
+                                        .observeOn(MainScheduler.instance)
+                                        .subscribe(onNext: { [weak strongSelf] user in
+                                            guard let strongSelf = strongSelf else {
+                                                return
+                                            }
+
+                                            // add user into db and transfer to my routes vc
+                                            strongSelf.databaseManager.addUser(uid: user.uid, email: email)
+                                                .observeOn(MainScheduler.instance)
+                                                .subscribe(onNext: { [weak strongSelf] _ in
+                                                    guard let strongSelf = strongSelf else {
+                                                        return
+                                                    }
+
+                                                    strongSelf.loginDisplayNode.state = .default
+                                                    print("Register successfull")
+                                                    }, onError: { [weak strongSelf] error in
+                                                        guard let strongSelf = strongSelf else {
+                                                            return
+                                                        }
+
+                                                        strongSelf.loginDisplayNode.state = .default
+                                                        InformerNode.showInformer(
+                                                            for: strongSelf.node,
+                                                            with: NSLocalizedString("informer.network_error", comment: "")
+                                                        )
+                                                })
+                                                .addDisposableTo(strongSelf.disposeBag)
+                                            }, onError: { [weak strongSelf] error in
+                                                guard let strongSelf = strongSelf else {
+                                                    return
+                                                }
+
+                                                let error = error as NSError
+                                                var registerErrorMessage: String
+
+                                                switch error.code {
+                                                case FIRAuthErrorCode.errorCodeInvalidEmail.rawValue:
+                                                    registerErrorMessage = "error.register.invalid_email_format"
+                                                case FIRAuthErrorCode.errorCodeWeakPassword.rawValue:
+                                                    registerErrorMessage = "error.register.weak_password_error"
+                                                case FIRAuthErrorCode.errorCodeEmailAlreadyInUse.rawValue:
+                                                    registerErrorMessage = "error.register.email_already_in_use"
+                                                case FIRAuthErrorCode.errorCodeNetworkError.rawValue:
+                                                    registerErrorMessage = "informer.network_error"
+                                                    strongSelf.loginDisplayNode.state = .default
+                                                    InformerNode.showInformer(
+                                                        for: strongSelf.node,
+                                                        with: NSLocalizedString(registerErrorMessage, comment: "")
+                                                    )
+                                                    return
+                                                default:
+                                                    strongSelf.loginDisplayNode.state = .default
+                                                    registerErrorMessage = "error.unknown_error"
+                                                    InformerNode.showInformer(
+                                                        for: strongSelf.node,
+                                                        with: NSLocalizedString(registerErrorMessage, comment: "")
+                                                    )
+                                                    return
+                                                }
+                                                strongSelf.loginDisplayNode.state = .default
+                                                AlertWithBackgroundNode.showAlert(
+                                                    for: strongSelf.node,
+                                                    with: NSLocalizedString(registerErrorMessage, comment: "")
+                                                )
+                                        })
+                                        .addDisposableTo(strongSelf.disposeBag)
+                                    return
+                                case FIRAuthErrorCode.errorCodeNetworkError.rawValue:
+                                    errorMessage = "informer.network_error"
+                                    strongSelf.loginDisplayNode.state = .default
+                                    InformerNode.showInformer(
+                                        for: strongSelf.node, 
+                                        with: NSLocalizedString(errorMessage, comment: "")
+                                    )
+                                    return
+                                default:
+                                    errorMessage = "error.unknown_error"
+                                    strongSelf.loginDisplayNode.state = .default
+                                    InformerNode.showInformer(
+                                        for: strongSelf.node,
+                                        with: NSLocalizedString(errorMessage, comment: "")
+                                    )
+                                    return
+                                }
+                                strongSelf.loginDisplayNode.state = .default
+                                AlertWithBackgroundNode.showAlert(
+                                    for: strongSelf.node, 
+                                    with: NSLocalizedString(errorMessage, comment: "")
+                                )
+                        })
+                        .addDisposableTo(strongSelf.disposeBag)
                 })
             })
             .addDisposableTo(disposeBag)
@@ -64,6 +191,7 @@ class LoginViewController: ASViewController<ASDisplayNode> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgesForExtendedLayout = []
         navigationItem.title = NSLocalizedString(
             "welcome_screen.login",
             comment: ""

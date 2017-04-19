@@ -7,10 +7,15 @@
 //
 
 import DITranquillity
+import Firebase
 
 class DataLayerModule: DIModule {
     func load(builder: DIContainerBuilder) {
         builder.register { WebService() }
+            .lifetime(.lazySingle)
+        builder.register { AuthManager(authProvider: FIRAuth.auth()!) }
+            .lifetime(.lazySingle)
+        builder.register { DatabaseManager(database: FIRDatabase.database()) }
             .lifetime(.lazySingle)
     }
 }
