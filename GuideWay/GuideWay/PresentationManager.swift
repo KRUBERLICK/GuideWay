@@ -19,9 +19,15 @@ class PresentationManager {
     // ViewControllers
 
     func getInitialViewController() -> UIViewController {
-        let routeSetupVC: RouteSetupViewController = *!scope
+        return BaseNavigationController(rootViewController: getWelcomeScreenViewController())
+    }
 
-        return BaseNavigationController(rootViewController: routeSetupVC)
+    func getWelcomeScreenViewController() -> WelcomeScreenViewController {
+        return *!scope
+    }
+
+    func getRouteSetupViewController() -> RouteSetupViewController {
+        return *!scope
     }
 
     func getRouteDetailsViewController(for route: Route) -> RouteDetailsViewController {
@@ -39,6 +45,10 @@ class PresentationManager {
     }
 
     // Nodes
+
+    func getWelcomeScreenDisplayNode() -> WelcomeScreenDisplayNode {
+        return *!scope
+    }
 
     func getRouteDetailsDisplayNode(with state: RouteDetailsDisplayNode.State) -> RouteDetailsDisplayNode {
         return try! scope.resolve(arg: state)

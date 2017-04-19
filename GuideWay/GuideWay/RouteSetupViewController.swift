@@ -29,10 +29,6 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         return false
     }
 
-    override var shouldAutorotate: Bool {
-        return false
-    }
-
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
@@ -110,12 +106,24 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
             self.autocompleteDisposeBag = DisposeBag()
             self.autocompleteController.hideAutocomplete()
         }
+        navigationItem.title = NSLocalizedString(
+            "route_setup.title",
+            comment: ""
+        )
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar
+            .barTintColor = UIColor(hexString: "626466")
+        navigationController?.navigationBar
+            .titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.setNavigationBarHidden(
+            false,
+            animated: true
+        )
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(RouteSetupViewController
@@ -143,24 +151,24 @@ class RouteSetupViewController: ASViewController<ASDisplayNode> {
         keyboardController.supress = false
 
         // Temporary
-        var routeMock = Route(
-            origin: "проспект Победы 12",
-            destination: "проспект Победы 25"
-        )
-
-        routeMock.passes.append(RoutePass(mistakeIndexes: [1, 3, 6, 2]))
-        routeMock.passes.append(RoutePass(mistakeIndexes: []))
-        routeMock.passes.append(RoutePass(mistakeIndexes: [5, 4]))
-
-        let routeDetailsVC = self.presentationManager
-            .getRouteDetailsViewController(
-                for: routeMock
-        )
-
-        self.navigationController?.pushViewController(
-            routeDetailsVC,
-            animated: true
-        )
+//        var routeMock = Route(
+//            origin: "проспект Победы 12",
+//            destination: "проспект Победы 25"
+//        )
+//
+//        routeMock.passes.append(RoutePass(mistakeIndexes: [1, 3, 6, 2]))
+//        routeMock.passes.append(RoutePass(mistakeIndexes: []))
+//        routeMock.passes.append(RoutePass(mistakeIndexes: [5, 4]))
+//
+//        let routeDetailsVC = self.presentationManager
+//            .getRouteDetailsViewController(
+//                for: routeMock
+//        )
+//
+//        self.navigationController?.pushViewController(
+//            routeDetailsVC,
+//            animated: true
+//        )
     }
 
     func textFieldDidBeginEditing(notification: Notification) {

@@ -28,6 +28,8 @@
 		5B467BFC1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B467BFB1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift */; };
 		5B5156A21E6032C100A38C62 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */; };
 		5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B51CBEC1E6023B6002C06AE /* AlertNode.swift */; };
+		5B52C4CE1EA7656400E0E37B /* WelcomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4CD1EA7656400E0E37B /* WelcomeScreenViewController.swift */; };
+		5B52C4D01EA7670700E0E37B /* WelcomeScreenDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4CF1EA7670700E0E37B /* WelcomeScreenDisplayNode.swift */; };
 		5B838D511EA4A6F1000D8A72 /* RouteMapInfoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
 		5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B976AE71E65DA4000CB03DE /* KeyboardController.swift */; };
@@ -75,6 +77,8 @@
 		5B467BFB1E8136D500EB2C25 /* RouteDetailsStatisticsItemCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsStatisticsItemCellNode.swift; sourceTree = "<group>"; };
 		5B5156A11E6032C100A38C62 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteDetailsViewController.swift; sourceTree = "<group>"; };
 		5B51CBEC1E6023B6002C06AE /* AlertNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertNode.swift; sourceTree = "<group>"; };
+		5B52C4CD1EA7656400E0E37B /* WelcomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreenViewController.swift; sourceTree = "<group>"; };
+		5B52C4CF1EA7670700E0E37B /* WelcomeScreenDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreenDisplayNode.swift; sourceTree = "<group>"; };
 		5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapInfoNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B976AE71E65DA4000CB03DE /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				5BA977C91E608BF100421A60 /* BaseNavigationController.swift */,
 				5B3B74D21E77EDCC00F46FD6 /* RouteMapViewController.swift */,
 				5B220C181E891771002207AD /* RouteManeuversListViewController.swift */,
+				5B52C4CD1EA7656400E0E37B /* WelcomeScreenViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				5BB042461E5DD7DA00A31443 /* RouteSetupDisplayNode.swift */,
 				5B51CBEC1E6023B6002C06AE /* AlertNode.swift */,
 				5BAEFF1B1E696EAF004A3D6F /* InformerNode.swift */,
+				5B52C4CF1EA7670700E0E37B /* WelcomeScreenDisplayNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
 				5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */,
 				5B34A5001E7C39C7005FEF41 /* RouteMapDisplayNode+ButtonHandling.swift in Sources */,
+				5B52C4CE1EA7656400E0E37B /* WelcomeScreenViewController.swift in Sources */,
 				5B307BB31E5DAFBC004F8017 /* RouteSetupViewController.swift in Sources */,
 				5B3B74D91E77FEA400F46FD6 /* RouteMapMenuNode.swift in Sources */,
 				5BB042401E5DB45F00A31443 /* PresentationLayerModule.swift in Sources */,
@@ -465,6 +472,7 @@
 				5B220C1B1E894621002207AD /* RouteManeuverCellNode.swift in Sources */,
 				5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */,
 				5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */,
+				5B52C4D01EA7670700E0E37B /* WelcomeScreenDisplayNode.swift in Sources */,
 				5B220C171E891092002207AD /* RouteManeuversListDisplayNode.swift in Sources */,
 				5B2CFE441E670FE300D57D53 /* RouteDetailsMapCellNode.swift in Sources */,
 				5B2CFE421E66DA7500D57D53 /* DirectionsResponse.swift in Sources */,

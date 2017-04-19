@@ -6,6 +6,10 @@
   Copyright © 2017 Sasha&Daniel. All rights reserved.
 */
 
+"guideway" = "GuideWay";
+"welcome_screen.login" = "Login";
+"welcome_screen.demo" = "Demo";
+"route_setup.title" = "Route Create";
 "route_setup.create_new_route" = "Create new route";
 "route_setup.origin" = "Origin";
 "route_setup.destination" = "Destination";
@@ -33,3 +37,4 @@
 "informer.network_error" = "Network error";
 "map.car_marker_title" = "Your current position";
 "text_instructions" = "Text instructions";
+"welcome" = "Welcome!";

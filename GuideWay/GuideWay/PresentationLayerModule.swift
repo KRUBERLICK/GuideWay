@@ -55,7 +55,11 @@ class PresentationLayerModule: DIModule {
                 )
             }
             .lifetime(.perDependency)
+        builder.register { WelcomeScreenViewController(presentationManager: *!$0) }
+            .lifetime(.perDependency)
         // Nodes
+        builder.register { WelcomeScreenDisplayNode() }
+            .lifetime(.perDependency)
         builder.register { RouteSetupDisplayNode() }
             .lifetime(.perDependency)
         builder.register {
