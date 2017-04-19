@@ -23,7 +23,7 @@ class InformerNode: ASDisplayNode {
     init(message: String) {
         super.init()
         automaticallyManagesSubnodes = true
-        backgroundColor = UIColor(hexString: "F6A623")
+        backgroundColor = UIColor(hexString: "C23E3E")
 
         let textAttribs = [
             NSForegroundColorAttributeName: UIColor.white, 
@@ -63,7 +63,7 @@ class InformerNode: ASDisplayNode {
                        closeButtonNode]
         )
         let messageAndCloseButtonStackInsets = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 30, left: 15, bottom: 15, right: 15),
+            insets: UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15),
             child: messageAndCloseButtonStack
         )
 

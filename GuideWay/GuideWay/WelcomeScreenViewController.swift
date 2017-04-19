@@ -29,7 +29,9 @@ class WelcomeScreenViewController: ASViewController<ASDisplayNode> {
         welcomeScreenDisplayNode = presentationManager.getWelcomeScreenDisplayNode()
         super.init(node: welcomeScreenDisplayNode)
         welcomeScreenDisplayNode.onLoginTap = { [unowned self] in
+            let loginVC = self.presentationManager.getLoginViewController()
 
+            self.navigationController?.pushViewController(loginVC, animated: true)
         }
         welcomeScreenDisplayNode.onDemoTap = { [unowned self] in
             let routeSetupVC = self.presentationManager.getRouteSetupViewController()

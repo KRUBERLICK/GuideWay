@@ -26,6 +26,10 @@ class PresentationManager {
         return *!scope
     }
 
+    func getLoginViewController() -> LoginViewController {
+        return *!scope
+    }
+
     func getRouteSetupViewController() -> RouteSetupViewController {
         return *!scope
     }
@@ -47,6 +51,10 @@ class PresentationManager {
     // Nodes
 
     func getWelcomeScreenDisplayNode() -> WelcomeScreenDisplayNode {
+        return *!scope
+    }
+
+    func getLoginDisplayNode() -> LoginDisplayNode {
         return *!scope
     }
 

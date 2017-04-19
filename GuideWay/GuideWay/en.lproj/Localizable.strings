@@ -9,6 +9,9 @@
 "guideway" = "GuideWay";
 "welcome_screen.login" = "Login";
 "welcome_screen.demo" = "Demo";
+"login.email" = "E-mail";
+"login.password" = "Password";
+"login.login_register" = "Login/Register";
 "route_setup.title" = "Route Create";
 "route_setup.create_new_route" = "Create new route";
 "route_setup.origin" = "Origin";
