@@ -34,6 +34,9 @@
 		5B52C4D41EA7718C00E0E37B /* LoginDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4D31EA7718C00E0E37B /* LoginDisplayNode.swift */; };
 		5B52C4D61EA7977F00E0E37B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4D51EA7977F00E0E37B /* AuthManager.swift */; };
 		5B52C4D81EA7AC5400E0E37B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4D71EA7AC5400E0E37B /* DatabaseManager.swift */; };
+		5B52C4DA1EA7BEB500E0E37B /* RoutesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4D91EA7BEB500E0E37B /* RoutesListViewController.swift */; };
+		5B52C4DD1EA8AAC300E0E37B /* RoutesListDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4DC1EA8AAC300E0E37B /* RoutesListDisplayNode.swift */; };
+		5B52C4DF1EA8AAD900E0E37B /* RoutesListItemCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4DE1EA8AAD900E0E37B /* RoutesListItemCellNode.swift */; };
 		5B838D511EA4A6F1000D8A72 /* RouteMapInfoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
 		5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B976AE71E65DA4000CB03DE /* KeyboardController.swift */; };
@@ -87,6 +90,9 @@
 		5B52C4D31EA7718C00E0E37B /* LoginDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDisplayNode.swift; sourceTree = "<group>"; };
 		5B52C4D51EA7977F00E0E37B /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		5B52C4D71EA7AC5400E0E37B /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		5B52C4D91EA7BEB500E0E37B /* RoutesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesListViewController.swift; sourceTree = "<group>"; };
+		5B52C4DC1EA8AAC300E0E37B /* RoutesListDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesListDisplayNode.swift; sourceTree = "<group>"; };
+		5B52C4DE1EA8AAD900E0E37B /* RoutesListItemCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesListItemCellNode.swift; sourceTree = "<group>"; };
 		5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapInfoNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B976AE71E65DA4000CB03DE /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
@@ -222,6 +228,15 @@
 			name = RouteMap;
 			sourceTree = "<group>";
 		};
+		5B52C4DB1EA8AAAA00E0E37B /* RoutesList */ = {
+			isa = PBXGroup;
+			children = (
+				5B52C4DC1EA8AAC300E0E37B /* RoutesListDisplayNode.swift */,
+				5B52C4DE1EA8AAD900E0E37B /* RoutesListItemCellNode.swift */,
+			);
+			name = RoutesList;
+			sourceTree = "<group>";
+		};
 		5BAE1E4C1E5F2FA2007CCFB5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +306,7 @@
 				5B220C181E891771002207AD /* RouteManeuversListViewController.swift */,
 				5B52C4CD1EA7656400E0E37B /* WelcomeScreenViewController.swift */,
 				5B52C4D11EA7717B00E0E37B /* LoginViewController.swift */,
+				5B52C4D91EA7BEB500E0E37B /* RoutesListViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -298,6 +314,7 @@
 		5BB042451E5DD7CC00A31443 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				5B52C4DB1EA8AAAA00E0E37B /* RoutesList */,
 				5B3B74D51E77F2C600F46FD6 /* RouteMap */,
 				5B36E1A31E64384F0091BB7D /* RouteDetails */,
 				5B220C1C1E894722002207AD /* RouteManeuversList */,
@@ -479,6 +496,7 @@
 				5B3B74D31E77EDCC00F46FD6 /* RouteMapViewController.swift in Sources */,
 				5B220C191E891771002207AD /* RouteManeuversListViewController.swift in Sources */,
 				5B2CFE461E67361F00D57D53 /* RouteDetailsOriginDestinationCellNode.swift in Sources */,
+				5B52C4DD1EA8AAC300E0E37B /* RoutesListDisplayNode.swift in Sources */,
 				5B307BB11E5DAFBC004F8017 /* AppDelegate.swift in Sources */,
 				5BA977C61E6076C800421A60 /* Route.swift in Sources */,
 				5BB042471E5DD7DA00A31443 /* RouteSetupDisplayNode.swift in Sources */,
@@ -486,7 +504,9 @@
 				5B220C1B1E894621002207AD /* RouteManeuverCellNode.swift in Sources */,
 				5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */,
 				5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */,
+				5B52C4DF1EA8AAD900E0E37B /* RoutesListItemCellNode.swift in Sources */,
 				5B52C4D01EA7670700E0E37B /* WelcomeScreenDisplayNode.swift in Sources */,
+				5B52C4DA1EA7BEB500E0E37B /* RoutesListViewController.swift in Sources */,
 				5B220C171E891092002207AD /* RouteManeuversListDisplayNode.swift in Sources */,
 				5B2CFE441E670FE300D57D53 /* RouteDetailsMapCellNode.swift in Sources */,
 				5B2CFE421E66DA7500D57D53 /* DirectionsResponse.swift in Sources */,

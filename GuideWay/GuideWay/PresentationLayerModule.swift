@@ -62,6 +62,10 @@ class PresentationLayerModule: DIModule {
                                                authManager: *!$0,
                                                databaseManager: *!$0) }
             .lifetime(.perDependency)
+        builder.register { RoutesListViewController(routesListDisplayNode: *!$0,
+                                                    authManager: *!$0,
+                                                    databaseManager: *!$0) }
+            .lifetime(.perDependency)
         // Nodes
         builder.register { WelcomeScreenDisplayNode() }
             .lifetime(.perDependency)
@@ -128,6 +132,8 @@ class PresentationLayerModule: DIModule {
                 isFailed: $3
             )
             }
+            .lifetime(.perDependency)
+        builder.register { RoutesListDisplayNode() }
             .lifetime(.perDependency)
         // Utils
         builder.register { KeyboardController() }

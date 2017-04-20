@@ -67,8 +67,7 @@ class LoginViewController: ASViewController<ASDisplayNode> {
                             }
 
                             strongSelf.loginDisplayNode.state = .default
-                            // transfer to my routes vc
-                            print("Login successfull: \(user)")
+                            strongSelf.proceedToRoutesListViewController()
                             }, onError: { [weak strongSelf] error in
                                 guard let strongSelf = strongSelf else {
                                     return
@@ -94,7 +93,6 @@ class LoginViewController: ASViewController<ASDisplayNode> {
                                                 return
                                             }
 
-                                            // add user into db and transfer to my routes vc
                                             strongSelf.databaseManager.addUser(uid: user.uid, email: email)
                                                 .observeOn(MainScheduler.instance)
                                                 .subscribe(onNext: { [weak strongSelf] _ in
@@ -103,7 +101,7 @@ class LoginViewController: ASViewController<ASDisplayNode> {
                                                     }
 
                                                     strongSelf.loginDisplayNode.state = .default
-                                                    print("Register successfull")
+                                                    strongSelf.proceedToRoutesListViewController()
                                                     }, onError: { [weak strongSelf] error in
                                                         guard let strongSelf = strongSelf else {
                                                             return
@@ -231,5 +229,26 @@ class LoginViewController: ASViewController<ASDisplayNode> {
 
     func hideKeyboard() {
         keyboardController.hideKeyboard()
+    }
+
+    func proceedToRoutesListViewController() {
+        guard let window = view.window else {
+            return
+        }
+
+        let routesListViewController = BaseNavigationController(
+            rootViewController: presentationManager.getRoutesListViewController()
+        )
+
+        UIView.performWithoutAnimation {
+            routesListViewController.view.setNeedsLayout()
+            routesListViewController.view.layoutIfNeeded()
+        }
+        UIView.transition(with: window,
+                          duration: 0.5,
+                          options: .transitionFlipFromRight,
+                          animations: {
+                            window.rootViewController = routesListViewController
+        }, completion: nil)
     }
 }

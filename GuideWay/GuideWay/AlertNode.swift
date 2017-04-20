@@ -163,7 +163,7 @@ class AlertWithBackgroundNode: ASDisplayNode {
         let alertNode = AlertWithBackgroundNode(message: message)
 
         window.addSubnode(alertNode)
-        alertNode.frame = node.bounds
+        alertNode.frame = window.bounds
         alertNode.alpha = 0
         UIView.animate(withDuration: 0.25) { 
             alertNode.alpha = 1

@@ -48,6 +48,10 @@ class PresentationManager {
         return try! scope.resolve(arg: route, passIndex)
     }
 
+    func getRoutesListViewController() -> RoutesListViewController {
+        return *!scope
+    }
+
     // Nodes
 
     func getWelcomeScreenDisplayNode() -> WelcomeScreenDisplayNode {
@@ -104,5 +108,9 @@ class PresentationManager {
                                   maneuverType: RouteManeuver?,
                                   isFailed: Bool) -> RouteManeuverCellNode {
         return try! scope.resolve(arg: maneuverText, maneuverType, isFailed)
+    }
+
+    func getRoutesListDisplayNode() -> RoutesListDisplayNode {
+        return *!scope
     }
 }
