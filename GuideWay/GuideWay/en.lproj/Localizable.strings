@@ -49,3 +49,5 @@
 "error.register.weak_password_error" = "Password too weak. Must be at least 6 digits";
 "error.register.email_already_in_use" = "Email already in use";
 "error.unknown_error" = "Unknown error";
+"routes_list.title" = "Routes List";
+"logout" = "Logout";

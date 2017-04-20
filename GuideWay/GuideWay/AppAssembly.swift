@@ -10,7 +10,6 @@ import DITranquillity
 
 class AppAssembly: DIAssembly {
     var publicModules: [DIModule] = [DataLayerModule(),
-                                     DomainLayerModule(),
                                      PresentationLayerModule()]
     var internalModules: [DIModule] = []
     var dependencies: [DIAssembly] = []

@@ -9,9 +9,24 @@
 import AsyncDisplayKit
 
 class RoutesListDisplayNode: ASDisplayNode {
+    let collectionNode: ASCollectionNode
+
     override init() {
+        let collectionViewLayout = UICollectionViewFlowLayout()
+
+        collectionViewLayout.minimumLineSpacing = 20
+        collectionViewLayout.minimumInteritemSpacing = 0
+        collectionNode = ASCollectionNode(collectionViewLayout: collectionViewLayout)
+        collectionNode.backgroundColor = UIColor(hexString: "E4FCFF")
         super.init()
         automaticallyManagesSubnodes = true
-        backgroundColor = .orange
+    }
+
+    override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        return ASCenterLayoutSpec(
+            centeringOptions: .XY, 
+            sizingOptions: .minimumXY, 
+            child: collectionNode
+        )
     }
 }

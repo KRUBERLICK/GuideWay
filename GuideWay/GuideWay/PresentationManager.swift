@@ -12,6 +12,12 @@ import DITranquillity
 class PresentationManager {
     let scope: DIScope
 
+    var authManager: AuthManager {
+        get {
+            return *!scope
+        }
+    }
+
     init(scope: DIScope) {
         self.scope = scope
     }
@@ -19,7 +25,11 @@ class PresentationManager {
     // ViewControllers
 
     func getInitialViewController() -> UIViewController {
-        return BaseNavigationController(rootViewController: getWelcomeScreenViewController())
+        return BaseNavigationController(
+            rootViewController: authManager.isLoggedIn
+                ? getRoutesListViewController()
+                : getWelcomeScreenViewController()
+        )
     }
 
     func getWelcomeScreenViewController() -> WelcomeScreenViewController {

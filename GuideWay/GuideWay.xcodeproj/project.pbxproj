@@ -37,6 +37,7 @@
 		5B52C4DA1EA7BEB500E0E37B /* RoutesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4D91EA7BEB500E0E37B /* RoutesListViewController.swift */; };
 		5B52C4DD1EA8AAC300E0E37B /* RoutesListDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4DC1EA8AAC300E0E37B /* RoutesListDisplayNode.swift */; };
 		5B52C4DF1EA8AAD900E0E37B /* RoutesListItemCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4DE1EA8AAD900E0E37B /* RoutesListItemCellNode.swift */; };
+		5B52C4E11EA8E94000E0E37B /* ReachabilityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B52C4E01EA8E94000E0E37B /* ReachabilityProvider.swift */; };
 		5B838D511EA4A6F1000D8A72 /* RouteMapInfoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */; };
 		5B874A2C1E5ED74600C390BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */; };
 		5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B976AE71E65DA4000CB03DE /* KeyboardController.swift */; };
@@ -54,7 +55,6 @@
 		5BB042551E5E180E00A31443 /* AutocompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB042541E5E180E00A31443 /* AutocompleteController.swift */; };
 		5BB6B4131E5EE19900F270B4 /* PlaceAutocompleteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4121E5EE19900F270B4 /* PlaceAutocompleteResponse.swift */; };
 		5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4141E5EE35800F270B4 /* WebService.swift */; };
-		5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */; };
 		5BB6B41A1E5EFD5B00F270B4 /* GoogleServicesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +93,7 @@
 		5B52C4D91EA7BEB500E0E37B /* RoutesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesListViewController.swift; sourceTree = "<group>"; };
 		5B52C4DC1EA8AAC300E0E37B /* RoutesListDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesListDisplayNode.swift; sourceTree = "<group>"; };
 		5B52C4DE1EA8AAD900E0E37B /* RoutesListItemCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesListItemCellNode.swift; sourceTree = "<group>"; };
+		5B52C4E01EA8E94000E0E37B /* ReachabilityProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityProvider.swift; sourceTree = "<group>"; };
 		5B838D501EA4A6F1000D8A72 /* RouteMapInfoNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapInfoNode.swift; sourceTree = "<group>"; };
 		5B874A2B1E5ED74600C390BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5B976AE71E65DA4000CB03DE /* KeyboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardController.swift; sourceTree = "<group>"; };
@@ -110,7 +111,6 @@
 		5BB042541E5E180E00A31443 /* AutocompleteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteController.swift; sourceTree = "<group>"; };
 		5BB6B4121E5EE19900F270B4 /* PlaceAutocompleteResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceAutocompleteResponse.swift; sourceTree = "<group>"; };
 		5BB6B4141E5EE35800F270B4 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
-		5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainLayerModule.swift; sourceTree = "<group>"; };
 		5BB6B4191E5EFD5B00F270B4 /* GoogleServicesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleServicesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,7 +177,6 @@
 				5B307BB01E5DAFBC004F8017 /* AppDelegate.swift */,
 				5BB042431E5DB56800A31443 /* AppAssembly.swift */,
 				5BB0423A1E5DB41100A31443 /* DataLayer */,
-				5BB0423B1E5DB41B00A31443 /* DomainLayer */,
 				5BB0423D1E5DB43500A31443 /* PresentationLayer */,
 			);
 			name = Source;
@@ -258,9 +257,11 @@
 		5BAE1E4E1E5F2FC1007CCFB5 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				5BB6B4181E5EE80D00F270B4 /* NetworkAPIs */,
 				5BB6B4141E5EE35800F270B4 /* WebService.swift */,
 				5B52C4D51EA7977F00E0E37B /* AuthManager.swift */,
 				5B52C4D71EA7AC5400E0E37B /* DatabaseManager.swift */,
+				5B52C4E01EA8E94000E0E37B /* ReachabilityProvider.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -273,15 +274,6 @@
 				5BAE1E4C1E5F2FA2007CCFB5 /* Models */,
 			);
 			name = DataLayer;
-			sourceTree = "<group>";
-		};
-		5BB0423B1E5DB41B00A31443 /* DomainLayer */ = {
-			isa = PBXGroup;
-			children = (
-				5BB6B4161E5EE7DD00F270B4 /* DomainLayerModule.swift */,
-				5BB6B4181E5EE80D00F270B4 /* NetworkAPIs */,
-			);
-			name = DomainLayer;
 			sourceTree = "<group>";
 		};
 		5BB0423D1E5DB43500A31443 /* PresentationLayer */ = {
@@ -480,7 +472,6 @@
 			files = (
 				5BB6B4151E5EE35800F270B4 /* WebService.swift in Sources */,
 				5BAE1E501E5F2FE3007CCFB5 /* DataLayerModule.swift in Sources */,
-				5BB6B4171E5EE7DD00F270B4 /* DomainLayerModule.swift in Sources */,
 				5B3B74D71E77F2D600F46FD6 /* RouteMapDisplayNode.swift in Sources */,
 				5B52C4D21EA7717B00E0E37B /* LoginViewController.swift in Sources */,
 				5B34A5001E7C39C7005FEF41 /* RouteMapDisplayNode+ButtonHandling.swift in Sources */,
@@ -505,6 +496,7 @@
 				5B51CBED1E6023B6002C06AE /* AlertNode.swift in Sources */,
 				5B976AE81E65DA4000CB03DE /* KeyboardController.swift in Sources */,
 				5B52C4DF1EA8AAD900E0E37B /* RoutesListItemCellNode.swift in Sources */,
+				5B52C4E11EA8E94000E0E37B /* ReachabilityProvider.swift in Sources */,
 				5B52C4D01EA7670700E0E37B /* WelcomeScreenDisplayNode.swift in Sources */,
 				5B52C4DA1EA7BEB500E0E37B /* RoutesListViewController.swift in Sources */,
 				5B220C171E891092002207AD /* RouteManeuversListDisplayNode.swift in Sources */,
