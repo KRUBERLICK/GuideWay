@@ -20,10 +20,10 @@ class InformerNode: ASDisplayNode {
 
     var closeTimer: Timer?
 
-    init(message: String) {
+    init(message: String, color: String = "C23E3E") {
         super.init()
         automaticallyManagesSubnodes = true
-        backgroundColor = UIColor(hexString: "C23E3E")
+        backgroundColor = UIColor(hexString: color)
 
         let textAttribs = [
             NSForegroundColorAttributeName: UIColor.white, 
@@ -71,12 +71,21 @@ class InformerNode: ASDisplayNode {
     }
 
     static func showInformer(for node: ASDisplayNode,
-                      with message: String) {
+                      with message: String,
+                      informerColor: String? = nil) {
         node.subnodes
             .filter { type(of: $0) == InformerNode.self }
             .forEach { ($0 as? InformerNode)?.close() }
 
-        let informerNode = InformerNode(message: message)
+        var informerNode: InformerNode
+
+        if let informerColor = informerColor {
+            informerNode = InformerNode(message: message, color: informerColor)
+        }
+        else {
+            informerNode = InformerNode(message: message)
+        }
+        
         let calculatedLayout = informerNode.calculateLayoutThatFits(
             ASSizeRangeMake(
                 CGSize(width: node.bounds.width, height: 0), 

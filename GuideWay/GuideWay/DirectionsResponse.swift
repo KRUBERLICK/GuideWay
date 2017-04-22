@@ -115,6 +115,8 @@ struct DirectionsResponseRouteLeg: ImmutableMappable {
         distanceValue >>> map["distance.value"]
         durationString >>> map["duration.text"]
         durationValue >>> map["duration.value"]
+        startLocationTitle >>> map["start_address"]
+        endLocationTitle >>> map["end_address"]
         startLocationLatitude >>> map["start_location.lat"]
         startLocationLongitude >>> map["start_location.lng"]
         endLocationLatitude >>> map["end_location.lat"]

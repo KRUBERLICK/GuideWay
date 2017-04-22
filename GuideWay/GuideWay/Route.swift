@@ -59,7 +59,7 @@ struct Route: ImmutableMappable {
         title <- map["title"]
         origin <- map["origin"]
         destination <- map["destination"]
-        directions <- map["directions"]
-        passes <- map["passes"]
+        directions >>> map["directions"]
+        passes >>> map["passes"]
     }
 }

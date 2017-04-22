@@ -24,7 +24,7 @@ class PresentationLayerModule: DIModule {
                 $1.autocompleteController.parentNode = $1.node
             }
             .lifetime(.perDependency)
-        builder.register { RouteDetailsViewController(presentationManager: *!$0, route: $1, googleServicesAPI: *!$0) }.lifetime(.perDependency)
+        builder.register { RouteDetailsViewController(presentationManager: *!$0, authManager: *!$0, databaseManager: *!$0, route: $1, googleServicesAPI: *!$0) }.lifetime(.perDependency)
         builder.register { RouteMapViewController(presentationManager: *!$0, route: $1, mode: $2) }.lifetime(.perDependency)
         builder.register(RouteManeuversListViewController.self)
             .initializer { 

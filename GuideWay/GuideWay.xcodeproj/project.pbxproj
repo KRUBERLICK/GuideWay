@@ -62,6 +62,7 @@
 		00BAA290F6F4F9C4CE1CB494 /* Pods_GuideWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuideWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9602DC1AABEF46D3ED777E /* Pods-GuideWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideWay.release.xcconfig"; path = "Pods/Target Support Files/Pods-GuideWay/Pods-GuideWay.release.xcconfig"; sourceTree = "<group>"; };
 		5174A1AEF54E5E00744D335D /* Pods-GuideWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideWay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideWay/Pods-GuideWay.debug.xcconfig"; sourceTree = "<group>"; };
+		5B0634BC1EAB9EEC00AE9907 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5B220C161E891092002207AD /* RouteManeuversListDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManeuversListDisplayNode.swift; sourceTree = "<group>"; };
 		5B220C181E891771002207AD /* RouteManeuversListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManeuversListViewController.swift; sourceTree = "<group>"; };
 		5B220C1A1E894621002207AD /* RouteManeuverCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManeuverCellNode.swift; sourceTree = "<group>"; };
@@ -392,6 +393,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 5B307BA41E5DAFBC004F8017;
 			productRefGroup = 5B307BAE1E5DAFBC004F8017 /* Products */;
@@ -532,6 +534,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5BB0424B1E5DDBD800A31443 /* en */,
+				5B0634BC1EAB9EEC00AE9907 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -592,6 +596,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

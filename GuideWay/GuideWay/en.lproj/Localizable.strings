@@ -37,6 +37,8 @@
 "route_details.maneuveurs_done_right" = "maneuvers done right";
 "route_details.of_label" = "of";
 "route_details.statistics_show_details" = "Show details";
+"route_details.rename_route" = "Rename route";
+"route_details.delete_route" = "Delete route";
 "informer.network_error" = "Network error";
 "map.car_marker_title" = "Your current position";
 "text_instructions" = "Text instructions";
@@ -51,3 +53,6 @@
 "error.unknown_error" = "Unknown error";
 "routes_list.title" = "Routes List";
 "logout" = "Logout";
+"route_was_saved_to_list" = "Route was saved to list";
+"route_saved" = "Route saved";
+"cancel" = "Cancel";

@@ -135,14 +135,21 @@ class RouteSetupDisplayNode: ASDisplayNode {
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let isNarrow = constrainedSize.max.height <= 510
 
+        let centeredCreateNewRouteTitleNode = ASStackLayoutSpec(
+            direction: .vertical, 
+            spacing: 0, 
+            justifyContent: .center, 
+            alignItems: .center, 
+            children: [createNewRouteTitleNode]
+        )
         let routeImageAndTitleStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 17,
             justifyContent: .center,
             alignItems: .center,
             children: isNarrow
-                ? [self.createNewRouteTitleNode]
-                : [self.routeImageNode, self.createNewRouteTitleNode]
+                ? [centeredCreateNewRouteTitleNode]
+                : [routeImageNode, centeredCreateNewRouteTitleNode]
         )
 
         self.originTextFieldNode.style.flexShrink = 1

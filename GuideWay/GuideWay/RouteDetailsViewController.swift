@@ -11,6 +11,8 @@ import RxSwift
 
 class RouteDetailsViewController: ASViewController<ASDisplayNode> {
     let presentationManager: PresentationManager
+    let authManager: AuthManager
+    let databaseManager: DatabaseManager
     let routeDetailsDisplayNode: RouteDetailsDisplayNode
     var route: Route
 
@@ -28,6 +30,15 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+
+    lazy var moreBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+            image: #imageLiteral(resourceName: "ic_more"), 
+            style: .plain, 
+            target: self, 
+            action: #selector(RouteDetailsViewController.moreButtonTapped)
+        )
+    }()
 
     lazy var editBarButton: UIBarButtonItem = {
         return UIBarButtonItem(
@@ -56,12 +67,19 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
         )
     }()
 
+    var onRouteDelete: (() -> ())?
+
     init(presentationManager: PresentationManager,
+         authManager: AuthManager,
+         databaseManager: DatabaseManager,
          route: Route,
          googleServicesAPI: GoogleServicesAPI) {
         self.presentationManager = presentationManager
+        self.authManager = authManager
+        self.databaseManager = databaseManager
         self.routeDetailsDisplayNode =
-            presentationManager.getRouteDetailsDisplayNode(with: .loading)
+            presentationManager.getRouteDetailsDisplayNode(
+                with: route.directions == nil ? .loading : .loaded(route))
         self.route = route
         self.googleServicesAPI = googleServicesAPI
         super.init(node: routeDetailsDisplayNode)
@@ -92,9 +110,33 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
             )
 
             routeMapViewController.onTestingFinished = { [unowned self] route in
-                self.route = route
-                self.routeDetailsDisplayNode.state = .loaded(self.route)
-                self.routeDetailsDisplayNode.collectionNode.reloadData()
+                guard self.authManager.isLoggedIn else {
+                    self.route = route
+                    self.routeDetailsDisplayNode.state = .loaded(self.route)
+                    self.routeDetailsDisplayNode.collectionNode.reloadData()
+                    return
+                }
+                self.databaseManager.updateRoute(route)
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] _ in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        strongSelf.route = route
+                        strongSelf.routeDetailsDisplayNode.state = .loaded(strongSelf.route)
+                        strongSelf.routeDetailsDisplayNode.collectionNode.reloadData()
+                    }, onError: { [weak self] _ in
+                        guard let strongSelf = self else {
+                            return
+                        }
+
+                        InformerNode.showInformer(
+                            for: strongSelf.node, 
+                            with: NSLocalizedString("informer.network_error", comment: "")
+                        )
+                    })
+                    .addDisposableTo(self.disposeBag)
             }
             self.present(
                 routeMapViewController,
@@ -123,7 +165,13 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
                 action: #selector(RouteDetailsViewController.hideKeyboard)
             )
         )
-        requestRouteDirections()
+        if route.directions == nil {
+            requestRouteDirections()
+        } else {
+            navigationItem.rightBarButtonItems = authManager.isLoggedIn
+                ? [moreBarButton]
+                : [editBarButton]
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -152,25 +200,104 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
             to: route.destination
         )
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [unowned self] response in
-                self.route.directions = response.routes.first
-
-                guard let _ = self.route.directions else {
-                    self.navigationItem.setRightBarButtonItems([], animated: true)
-                    self.routeDetailsDisplayNode.state = .noDirections
+            .subscribe(onNext: { [weak self] response in
+                guard let strongSelf = self else {
                     return
                 }
 
-                self.navigationItem.setRightBarButtonItems(
-                    [self.editBarButton], 
-                    animated: true
-                )
-                self.routeDetailsDisplayNode.state = .loaded(self.route)
-            }, onError: { error in
-                self.navigationItem.setRightBarButtonItems([], animated: true)
-                self.routeDetailsDisplayNode.state = .loadingFailed
+                strongSelf.route.directions = response.routes.first
+
+                guard let _ = strongSelf.route.directions else {
+                    strongSelf.navigationItem.setRightBarButtonItems([], animated: true)
+                    strongSelf.routeDetailsDisplayNode.state = .noDirections
+                    return
+                }
+
+                if strongSelf.authManager.isLoggedIn {
+                    strongSelf.databaseManager.addRoute(
+                        strongSelf.route, 
+                        ownerId: strongSelf.authManager.currentUserId)
+                        .observeOn(MainScheduler.instance)
+                        .subscribe(onNext: { [weak strongSelf] route in
+                            guard let strongSelf = strongSelf else {
+                                return
+                            }
+
+                            strongSelf.route = route
+                            strongSelf.navigationItem.setRightBarButtonItems(
+                                [strongSelf.editBarButton],
+                                animated: true
+                            )
+                            strongSelf.routeDetailsDisplayNode.state = .loaded(strongSelf.route)
+                            if let navVc = strongSelf.navigationController,
+                                navVc.viewControllers.count > 2,
+                                navVc.viewControllers[navVc.viewControllers.count - 2] is RouteSetupViewController {
+                                navVc.viewControllers.remove(at: navVc.viewControllers.count - 2)
+                            }
+                            InformerNode.showInformer(
+                                for: strongSelf.node, 
+                                with: NSLocalizedString("route_was_saved_to_list", comment: ""),
+                                informerColor: "21C064"
+                            )
+                            }, onError: { [weak strongSelf] _ in
+                                guard let strongSelf = strongSelf else {
+                                    return
+                                }
+
+                                strongSelf.navigationItem.setRightBarButtonItems([], animated: true)
+                                strongSelf.routeDetailsDisplayNode.state = .loadingFailed
+                                InformerNode.showInformer(
+                                    for: strongSelf.node, 
+                                    with: NSLocalizedString("informer.network_error", comment: "")
+                                )
+                        })
+                        .addDisposableTo(strongSelf.disposeBag)
+                } else {
+                    strongSelf.navigationItem.setRightBarButtonItems(
+                        [strongSelf.editBarButton],
+                        animated: true
+                    )
+                    strongSelf.routeDetailsDisplayNode.state = .loaded(strongSelf.route)
+                }
+            }, onError: { [weak self] error in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.navigationItem.setRightBarButtonItems([], animated: true)
+                strongSelf.routeDetailsDisplayNode.state = .loadingFailed
             })
             .addDisposableTo(disposeBag)
+    }
+
+    func moreButtonTapped() {
+        let alert = UIAlertController(
+            title: nil, 
+            message: nil, 
+            preferredStyle: .actionSheet
+        )
+        let renameRouteAction = UIAlertAction(
+            title: NSLocalizedString("route_details.rename_route", comment: ""), 
+            style: .default, 
+            handler: { _ in
+                self.editButtonTapped()
+        })
+        let deleteRouteAction = UIAlertAction(
+            title: NSLocalizedString("route_details.delete_route", comment: ""), 
+            style: .destructive, 
+            handler: { _ in
+                self.deleteRoute()
+        })
+        let cancelAction = UIAlertAction(
+            title: NSLocalizedString("cancel", comment: ""), 
+            style: .cancel, 
+            handler: nil
+        )
+
+        alert.addAction(renameRouteAction)
+        alert.addAction(deleteRouteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
 
     func editButtonTapped() {
@@ -185,24 +312,89 @@ class RouteDetailsViewController: ASViewController<ASDisplayNode> {
         }
     }
 
+    func deleteRoute() {
+        databaseManager.deleteRoute(
+            with: route.id!, 
+            ownerId: authManager.currentUserId
+        )
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.onRouteDelete?()
+                strongSelf.navigationController?.popViewController(animated: true)
+            }, onError: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                InformerNode.showInformer(
+                    for: strongSelf.node, 
+                    with: "informer.network_error"
+                )
+            })
+            .addDisposableTo(disposeBag)
+    }
+
     func editCancelButtonTapped() {
         routeDetailsDisplayNode.isEditing = false
         navigationItem.setRightBarButtonItems(
-            [editBarButton], 
+            authManager.isLoggedIn ? [moreBarButton] : [editBarButton],
             animated: true
         )
     }
 
     func editConfirmButtonTapped() {
-        InformerNode.showInformer(for: node, with: "Error")
-        // Send route update request, if not in demo mode
-        route.title = routeDetailsDisplayNode.currentRouteTitle
-        routeDetailsDisplayNode.state = .loaded(route)
-        routeDetailsDisplayNode.isEditing = false
-        navigationItem.setRightBarButtonItems(
-            [editBarButton], 
-            animated: true
-        )
+        guard self.authManager.isLoggedIn else {
+            route.title = routeDetailsDisplayNode.currentRouteTitle
+            routeDetailsDisplayNode.state = .loaded(route)
+            routeDetailsDisplayNode.isEditing = false
+            navigationItem.setRightBarButtonItems(
+                authManager.isLoggedIn ? [moreBarButton] : [editBarButton],
+                animated: true
+            )
+            return
+        }
+
+        var newRoute = route
+
+        newRoute.title = routeDetailsDisplayNode.currentRouteTitle
+        databaseManager.updateRoute(newRoute)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.route = newRoute
+                strongSelf.routeDetailsDisplayNode.state
+                    = .loaded(strongSelf.route)
+                strongSelf.routeDetailsDisplayNode.isEditing = false
+                strongSelf.navigationItem
+                    .setRightBarButtonItems(
+                        strongSelf.authManager.isLoggedIn
+                            ? [strongSelf.moreBarButton]
+                            : [strongSelf.editBarButton],
+                        animated: true
+                )
+                InformerNode.showInformer(
+                    for: strongSelf.node,
+                    with: NSLocalizedString("route_saved", comment: ""),
+                    informerColor: "21C064"
+                )
+            }, onError: { [weak self] _ in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                InformerNode.showInformer(
+                    for: strongSelf.node, 
+                    with: NSLocalizedString("informer.network_error", comment: "")
+                )
+            })
+            .addDisposableTo(disposeBag)
     }
 
     func hideKeyboard() {

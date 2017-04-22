@@ -64,6 +64,8 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
         self.authManager = authManager
         self.databaseManager = databaseManager
         super.init(node: routesListDisplayNode)
+        routesListDisplayNode.collectionNode.dataSource = self
+        routesListDisplayNode.collectionNode.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -78,6 +80,24 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
         )
         navigationItem.leftBarButtonItem = logoutBarButton
         navigationItem.rightBarButtonItem = addRouteBarButton
+databaseManager.getRoutesList(forUserId: authManager.currentUserId)
+    .observeOn(MainScheduler.instance)
+    .subscribe(onNext: { [weak self] route in
+        guard let strongSelf = self else {
+            return
+        }
+
+        strongSelf.userRoutes.append(route)
+        strongSelf.routesListDisplayNode.collectionNode
+            .performBatch(
+                animated: true, 
+                updates: {
+                    strongSelf.routesListDisplayNode.collectionNode
+                        .insertItems(at: [IndexPath(item: strongSelf.userRoutes.count - 1,
+                                                    section: 0)])
+        }, completion: nil)
+    })
+    .addDisposableTo(disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +140,9 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
     }
 
     func addRouteButtonTapped() {
+        let routeSetupVC = presentationManager.getRouteSetupViewController()
 
+        navigationController?.pushViewController(routeSetupVC, animated: true)
     }
 
     func transitToWelcomeScreen() {
@@ -145,7 +167,7 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
     }
 }
 
-extension RoutesListViewController: ASCollectionDataSource, ASCollectionDelegate {
+extension RoutesListViewController: ASCollectionDataSource, ASCollectionDelegate, ASCollectionDelegateFlowLayout {
     func numberOfSections(in collectionNode: ASCollectionNode) -> Int {
         return 1
     }
@@ -158,11 +180,32 @@ extension RoutesListViewController: ASCollectionDataSource, ASCollectionDelegate
     func collectionNode(_ collectionNode: ASCollectionNode, 
                         nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
         let route = userRoutes[indexPath.item]
+        let indexPath = indexPath
 
-        return {
-            let cellNode = RoutesListItemCellNode(route: route)
+        return { [unowned self] in
+            let cellNode = RoutesListItemCellNode(
+                route: route, 
+                databaseManager: self.databaseManager
+            )
 
-            // setup cell node
+            cellNode.onTap = { [unowned self] route in
+                let routeDetailsVC = self.presentationManager
+                    .getRouteDetailsViewController(for: route)
+
+                routeDetailsVC.onRouteDelete = { [unowned self] in
+                    self.userRoutes.remove(at: indexPath.item)
+                    self.routesListDisplayNode.collectionNode.performBatch(
+                        animated: true, 
+                        updates: {
+                            self.routesListDisplayNode.collectionNode
+                                .deleteItems(at: [indexPath])
+                    }, completion: nil)
+                }
+                self.navigationController?.pushViewController(
+                    routeDetailsVC, 
+                    animated: true
+                )
+            }
             return cellNode
         }
     }
@@ -175,5 +218,11 @@ extension RoutesListViewController: ASCollectionDataSource, ASCollectionDelegate
             CGSize(width: width, height: 0), 
             CGSize(width: width, height: CGFloat.infinity)
         )
+    }
+
+    func collectionView(_ collectionView: UICollectionView, 
+                        layout collectionViewLayout: UICollectionViewLayout, 
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
     }
 }

@@ -1,0 +1,58 @@
+/* 
+  Localizable.strings
+  GuideWay
+
+  Created by Daniel Ilchishyn on 2/22/17.
+  Copyright © 2017 Sasha&Daniel. All rights reserved.
+*/
+
+"guideway" = "GuideWay";
+"welcome_screen.login" = "Вход";
+"welcome_screen.demo" = "Демо";
+"login.email" = "E-mail";
+"login.password" = "Пароль";
+"login.login_register" = "Вход/Регистрация";
+"route_setup.title" = "Создание маршрута";
+"route_setup.create_new_route" = "Создать новый маршрут";
+"route_setup.origin" = "Пункт отправления";
+"route_setup.destination" = "Пункт назначения";
+"alert.ok" = "OK";
+"alert.title.error" = "Ошибка";
+"alert.title.warning" = "Внимание";
+"alert.error.input_all_fields" = "Заполните все поля";
+"alert.warning.testing_exit" = "Вы покидаете назавершенный тест. Весь прогресс будет потерян. Вы уверены?";
+"alert.warning.yes" = "Да";
+"alert.warning.no" = "Нет";
+"route_details.title" = "Детали маршрута";
+"route_details.practice" = "Практика";
+"route_details.test" = "Тестирование";
+"route_details.route_title" = "Название маршрута";
+"route_details.loading_route" = "Рассчет маршрута...";
+"route_details.loading_failed" = "Ошибка загрузки";
+"route_details.no_directions" = "Маршруты не найдены";
+"route_details.from_label" = "От";
+"route_details.to_label" = "До";
+"route_details.statistics_title" = "Статистика:";
+"route_details.completed_label" = "завершено";
+"route_details.maneuveurs_done_right" = "маневров выполненно верно";
+"route_details.of_label" = "из";
+"route_details.statistics_show_details" = "Подробнее";
+"route_details.rename_route" = "Переименовать маршрут";
+"route_details.delete_route" = "Удалить маршрут";
+"informer.network_error" = "Ошибка сети";
+"map.car_marker_title" = "Ваше текущее положение";
+"text_instructions" = "Текстовые инструкции";
+"welcome" = "Добро пожаловать!";
+"error.auth.user_disabled" = "Этот аккаунт был отключен";
+"error.auth.wrong_password" = "Неправильный пароль";
+"error.auth.wrong_email" = "Неправильный Emai-l";
+"error.auth.user_not_found" = "Аккаунт не найден";
+"error.register.invalid_email_format" = "E-mail имеет неверный формат";
+"error.register.weak_password_error" = "Слабый пароль. Минимальная длина - 6 символов";
+"error.register.email_already_in_use" = "E-mail уже используется";
+"error.unknown_error" = "Неизвестная ошибка";
+"routes_list.title" = "Список маршрутов";
+"logout" = "Выход";
+"route_was_saved_to_list" = "Маршрут был сохранен в список";
+"route_saved" = "Маршрут сохранен";
+"cancel" = "Отмена";
