@@ -19,17 +19,17 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
 
     lazy var logoutBarButton: UIBarButtonItem = {
         return UIBarButtonItem(
-            title: NSLocalizedString("logout", comment: ""), 
-            style: .plain, 
-            target: self, 
+            title: NSLocalizedString("logout", comment: ""),
+            style: .plain,
+            target: self,
             action: #selector(RoutesListViewController.logoutButtonTapped)
         )
     }()
 
     lazy var addRouteBarButton: UIBarButtonItem = {
         return UIBarButtonItem(
-            barButtonSystemItem: .add, 
-            target: self, 
+            barButtonSystemItem: .add,
+            target: self,
             action: #selector(RoutesListViewController.addRouteButtonTapped)
         )
     }()
@@ -57,7 +57,7 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
     }
 
     init(presentationManager: PresentationManager,
-         authManager: AuthManager, 
+         authManager: AuthManager,
          databaseManager: DatabaseManager) {
         self.presentationManager = presentationManager
         routesListDisplayNode = presentationManager.getRoutesListDisplayNode()
@@ -67,7 +67,7 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
         routesListDisplayNode.collectionNode.dataSource = self
         routesListDisplayNode.collectionNode.delegate = self
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -80,24 +80,46 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
         )
         navigationItem.leftBarButtonItem = logoutBarButton
         navigationItem.rightBarButtonItem = addRouteBarButton
-databaseManager.getRoutesList(forUserId: authManager.currentUserId)
-    .observeOn(MainScheduler.instance)
-    .subscribe(onNext: { [weak self] route in
-        guard let strongSelf = self else {
-            return
-        }
 
-        strongSelf.userRoutes.append(route)
-        strongSelf.routesListDisplayNode.collectionNode
-            .performBatch(
-                animated: true, 
-                updates: {
-                    strongSelf.routesListDisplayNode.collectionNode
-                        .insertItems(at: [IndexPath(item: strongSelf.userRoutes.count - 1,
-                                                    section: 0)])
-        }, completion: nil)
-    })
-    .addDisposableTo(disposeBag)
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
+        activityIndicator.startAnimating()
+        routesListDisplayNode.collectionNode.view.backgroundView = activityIndicator
+        databaseManager.getRoutesList(forUserId: authManager.currentUserId)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] route in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                strongSelf.routesListDisplayNode.collectionNode.view.backgroundView = nil
+                strongSelf.userRoutes.append(route)
+                strongSelf.routesListDisplayNode.collectionNode
+                    .performBatch(
+                        animated: true,
+                        updates: {
+                            strongSelf.routesListDisplayNode.collectionNode
+                                .insertItems(at: [IndexPath(item: strongSelf.userRoutes.count - 1,
+                                                            section: 0)])
+                    }, completion: nil)
+            })
+            .addDisposableTo(disposeBag)
+        databaseManager.getRoutesCount(forUserId: authManager.currentUserId)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] count in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                if count == 0 {
+                    let label = UILabel()
+
+                    label.text = "No routes"
+                    label.textAlignment = .center
+                    strongSelf.routesListDisplayNode.collectionNode.view.backgroundView = label
+                }
+            })
+            .addDisposableTo(disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -125,16 +147,16 @@ databaseManager.getRoutesList(forUserId: authManager.currentUserId)
 
                 strongSelf.navigationItem.leftBarButtonItem = strongSelf.logoutBarButton
                 strongSelf.transitToWelcomeScreen()
-            }, onError: { [weak self] _ in
-                guard let strongSelf = self else {
-                    return
-                }
+                }, onError: { [weak self] _ in
+                    guard let strongSelf = self else {
+                        return
+                    }
 
-                strongSelf.navigationItem.leftBarButtonItem = strongSelf.logoutBarButton
-                InformerNode.showInformer(
-                    for: strongSelf.node, 
-                    with: NSLocalizedString("error.unknown_error", comment: "")
-                )
+                    strongSelf.navigationItem.leftBarButtonItem = strongSelf.logoutBarButton
+                    InformerNode.showInformer(
+                        for: strongSelf.node,
+                        with: NSLocalizedString("error.unknown_error", comment: "")
+                    )
             })
             .addDisposableTo(disposeBag)
     }
@@ -172,19 +194,18 @@ extension RoutesListViewController: ASCollectionDataSource, ASCollectionDelegate
         return 1
     }
 
-    func collectionNode(_ collectionNode: ASCollectionNode, 
+    func collectionNode(_ collectionNode: ASCollectionNode,
                         numberOfItemsInSection section: Int) -> Int {
         return userRoutes.count
     }
 
-    func collectionNode(_ collectionNode: ASCollectionNode, 
+    func collectionNode(_ collectionNode: ASCollectionNode,
                         nodeBlockForItemAt indexPath: IndexPath) -> ASCellNodeBlock {
         let route = userRoutes[indexPath.item]
-        let indexPath = indexPath
 
         return { [unowned self] in
             let cellNode = RoutesListItemCellNode(
-                route: route, 
+                route: route,
                 databaseManager: self.databaseManager
             )
 
@@ -193,16 +214,18 @@ extension RoutesListViewController: ASCollectionDataSource, ASCollectionDelegate
                     .getRouteDetailsViewController(for: route)
 
                 routeDetailsVC.onRouteDelete = { [unowned self] in
-                    self.userRoutes.remove(at: indexPath.item)
+                    let index = self.userRoutes.index(where: { $0.id == route.id })!
+
+                    self.userRoutes.remove(at: index)
                     self.routesListDisplayNode.collectionNode.performBatch(
-                        animated: true, 
+                        animated: true,
                         updates: {
                             self.routesListDisplayNode.collectionNode
-                                .deleteItems(at: [indexPath])
+                                .deleteItems(at: [IndexPath(item: index, section: 0)])
                     }, completion: nil)
                 }
                 self.navigationController?.pushViewController(
-                    routeDetailsVC, 
+                    routeDetailsVC,
                     animated: true
                 )
             }
@@ -210,16 +233,16 @@ extension RoutesListViewController: ASCollectionDataSource, ASCollectionDelegate
         }
     }
 
-    func collectionNode(_ collectionNode: ASCollectionNode, 
+    func collectionNode(_ collectionNode: ASCollectionNode,
                         constrainedSizeForItemAt indexPath: IndexPath) -> ASSizeRange {
         let width = collectionNode.bounds.width - 44
 
         return ASSizeRangeMake(
-            CGSize(width: width, height: 0), 
+            CGSize(width: width, height: 0),
             CGSize(width: width, height: CGFloat.infinity)
         )
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, 
                         layout collectionViewLayout: UICollectionViewLayout, 
                         insetForSectionAt section: Int) -> UIEdgeInsets {

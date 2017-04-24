@@ -152,6 +152,23 @@ class DatabaseManager {
         }
     }
 
+    func getRoutesCount(forUserId userId: String) -> Observable<Int> {
+        return Observable.create { observer in
+            self.usersNode.child(userId).child("routes").observe(.value, with: { snapshot in
+                guard let array = snapshot.value as? [Any] else {
+                    observer.onNext(0)
+                    return
+                }
+
+                observer.onNext(array.count)
+                observer.onCompleted()
+            }, withCancel: { error in
+                observer.onError(error)
+            })
+            return Disposables.create()
+        }
+    }
+
     func listenForRouteUpdates(routeId: String) -> Observable<Route> {
         return Observable.create { observer in
             self.routesNode.child(routeId).observe(
