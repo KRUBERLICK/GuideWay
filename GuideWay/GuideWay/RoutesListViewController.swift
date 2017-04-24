@@ -131,7 +131,7 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
                     return
                 }
 
-                if !statusg {
+                if !status {
                     InformerNode.showInformer(
                         for: strongSelf.node, 
                         with: NSLocalizedString("informer.network_error", comment: "")
