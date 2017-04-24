@@ -43,7 +43,7 @@ class PresentationLayerModule: DIModule {
             .lifetime(.perDependency)
         builder.register { WelcomeScreenViewController(presentationManager: *!$0) }.lifetime(.perDependency)
         builder.register { LoginViewController(presentationManager: *!$0, keyboardController: *!$0, authManager: *!$0, databaseManager: *!$0) }.lifetime(.perDependency)
-        builder.register { RoutesListViewController(presentationManager: *!$0, authManager: *!$0,databaseManager: *!$0) }.lifetime(.perDependency)
+        builder.register { RoutesListViewController(presentationManager: *!$0, authManager: *!$0,databaseManager: *!$0, reachabilityProvider: *!$0) }.lifetime(.perDependency)
         // Nodes
         builder.register { WelcomeScreenDisplayNode() }.lifetime(.perDependency)
         builder.register { LoginDisplayNode() }.lifetime(.perDependency)

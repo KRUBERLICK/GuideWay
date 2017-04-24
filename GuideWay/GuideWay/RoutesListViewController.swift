@@ -14,6 +14,7 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
     let routesListDisplayNode: RoutesListDisplayNode
     let authManager: AuthManager
     let databaseManager: DatabaseManager
+    let reachabilityProvider: ReachabilityProvider
     var userRoutes: [Route] = []
     let disposeBag = DisposeBag()
 
@@ -58,11 +59,13 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
 
     init(presentationManager: PresentationManager,
          authManager: AuthManager,
-         databaseManager: DatabaseManager) {
+         databaseManager: DatabaseManager,
+         reachabilityProvider: ReachabilityProvider) {
         self.presentationManager = presentationManager
         routesListDisplayNode = presentationManager.getRoutesListDisplayNode()
         self.authManager = authManager
         self.databaseManager = databaseManager
+        self.reachabilityProvider = reachabilityProvider
         super.init(node: routesListDisplayNode)
         routesListDisplayNode.collectionNode.dataSource = self
         routesListDisplayNode.collectionNode.delegate = self
@@ -80,6 +83,7 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
         )
         navigationItem.leftBarButtonItem = logoutBarButton
         navigationItem.rightBarButtonItem = addRouteBarButton
+        edgesForExtendedLayout = []
 
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
@@ -117,6 +121,21 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
                     label.text = "No routes"
                     label.textAlignment = .center
                     strongSelf.routesListDisplayNode.collectionNode.view.backgroundView = label
+                }
+            })
+            .addDisposableTo(disposeBag)
+        reachabilityProvider.firebaseReachabilityStatus.asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] status in
+                guard let strongSelf = self else {
+                    return
+                }
+
+                if !statusg {
+                    InformerNode.showInformer(
+                        for: strongSelf.node, 
+                        with: NSLocalizedString("informer.network_error", comment: "")
+                    )
                 }
             })
             .addDisposableTo(disposeBag)
