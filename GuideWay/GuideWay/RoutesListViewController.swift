@@ -124,21 +124,21 @@ class RoutesListViewController: ASViewController<ASDisplayNode> {
                 }
             })
             .addDisposableTo(disposeBag)
-        reachabilityProvider.firebaseReachabilityStatus.asObservable()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] status in
-                guard let strongSelf = self else {
-                    return
-                }
-
-                if !status {
-                    InformerNode.showInformer(
-                        for: strongSelf.node, 
-                        with: NSLocalizedString("informer.network_error", comment: "")
-                    )
-                }
-            })
-            .addDisposableTo(disposeBag)
+//        reachabilityProvider.firebaseReachabilityStatus.asObservable()
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] status in
+//                guard let strongSelf = self else {
+//                    return
+//                }
+//
+//                if !status {
+//                    InformerNode.showInformer(
+//                        for: strongSelf.node, 
+//                        with: NSLocalizedString("informer.network_error", comment: "")
+//                    )
+//                }
+//            })
+//            .addDisposableTo(disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
